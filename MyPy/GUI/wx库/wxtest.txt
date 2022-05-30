@@ -1,0 +1,7 @@
+Tkinter  :是python最简单的图形化模块，总共只有14种组建
+
+Pyqt     :是python最复杂也是使用最广泛的图形化
+
+Wx       :是python当中居中的一个图形化，学习结构很清晰
+
+Pywin    :是python windows 下的模块，摄像头控制(opencv)，常用于外挂制作

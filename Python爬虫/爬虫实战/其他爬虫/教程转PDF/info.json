@@ -1,0 +1,287 @@
+{
+  "id": 0,
+  "subject": null,
+  "chapters": [
+    {
+      "id": 32481,
+      "isFree": true,
+      "subject": "版权声明",
+      "lockType": 0
+    },
+    {
+      "id": 32482,
+      "isFree": true,
+      "subject": "献词",
+      "lockType": 0
+    },
+    {
+      "id": 32483,
+      "isFree": true,
+      "subject": "译者序",
+      "lockType": 0
+    },
+    {
+      "id": 32484,
+      "isFree": true,
+      "subject": "序",
+      "lockType": 0
+    },
+    {
+      "id": 32485,
+      "isFree": true,
+      "subject": "前言",
+      "lockType": 0
+    },
+    {
+      "id": 32486,
+      "isFree": true,
+      "subject": "致谢",
+      "lockType": 0
+    },
+    {
+      "id": 32487,
+      "isFree": true,
+      "subject": "第 1 章　什么是JavaScript",
+      "lockType": 0
+    },
+    {
+      "id": 32488,
+      "isFree": true,
+      "subject": "第 2 章　HTML中的JavaScript",
+      "lockType": 0
+    },
+    {
+      "id": 32489,
+      "isFree": false,
+      "subject": "第 3 章　语言基础",
+      "lockType": 0
+    },
+    {
+      "id": 32490,
+      "isFree": false,
+      "subject": "第 4 章　变量、作用域与内存",
+      "lockType": 0
+    },
+    {
+      "id": 32491,
+      "isFree": false,
+      "subject": "第 5 章　基本引用类型",
+      "lockType": 0
+    },
+    {
+      "id": 32492,
+      "isFree": false,
+      "subject": "第 6 章　集合引用类型",
+      "lockType": 0
+    },
+    {
+      "id": 32493,
+      "isFree": false,
+      "subject": "第 7 章　迭代器与生成器",
+      "lockType": 0
+    },
+    {
+      "id": 32494,
+      "isFree": false,
+      "subject": "第 8 章　对象、类与面向对象编程",
+      "lockType": 0
+    },
+    {
+      "id": 32495,
+      "isFree": false,
+      "subject": "第 9 章　代理与反射",
+      "lockType": 0
+    },
+    {
+      "id": 32496,
+      "isFree": false,
+      "subject": "第 10 章　函数",
+      "lockType": 0
+    },
+    {
+      "id": 32497,
+      "isFree": false,
+      "subject": "第 11 章　期约与异步函数",
+      "lockType": 0
+    },
+    {
+      "id": 32498,
+      "isFree": false,
+      "subject": "第 12 章　BOM",
+      "lockType": 0
+    },
+    {
+      "id": 32499,
+      "isFree": false,
+      "subject": "第 13 章　客户端检测",
+      "lockType": 0
+    },
+    {
+      "id": 32500,
+      "isFree": false,
+      "subject": "第 14 章　DOM",
+      "lockType": 0
+    },
+    {
+      "id": 32501,
+      "isFree": false,
+      "subject": "第 15 章　DOM扩展",
+      "lockType": 0
+    },
+    {
+      "id": 32502,
+      "isFree": false,
+      "subject": "第 16 章　DOM2和DOM3",
+      "lockType": 0
+    },
+    {
+      "id": 32503,
+      "isFree": false,
+      "subject": "第 17 章　事件",
+      "lockType": 0
+    },
+    {
+      "id": 32504,
+      "isFree": false,
+      "subject": "第 18 章　动画与Canvas图形",
+      "lockType": 0
+    },
+    {
+      "id": 32505,
+      "isFree": false,
+      "subject": "第 19 章　表单脚本",
+      "lockType": 0
+    },
+    {
+      "id": 32506,
+      "isFree": false,
+      "subject": "第 20 章　JavaScript API",
+      "lockType": 0
+    },
+    {
+      "id": 32507,
+      "isFree": false,
+      "subject": "第 21 章　错误处理与调试",
+      "lockType": 0
+    },
+    {
+      "id": 32508,
+      "isFree": false,
+      "subject": "第 22 章　处理XML",
+      "lockType": 0
+    },
+    {
+      "id": 32509,
+      "isFree": false,
+      "subject": "第 23 章　JSON",
+      "lockType": 0
+    },
+    {
+      "id": 32510,
+      "isFree": false,
+      "subject": "第 24 章　网络请求与远程资源",
+      "lockType": 0
+    },
+    {
+      "id": 32511,
+      "isFree": false,
+      "subject": "第 25 章　客户端存储",
+      "lockType": 0
+    },
+    {
+      "id": 32512,
+      "isFree": false,
+      "subject": "第 26 章　模块",
+      "lockType": 0
+    },
+    {
+      "id": 32513,
+      "isFree": false,
+      "subject": "第 27 章　工作者线程",
+      "lockType": 0
+    },
+    {
+      "id": 32514,
+      "isFree": false,
+      "subject": "第 28 章　最佳实践",
+      "lockType": 0
+    },
+    {
+      "id": 32515,
+      "isFree": false,
+      "subject": "附录 A　ES2018和ES2019",
+      "lockType": 0
+    },
+    {
+      "id": 32516,
+      "isFree": false,
+      "subject": "附录 B　严格模式",
+      "lockType": 0
+    },
+    {
+      "id": 32517,
+      "isFree": false,
+      "subject": "附录 C　JavaScript库和框架",
+      "lockType": 0
+    },
+    {
+      "id": 32518,
+      "isFree": false,
+      "subject": "附录 D　JavaScript工具",
+      "lockType": 0
+    },
+    {
+      "id": 33271,
+      "isFree": false,
+      "subject": "作者简介",
+      "lockType": 0
+    }
+  ],
+  "hasBoughtEbook": true,
+  "book": {
+    "id": 2472,
+    "coverKey": "20080d81a4fb8a268c40",
+    "name": "JavaScript高级程序设计（第4版）",
+    "isbn": "978-7-115-54538-1",
+    "abstract": null,
+    "bookEditionPrices": null
+  },
+  "categories": [
+    [
+      {
+        "id": 1,
+        "name": "计算机",
+        "key": null
+      },
+      {
+        "id": 2,
+        "name": "编程语言",
+        "key": null
+      },
+      {
+        "id": 278,
+        "name": "JavaScript",
+        "key": null
+      }
+    ],
+    [
+      {
+        "id": 1,
+        "name": "计算机",
+        "key": null
+      },
+      {
+        "id": 294,
+        "name": "大前端",
+        "key": null
+      },
+      {
+        "id": 295,
+        "name": "JavaScript",
+        "key": null
+      }
+    ]
+  ],
+  "firstSaleDiscount": [],
+  "hasBuyFirstSaleBook": 1
+}

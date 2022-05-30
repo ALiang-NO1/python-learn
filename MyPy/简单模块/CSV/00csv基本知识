@@ -1,0 +1,25 @@
+模式     可做操作     若文件不存在     是否覆盖
+----    --------    ----------    ------
+r        只能读           报错      -
+r+       可读可写          报错      是
+w        只能写           创建      是
+w+       可读可写          创建      是
+a        只能写           创建      否，追加写
+a+       可读可写          创建      否，追加写
+
+1.reader(csvfile, dialect='excel', **fmtparams)
+参数说明：
+（1）csvfile，必须是支持迭代(Iterator)的对象，可以是文件(file)对象或者列表(list)对象，如果是文件对
+象，打开时需要加"b"标志参数。
+（2）dialect，编码风格，默认为excel的风格，也就是用逗号（,）分隔，dialect 方式也支持自定义，通过调用register_dialect方法来注册，下文会提到。
+（3）fmtparam，格式化参数，用来覆盖之前dialect对象指定的编码风格。
+
+2.writer(csvfile, dialect='excel', **fmtparams)
+
+3.register_dialect(name, [dialect, ]**fmtparams)
+参数说明：
+（1）name,你所自定义的dialect的名字，比如默认的是'excel'，你可以定义成'mydialect'
+（2）[dialect, ]**fmtparams，dialect格式参数，有delimiter（分隔符，默认的就是逗号）、quotechar、quoting等等，
+可以参考Dialects and Formatting Parameters
+
+4.unregister_dialect(name)      这个函数用于注销自定义的dialect

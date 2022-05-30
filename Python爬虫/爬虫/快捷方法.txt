@@ -1,0 +1,30 @@
+import requests
+from lxml import etree
+import threadpool
+
+def rq(url):
+    res = requests.get(url, headers=head, timeout=5)
+    res.encoding = 'utf-8'
+    return res
+
+def rq(url, data=None):
+    """获取网页响应"""
+    head = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                          'Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3775.400 QQBrowser/10.6.4209.400',
+            "Connection": "close"}
+    proxies = {'http': 'http://36.248.132.37:9999', 'https': 'https://121.237.149.4:3000'}
+    res = requests.get(url, headers=head, timeout=5)   # , proxies=proxies
+    return res
+
+def xp(html, xpath):
+    """根据网页及re模式获取元素列表"""
+    tree = etree.HTML(html)
+    list = tree.xpath(xpath)
+    return list
+
+def pool(function, arg, pool_num):
+    """传入蹲位，用函数处理参数"""
+    pool = threadpool.ThreadPool(pool_num)
+    request = threadpool.makeRequests(function, arg)
+    [pool.putRequest(req) for req in request]
+    pool.wait()

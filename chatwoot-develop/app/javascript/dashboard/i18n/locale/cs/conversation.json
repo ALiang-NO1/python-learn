@@ -1,0 +1,57 @@
+{
+  "CONVERSATION": {
+    "404": "Vyberte prosím konverzaci z levého panelu",
+    "NO_MESSAGE_1": "Ale ne! Vypadá to, že ve vaší schránce nejsou žádné zprávy od zákazníků.",
+    "NO_MESSAGE_2": " pro odeslání zprávy na vaši stránku!",
+    "NO_INBOX_1": "Hola! Zdá se, že jste ještě nepřidali žádné schránky.",
+    "NO_INBOX_2": " začít",
+    "NO_INBOX_AGENT": "Uh Oh! Vypadá to, že nejste součástí žádné schránky. Obraťte se na správce",
+    "CLICK_HERE": "Klikněte zde",
+    "LOADING_INBOXES": "Načítání krabic",
+    "LOADING_CONVERSATIONS": "Načítání konverzací",
+    "CANNOT_REPLY": "You cannot reply due to",
+    "24_HOURS_WINDOW": "24 hour message window restriction",
+    "LAST_INCOMING_TWEET": "You are replying to the last incoming tweet",
+    "REPLYING_TO": "You are replying to:",
+    "REMOVE_SELECTION": "Remove Selection",
+    "DOWNLOAD": "Stáhnout",
+    "HEADER": {
+      "RESOLVE_ACTION": "Vyřešit",
+      "REOPEN_ACTION": "Znovu otevřít",
+      "OPEN": "Více",
+      "CLOSE": "Zavřít",
+      "DETAILS": "Podrobnosti"
+    },
+    "FOOTER": {
+      "MSG_INPUT": "Shift + zadejte pro nový řádek. Začněte '/' pro výběr zrušené odpovědi.",
+      "PRIVATE_MSG_INPUT": "Shift + zadejte pro nový řádek. Toto bude viditelné pouze pro agenty"
+    },
+    "REPLYBOX": {
+      "REPLY": "Odpověď",
+      "PRIVATE_NOTE": "Soukromá poznámka",
+      "SEND": "Poslat",
+      "CREATE": "Přidat poznámku",
+      "TWEET": "Tweet"
+    },
+    "VISIBLE_TO_AGENTS": "Soukromá poznámka: Viditelné pouze pro vás a váš tým",
+    "CHANGE_STATUS": "Stav konverzace byl změněn",
+    "CHANGE_AGENT": "Konverzace pověřená osoba změněna"
+  },
+  "EMAIL_TRANSCRIPT": {
+    "TITLE": "Send conversation transcript",
+    "DESC": "Send a copy of the conversation transcript to the specified email address",
+    "SUBMIT": "Odeslat",
+    "CANCEL": "Zrušit",
+    "SEND_EMAIL_SUCCESS": "The chat transcript was sent successfully",
+    "SEND_EMAIL_ERROR": "There was an error, please try again",
+    "FORM": {
+      "SEND_TO_CONTACT": "Send the transcript to the customer",
+      "SEND_TO_AGENT": "Send the transcript of the assigned agent",
+      "SEND_TO_OTHER_EMAIL_ADDRESS": "Send the transcript to another email address",
+      "EMAIL": {
+        "PLACEHOLDER": "Enter an email address",
+        "ERROR": "Zadejte prosím platnou e-mailovou adresu"
+      }
+    }
+  }
+}

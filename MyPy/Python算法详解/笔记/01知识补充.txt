@@ -1,0 +1,8 @@
+1. 切片
+items=[0,1,2,3];s=slice(2,4)
+items[s]<=>items[2:4]<=>
+str='abcdef'
+for i in range(s.indices(len(str))):
+    print(str[i])
+
+2.

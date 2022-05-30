@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>测试文档</title>
+  <style>
+    div{
+      border: 2px solid darkred;
+      width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p>ppp</p>
+  </div>
+
+  <script>
+      var p = document.querySelector('p');
+      var div = document.querySelector('div');
+      function fun(){
+          alert('点击了p')
+      }
+      function fun2(){
+          alert('点击了div')
+      }
+      p.addEventListener('click', fun, false)
+      div.addEventListener('click', fun2, false)
+  </script>
+</body>
+</html>

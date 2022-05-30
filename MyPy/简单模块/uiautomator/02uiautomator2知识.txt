@@ -1,0 +1,466 @@
+安装：pip install --upgrade --pre uiautomator2
+git clone https://github.com/openatx/uiautomator2
+检查：uiautomator2 --help
+
+为了减少atx频繁的启停，我们开发了基于浏览器技术的weditor UI查看器：https://github.com/openatx/weditor
+安装：pip install -U weditor
+检查：weditor --help
+python -m uiautomator2 init     # init 所有的已经连接到电脑的设备
+
+-----------连接到设备-----------
+1.处于同一WiFi下
+d = u2.connect('10.0.0.1') # alias for u2.connect_wifi('10.0.0.1')
+
+2.通过USB
+d = u2.connect('123456f') # alias for u2.connect_usb('123456f')
+
+3.通过ADB WiFi
+d = u2.connect_adb_wifi("10.0.0.1:5555")
+
+-----------与第一版区别-----------
+网上很多教程都是关于1.0版本的，而2.0版本从表象上，可以看做是在API上进行的丰富（例如APP的启动方式），以及缺陷的修补（例如不支持中文）。若未接触过1.0，可以直接忽略。
+两者的主要区别如下
+（a）2.0基于 Instrumentation， 可以获取应用Context，可以使用Android服务及接口。
+（b）2.0基于 Junit4，测试用例无需继承于任何父类，方法名不限，使用Annotation进行， 1.0需要继承UiAutomatorTestCase，测试方法需要以test开头。
+（c）2.0采用Gradle进行构建，1.0使用Maven或Ant。
+（d）2.0新增UiObject2、Until、By、BySelector等接口。
+（e）2.0输出到Logcat，1.0可以使用System.out.print输出流回显至执行端。
+（f）2.0输出为APK，1.0输出为JAR。
+简单来讲，2.0操作更方便了。
+
+-----------主要语法-----------
+（1）启动app
+d.app_start("com.addcn.android.house591")
+
+（2）关闭app
+cls.d.app_stop("com.addcn.android.house591")
+
+（3）ResourceId定位
+cls.d(resourceId="com.addcn.android.house591:id/ad_banner").click()
+支持参数：resourceId, resourceIdMatches
+
+（4）Text定位
+d(text="精选").click()
+d(textContains="精").click()
+支持参数：text, textContains, textMatches, textStartsWith
+
+（5）Description定位
+d(description="..").click()
+支持参数：description, descriptionContains, descriptionMatches, descriptionStartsWith
+
+（6）ClassName定位
+d(className="android.widget.TextView").click()
+支持参数：className, classNameMatches
+
+（7）xpath定位
+d.xpath("//*[@content-desc='分享']").click()
+
+（8）组合定位
+d(text='Clock', className='android.widget.TextView')
+其他参数：
+checkable, checked, clickable, longClickable
+scrollable, enabled,focusable, focused, selected
+packageName, packageNameMatches
+index, instance
+
+（9）获取/设置/清空编辑框内容
+d(description="请输入QQ号码或手机或邮箱").get_text()
+
+d(description="请输入QQ号码或手机或邮箱").set_text("1234")
+
+d(description="请输入QQ号码或手机或邮箱").clear_text()
+
+-----------获取UI对象状态及信息-----------
+d(text="3D_H5").exists
+d.exists(text="3D_H5")
+d(text="3D_H5").info
+
+-----------操作控制-----------
+
+（1）默认元素等待超时（秒）————
+cls.d.wait_timeout = 20.0  #默认20
+
+（2）获取控件中心位置坐标————
+x,y=d(text="设置").center()
+#x,y = d(text="设置").center(offset=(0, 0)) # left-top x, y
+
+（3）开关点击————
+d(A).left(B), selects B on the left side of A.
+d(A).right(B), selects B on the right side of A.
+d(A).up(B), selects B above A.
+d(A).down(B), selects B under A.
+例如：
+选择“Wi-Fi”右侧的“开关”: d(text="Wi‑Fi").right(className="android.widget.Switch").click()
+
+（4）获取/统计某个相同条件的数目————
+d(text="Add new").count
+或者
+len(d(text="Add new"))
+得知数目之后，我们可以通过索引去定位
+d(text="Add new")[0]
+d(text="Add new")[1]
+也可以遍历
+for view in d(text="Add new"):
+    view.info
+
+（5）截图————
+＃截取屏幕截图并保存到计算机上的文件中，要求Android> = 4.2。
+d.screenshot("home.jpg ") # get PIL.Image格式化图像。当然，你需要首先安装pillow
+image = d.screenshot() # default format ="pillow”
+image.save("home.jpg ")＃或home.png。目前，只有PNG和JPG支持
+
+＃得到OpenCV的格式图像。当然，你需要先安装numpy和cv2
+import cv2
+＃ 获取原始JPEG数据 imagebin = d.screenshot（格式= '原始'） 打开（ “ some.jpg ”， “ WB ”）.WRITE（imagebin）
+image = d.screenshot( format='opencv')
+cv2.imwrite('home.jpg')
+
+（6）手势操作————
+d(text="设置").click(timeout=30)  # 最多延迟等待30秒，没找到该元素会抛出.UiObjectNotFoundError
+
+d(text="设置").click(offset=(0.5, 0.5))  # 百分比表示方法 默认点击中心坐标
+
+d(text="设置").click(offset=(0, 0)) # 点击坐标 左-上
+
+d(text="设置").click(offset=(1, 1)) # 点击坐标 右-下
+
+d(text="设置").click_gone(maxretry=3, interval=1)  # 重复点击此元素3次，每次间隔1秒，若该元素消失则中止偿试并返回bool值
+
+d(text="设置").long_click(timeout=3)  # 长按指定元素对象3秒
+
+
+-----------针对特定对象的手势动作-----------
+
+————在xx秒内拖动指定对象到指定坐标点（或指定对象位置）
+d(text="设置").drag_to(500, 500, duration=0.1)
+d(text="设置").drag_to(text="安全中心", duration=0.2)
+d.drag(sx, sy, ex, ey)  # drag from (sx, sy) to (ex, ey)
+d.drag(sx, sy, ex, ey, steps=10)  # drag from (sx, sy) to (ex, ey) with 10 steps
+
+————从UI对象的中心位置开始移动到它的边缘，支持4个方向：left，right，top，down
+d(text="设置").swipe("up",steps=100)
+#1 steps大约5ms，10 steps大约0.5秒，是一个按下→移动→弹起的过程。试了一下：steps太短上/上滑动等于单击，左/右移动等于快速滑动
+
+————等待指定的对象出现，并返回bool值
+d(text="设置").wait(timeout=3)  # 3秒内”设置“对象出现返回true，否则返回false
+
+————等待指定的对象消失，并返回bool值
+d(text="设置").wait(timeout=3) # 3秒内”设置“对象消失”返回true，否则返回false
+这个有两种情况：
+1.如果当前界面无此对象，则直接返回false；
+2.如果当前界面有此对象，3内消失（最长等待3秒）返回true；否则返回false
+
+-----------界面飞轮操作（就是按住滑一下，类似 鼠标滚轮滑动一次的行/列数）-----------
+
+————直滚动
+d(scrollable=True).fling()  # 默认垂直滚动条.vert可省略 为了可读性可加上，向下滚动
+
+d(scrollable=True).fling.toEnd() 或 d(scrollable=True).fling.vert.toEnd()  # 垂直滑动：滑到最底部
+
+d(scrollable=True).fling.toBeginning() 或 d(scrollable=True).fling.vert.toBeginning()  # 垂直滑动：滑到顶部
+
+d(scrollable=True).fling.vert.forward()  # 垂直向上滑动
+
+d(scrollable=True).fling.vert.backward()  # t垂直向下滑动
+
+————水平滚动（比如打开网页baidu，会在顶部的各个分类页签上切换）
+d(scrollable=True).fling.horiz.toBeginning()#向左滑动
+
+d(scrollable=True).fling.horiz.toEnd()#向右滑动
+
+d(scrollable=True).fling.horiz.forward()#向左滑动
+
+d(scrollable=True).fling.horiz.backward(max_swipes=1000)#向右滑动
+
+————scroll滚动条操作
+d(scrollable=True).scroll(steps=10)  # 默认垂直，向上滑动
+
+d(scrollable=True).scroll.horiz.forward(steps=100)  # 向右滑动，1 steps约20ms
+
+d(scrollable=True).scroll.vert.backward() # 垂直：向下滑动
+
+d(scrollable=True).scroll.horiz.toBeginning(steps=100, max_swipes=1000)  # 水平，向左滑动
+
+d(scrollable=True).scroll.toEnd()  # 垂直：向下滑动到底部
+
+————滚动直到指定的对象页面出现为止
+d(scrollable=True).scroll.to(text="琅琊榜")  # 垂直的挺准
+
+d(scrollable=True).scroll.horiz.to(text="琅琊榜")  # 这个水平的没搞明白……感觉不准确
+
+-----------监视器Watcher  # 测试机为华为P7-安卓7.0-----------
+serialno = 'KWG5T16603013752'
+apk = 'http://ip/test/eg.apk'
+d = u2.connect_usb(serialno)
+d.implicitly_wait(10.0)
+d.watcher("ok").when(text="仅允许本次安装").click()  # 创建监视器
+d.watcher("ins").when(text="安装").click()  # 创建监视器
+d.watchers.watched=True  # 启动监视器
+d.app_install(apk)  # 安装app
+print("all watchers:",d.watchers,d.watchers.triggered)  # 打印所有监视器
+d.watchers.reset()  # 重置监视器
+print("reset watchers:",d.watchers.triggered)
+d.watchers.remove("ins")  # 移除指定监视器
+print("reomve_ins.watcher",d.watchers)
+d.watchers.remove()  # 移除所有监视器
+print("remove_all.watcher",d.watchers)
+
+-----------使用adb广播输入消息-----------
+d(text="备忘录", className="android.widget.TextView").click()
+d(text="新建", className="android.widget.TextView").click()
+d.set_fastinput_ime(True) # 切换成FastInputIME输入法
+d.send_keys("你好hello") # adb广播输入
+d.clear_text() # 清除输入框所有内容
+d.set_fastinput_ime(False) # 切换成正常的输入法
+d.send_action("search") # 模拟输入法的搜索
+
+————send_action 说明
+该函数可以使用的参数有 go search send next done previous
+
+-----------Toast显示和Xpath识别对象-----------
+
+serialno = '7f3dec60' # device adb serial
+d = u2.connect_usb(serialno)
+
+# 比如操作微信底部按钮菜单，RelativeLayout[1]微信，[2]通讯录，[3]发现，[4]我
+sl=d.xpath('//*[@resource-id="com.tencent.mm:id/bq"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[3]').get()
+x,y=sl.center()
+d.long_click(x,y)
+'''
+sl=d.xpath('//*[@resource-id="com.tencent.mm:id/li"]')  # 操作搜索框
+print(sl.exists,sl.get_last_match(),sl.get_text())
+sl.set_text("hello world")  # 搜索框发送内容
+
+if d(text="文章", className="android.widget.TextView").exists():  # Selector搜索文本
+print("Got it-1 article")
+if d(resourceId="com.tencent.mm:id/c2t", className="android.widget.TextView").exists():  # 搜索id
+print("Got it-2 article")
+
+if d.xpath('//*[@text="文章"]').exists:
+print("Got it-3 article")
+if d.xpath('//*[@resource-id="com.tencent.mm:id/c2t"]').exists:
+print("Got it-4 article")
+
+if d(resourceId="com.tencent.mm:id/c2t", text="文章").exists():
+print("Got it-5 article")
+if d(resourceId="com.tencent.mm:id/c2t", text="音乐").exists():
+print("Got it-6 music")
+'''
+
+————Toast消息显示
+# d.toast.show("Hello world")
+d.toast.show("Hello world", 1.0)   #  show for 1.0s, default 1.0s
+# 下边的get方法报错了
+# d.toast.get_message(5.0, 10.0, "default message")
+# assert "Short message" in d.toast.get_message(5.0, default="")
+#  clear cached toast
+# d.toast.reset()
+#  Now d.toast.get_message(0) is None
+
+
+-----------在屏幕上滑动-----------
+
+# swipe from (sx, sy) to (ex, ey)
+d.swipe(sx, sy, ex, ey)
+# swipe from (sx, sy) to (ex, ey) with 10 steps
+d.swipe(sx, sy, ex, ey, steps=10)
+
+-----------系统常用按键-----------
+d.press.home()
+d.press.back()
+d.press("back")----亲测可用
+d.press(0x07, 0x02)
+
+1、home            手机Home键
+2、back            手机返回键
+3、left            对应键盘上的向右键<-
+4、right           对应键盘上的向右键->
+5、up              对应键盘上的向上键
+6、down            对应键盘上的向下键
+7、center          选中？
+8、menu            菜单
+9、search          查找？
+10、enter           对应键盘上的Enter键
+11、delete(or》del)  对应键盘上的DEL键用于删除
+12、recent(recent》apps)  任务切换
+13、volume_up       声音向上调整
+14、volume_down     声音向下调整
+15、volume_mute     静音按键
+16、camera          拍照
+17、power           电源键
+
+（9）其他
+————判断屏幕唤醒状态
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s-%(name)s-%(levelname)s-%(message)s')
+logger = logging.getLogger(__name__)
+d = u2.connect()
+screen = d.info
+if screen["screenOn"] == False:  # 屏幕状态
+    logger.info("灭屏状态")
+elif screen["screenOn"] == True:   # 屏幕状态
+    logger.info("亮屏状态")
+
+————解锁屏幕
+STOP_COUNT = 150
+d = u2.connect()
+# 输入滑动解锁码
+def do_password(count):
+    # 通过weditor获取到的图案位置
+    d.swipe_points([(0.304, 0.431), (0.507, 0.435), (0.5, 0.636)], 0.1)
+# 检验是否输入正确
+def do_check():
+    # 检查输入密码是否达到现在
+    if d(resourceId="android:id/message").exists:
+        message = d(resourceId="android:id/message").get_text()
+        # 取得输密码的次数
+        times = re.findall('\d+', message)[0]
+        # 需要等待的时间
+        timeout = re.findall('\d+', message)[1]
+        print("暂时不能输入密码，这是第$s次输入，需要等待%s才可以再次输入" % (times, timeout))
+        return True, times, timeout
+    else:
+        print("可以输入")
+        return False, 0, 0
+count = 0
+while True:
+    ret, times, timeout = do_check()
+    if ret:
+        d.screenshot(times + "times_" + timeout + "s.jpg")
+        if int(times) >= STOP_COUNT:
+            break
+        time.sleep(int(timeout))
+        d(resourceId="android:id/button3").click()
+    count = count + 1
+    do_password(count)
+
+-----------命令行-----------
+$device_ip代表设备的ip地址
+如需指定设备需要传入--serial 如 python3 -m uiautomator2 --serial bff1234 <SubCommand>, SubCommand为子命令（init,或者screenshot等）
+1.0.3 Added: python3 -m uiautomator2可以简写为uiautomator2
+————screenshot: 截图
+$ uiautomator2 screenshot screenshot.jpg
+
+————current: 获取当前包名和activity
+$ uiautomator2 current
+{
+    "package": "com.android.browser",
+    "activity": "com.uc.browser.InnerUCMobile",
+    "pid": 28478
+}
+
+————uninstall： 卸载
+$ uiautomator2 uninstall <package-name> # 卸载一个包
+$ uiautomator2 uninstall <package-name-1> <package-name-2> # 卸载多个包
+$ uiautomator2 uninstall --all # 全部卸载
+
+————stop: 停止应用
+$ uiautomator2 stop com.example.app # 停止一个app
+$ uiautomator2 stop --all # 停止所有的app
+
+————install: 安装apk，apk通过URL给出 (暂时不能用)
+
+————healthcheck: 健康检查 (暂不能用)
+
+-----------API文件-----------
+d = u2.connect() # connect to device
+
+————新命令超时
+假设客户端退出并结束uiautomator服务之前，客户端要等待多长时间（以秒为单位）（默认3分钟）
+
+配置可访问性服务的最大长度时间，超时将自动释放。至少3分钟。
+d.set_new_command_timeout（300）＃更改为5分钟，单位秒
+
+————调试HTTP请求
+>>> d.debug = True
+>>> d.info
+
+————隐式等待
+d.implicitly_wait(10.0) # 也可以通过d.settings['wait_timeout'] = 10.0 修改
+d(text="Settings").click() # if Settings button not show in 10s, UiObjectNotFoundError will raised
+
+————安装应用
+d.app_install('http://some-domain.com/some.apk')
+
+————发布应用
+# 默认的这种方法是先通过atx-agent解析apk包的mainActivity，然后调用am start -n $package/$activity启动
+d.app_start("com.example.hello_world")
+
+# 使用 monkey -p com.example.hello_world -c android.intent.category.LAUNCHER 1 启动
+# 这种方法有个副作用，它自动会将手机的旋转锁定给关掉
+d.app_start("com.example.hello_world", use_monkey=True) # start with package name
+
+# 通过指定main activity的方式启动应用，等价于调用am start -n com.example.hello_world/.MainActivity
+d.app_start("com.example.hello_world", ".MainActivity")
+
+————停止应用
+# equivalent to `am force-stop`, thus you could lose data
+d.app_stop("com.example.hello_world")
+# equivalent to `pm clear`
+d.app_clear('com.example.hello_world')
+————停止所有正在运行的应用
+# stop all
+d.app_stop_all()
+# stop all app except for com.examples.demo
+d.app_stop_all(excludes=['com.examples.demo'])
+————获取应用信息
+d.app_info("com.examples.demo")
+# expect output
+#{
+#    "mainActivity": "com.github.uiautomator.MainActivity",
+#    "label": "ATX",
+#    "versionName": "1.1.7",
+#    "versionCode": 1001007,
+#    "size":1760809
+#}
+
+# save app icon
+img = d.app_icon("com.examples.demo")
+img.save("icon.png")
+————列出所有正在运行的应用
+pid = d.app_wait("com.example.android") # 等待应用运行, return pid(int)
+if not pid:
+    print("com.example.android is not running")
+else:
+    print("com.example.android pid is %d" % pid)
+
+d.app_wait("com.example.android", front=True) # 等待应用前台运行
+d.app_wait("com.example.android", timeout=20.0) # 最长等待时间20s（默认）
+
+————等到应用程序运行
+push a file to the device
+# push to a folder
+d.push("foo.txt", "/sdcard/")
+# push and rename
+d.push("foo.txt", "/sdcard/bar.txt")
+# push fileobj
+with open("foo.txt", 'rb') as f:
+    d.push(f, "/sdcard/")
+# push and change file access mode
+d.push("foo.sh", "/data/local/tmp/", mode=0o755)
+pull a file from the device
+
+d.pull("/sdcard/tmp.txt", "tmp.txt")
+# FileNotFoundError will raise if the file is not found on the device
+d.pull("/sdcard/some-file-not-exists.txt", "tmp.txt")
+
+————推拉文件
+# push to a folder
+d.push("foo.txt", "/sdcard/")
+# push and rename
+d.push("foo.txt", "/sdcard/bar.txt")
+# push fileobj
+with open("foo.txt", 'rb') as f:
+    d.push(f, "/sdcard/")
+# push and change file access mode
+d.push("foo.sh", "/data/local/tmp/", mode=0o755)
+
+pull a file from the device
+
+d.pull("/sdcard/tmp.txt", "tmp.txt")
+
+# FileNotFoundError will raise if the file is not found on the device
+d.pull("/sdcard/some-file-not-exists.txt", "tmp.txt")
+
+————检查并维持设备端守护进程处于运行状态
+d.healthcheck()

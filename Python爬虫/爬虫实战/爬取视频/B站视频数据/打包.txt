@@ -1,0 +1,28 @@
+工具打包
+在cmd控制台使用cd进入py文件所在目录:
+cd D:\菜J学Python\GUI工具\B站视频数据下载器
+
+使用pyinstaller打包:
+pyinstaller -F -w bilibili.py
+运行完成后，会在当前目录下生成1个dist文件夹和build文件夹，打开dist文件夹，双击bilibili.exe，工具即可运行。
+如果是mac环境可以使用py2app进行打包。
+
+pyinstaller -D -w -i "resources\logo.ico" AudioConverter.py Amusic.py --add-data "resources\7z.dll;." --add-data "resources\7z.exe;." --add-data "resources\aria2c.exe;." --add-data "resources\logo.ico;."
+参数解释：
+-D 创建一个包含可执行文件的单文件夹捆绑包（不推荐-F单文件形式，原因：单文件每次启动前需要解压操作，会拖慢启动速度）
+-w 不显示控制台窗口，GUI可视化程序需要此项
+-i 指定可执行文件的图标
+-n 指定应用程序包的名称（默认值：第一个脚本的名称）
+–add-data <SRC;DEST or SRC:DEST> 添加资源文件（Windows使用;分号，大多数Unix使用:冒号，注意后面还有一个.点）
+其他参数可查阅官方文档https://pyinstaller.readthedocs.io/en/stable/
+
+出现运行异常兼容性问题，请尝试PyInstaller开发版本
+pip install https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
+高速访问GitHub
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple https://git.yumenaka.net/github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
+
+反馈信息api
+钉钉机器人文档：https://ding-doc.dingtalk.com/doc#/serverapi2/krgddi
+与你机器人文档：http://www.uneed.com/openapi/pages/index.html#/chatbot/intro
+飞书机器人文档：https://www.feishu.cn/hc/zh-CN/articles/360024984973-%E6%9C%BA%E5%99%A8%E4%BA%BA-%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BE%A4%E8%81%8A%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%9C%BA%E5%99%A8%E4%BA%BA-#source=section
+企业微信机器人文档：https://work.weixin.qq.com/api/doc/90000/90136/91770

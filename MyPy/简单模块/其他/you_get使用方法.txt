@@ -1,0 +1,186 @@
+---------版本下载------
+稳定版 (与PyPI最新版等同)：https://github.com/soimort/you-get/archive/master.zip
+开发版 (更多的热补丁与不稳定功能)：https://github.com/soimort/you-get/archive/develop.zip
+
+----------参数说明-----
+1.第一个参数是 -i , 作用是解析出该地址下的视频信息
+you-get -i https://v.qq.com/x/cover/34rg8ntemeszdm4/j0613bozdsx.html
+#you-get -i 视频的地址
+
+2.第二个参数是 -o , 作用是下载该视频(注意要加保存的地址)
+you-get -o D:/ https://v.qq.com/x/cover/34rg8ntemeszdm4/j0613bozdsx.html
+#格式为you-get -o 要保存的地址 包含视频的网页url
+
+3.如果希望下载不同的的画质,先用-i参数得到解析出来的视频信息[default为默认下载画质（最高）]
+you-get --format == mp4hd -o D:/ https://v.qq.com/x/cover/mzc002006ncxgx1.html
+#格式:you-get --format == container path url
+
+4.第三个参数是 -u , 作用是解析视频真实的地址(url)
+you-get -u https://v.qq.com/x/cover/34rg8ntemeszdm4/j0613bozdsx.html
+
+5.获取视频的json格式信息
+you-get --json https://v.qq.com/x/cover/34rg8ntemeszdm4/j0613bozdsx.html
+
+6.乱码问题的解决方法
+　　CMD窗口下输入：chcp 65001 #UTF-8字符集代码，默认GBK为936
+　　CMD窗口上方标题栏，属性--字体中，修改为TrueType 'Lucida Console'
+
+--------------you-get选项----------
+optional arguments:
+  -V, --version         Print version and exit
+  -h, --help            Print this help message and exit
+Dry-run options: (no actual downloading)
+  -i, --info            Print extracted information
+  -u, --url             Print extracted information with URLs
+  --json                Print extracted URLs in JSON format
+Download options:
+  -n, --no-merge        Do not merge video parts
+  --no-caption          Do not download captions (subtitles, lyrics, danmaku, ...)
+  -f, --force           Force overwriting existing files（强制覆盖当前文档）
+  --skip-existing-file-size-check
+                        Skip existing file without checking file size
+                        （跳过现有文件而不检查文件大小）
+  -F STREAM_ID, --format STREAM_ID
+                        Set video format to STREAM_ID
+                        （将视频格式设置为流ID）
+  -O FILE, --output-filename FILE
+                        Set output filename
+  -o DIR, --output-dir DIR
+                        Set output directory
+  -p PLAYER, --player PLAYER
+                        Stream extracted URL to a PLAYER
+  -c COOKIES_FILE, --cookies COOKIES_FILE
+                        Load cookies.txt or cookies.sqlite
+  -t SECONDS, --timeout SECONDS
+                        Set socket timeout
+  -d, --debug           Show traceback and other debug info
+  -I FILE, --input-file FILE
+                        Read non-playlist URLs from FILE
+  -P PASSWORD, --password PASSWORD
+                        Set video visit password to PASSWORD
+  -l, --playlist        Prefer to download a playlist
+  -a, --auto-rename     Auto rename same name different files
+  -k, --insecure        ignore ssl errors
+Proxy options:
+  -x HOST:PORT, --http-proxy HOST:PORT
+                        Use an HTTP proxy for downloading
+  -y HOST:PORT, --extractor-proxy HOST:PORT
+                        Use an HTTP proxy for extracting only
+  --no-proxy            Never use a proxy
+  -s HOST:PORT or USERNAME:PASSWORD@HOST:PORT, --socks-proxy HOST:PORT or USERNAME:PASSWORD@HOST:PORT
+                        Use an SOCKS5 proxy for downloading
+--------其他说明---------
+当观赏感兴趣之视频，您可以使用 --info/-i 以查看所有可用画质与格式(如YouTube视频带有字幕，将被一同下载，以SubRip格式保存.)
+
+如您希望其他格式(mp4)，请使用其他提示选项:
+you-get --itag=18 'https://www.youtube.com/watch?v=jNQXAC9IVRw'
+
+如不希望you-get合并视频，使用--no-merge/-n.
+
+---暂停与恢复下载
+》》可以使用Ctrl+C 暂停下载.
+》》临时的.download文件将保存于输出目录。下次使用you-get传入相同参数时，下载将从上次继续开始.
+如果下载已经完成 (临时的.download 扩展名消失), you-get将忽略下载.
+》》用--force/-f强行重下载. (注意: 将覆盖同名文件或临时文件!)
+
+---设置输出文件名或路径
+使用--output-dir/-o 设定路径, --output-filename/-O 设定输出文件名:
+$ you-get -o ~/Videos -O zoo.webm 'https://www.youtube.com/watch?v=jNQXAC9IVRw'
+提示: 如果原视频标题含有与系统不兼容字符，十分有效。也可以帮助使用脚本批量下载于指定目录和文件名.
+
+---代理设置
+使用 --http-proxy/-x为you-get设置HTTP代理:
+$ you-get -x 127.0.0.1:8087 'https://www.youtube.com/watch?v=jNQXAC9IVRw'
+然而系统代理 (即系统变量http_proxy) 自动使用. 使用--no-proxy强行关闭.
+提示:
+如果经常使用代理 (网络封锁了部分网站), 考虑将you-get和 proxychains 一同使用，并设置alias you-get="proxychains -q you-get" (于命令行).
+对于某些网站(例如Youku), 如果你需要下载仅供中国大陆观看的视频, 可以使用 --extractor-proxy/-y单独为解析器设置代理.
+可以使用 -y proxy.uku.im:8888
+
+---观看视频
+使用 --player/-p 将视频喂进播放器, 例如 mplayer 或者 vlc,而不是下载:
+$ you-get -p vlc 'https://www.youtube.com/watch?v=jNQXAC9IVRw'
+
+或者你想在浏览器中观看而不希望看广告或评论区:
+$ you-get -p chromium 'https://www.youtube.com/watch?v=jNQXAC9IVRw'
+提示:
+可以使用 -p 开启下载工具,例如 you-get -p uget-gtk 'https://www.youtube.com/watch?v=jNQXAC9IVRw', 虽然有可能不灵.
+
+---加载cookie
+并非所有视频可供任何人观看。如果需要登录以观看 (例如, 私密视频), 可能必须将浏览器cookie通过--cookies/-c 加载入 you-get.
+注意:
+目前我们支持两种cookie格式：Mozilla cookies.sqlite 和 Netscape cookies.txt.
+复用解析数据
+使用 --url/-u 获得页面所有可下载URL列表. 使用 --json以获得JSON格式.
+
+网站	URL	视频	图像	音频
+1.YouTube       https://www.youtube.com/
+2.Twitter       https://twitter.com/
+3.VK            http://vk.com/
+4.Vine          https://vine.co/
+5.Vimeo         https://vimeo.com/
+6.Vidto         http://vidto.me/
+7.Veoh          http://www.veoh.com/
+8.Tumblr        https://www.tumblr.com/
+9.TED           http://www.ted.com/
+10.SoundCloud    https://soundcloud.com/
+11.Pinterest     https://www.pinterest.com/
+12.MusicPlayOn   http://en.musicplayon.com/
+13.MTV81         http://www.mtv81.com/
+14.Mixcloud      https://www.mixcloud.com/
+15.Metacafe      http://www.metacafe.com/
+16.Magisto       http://www.magisto.com/
+17.Khan-Academy  https://www.khanacademy.org/
+18.JPopsuki-TV   http://www.jpopsuki.tv/
+19.Internet-Archive     https://archive.org/
+20.Instagram     https://instagram.com/
+21.Heavy-Music-Archive  http://www.heavy-music.ru/
+22.Google+       https://plus.google.com/
+23.Freesound     http://www.freesound.org/
+24.Flickr        https://www.flickr.com/
+25.Facebook      https://www.facebook.com/
+26.eHow          http://www.ehow.com/
+27.Dailymotion   http://www.dailymotion.com/
+28.CBS           http://www.cbs.com/
+29.Bandcamp      http://bandcamp.com/
+30.AliveThai     http://alive.in.th/
+31.interest.me   http://ch.interest.me/tvn
+32.ナナゴーゴー        http://7gogo.jp/
+33.ニコニコ動画        http://www.nicovideo.jp/
+34.网易视频          http://v.163.com/
+35.网易云音乐         http://music.163.com/
+36.56网           http://www.56.com/
+37.AcFun         http://www.acfun.tv/
+38.百度贴吧          http://tieba.baidu.com/
+39.爆米花网          http://www.baomihua.com/
+40.哔哩哔哩          http://www.bilibili.com/
+41.Dilidili      http://www.dilidili.com/
+42.豆瓣            http://www.douban.com/
+43.斗鱼            http://www.douyutv.com/
+44.凤凰视频          http://v.ifeng.com/
+45.风行网           http://www.fun.tv/
+46.爱奇艺           http://www.iqiyi.com/
+47.激动网           http://www.joy.cn/
+48.酷6网           http://www.ku6.com/
+49.酷狗音乐          http://www.kugou.com/
+50.酷我音乐          http://www.kuwo.cn/
+51.乐视网           http://www.letv.com/
+52.荔枝FM          http://www.lizhi.fm/
+53.秒拍            http://www.miaopai.com/
+54.MioMio弹幕网     http://www.miomio.tv/
+55.痞客邦           https://www.pixnet.net/
+56.PPTV聚力        http://www.pptv.com/
+57.齐鲁网           http://v.iqilu.com/
+58.腾讯视频          http://v.qq.com/
+59.阡陌视频          http://qianmo.com/
+60.新浪视频          http://video.sina.com.cn/
+61.微博秒拍视频        http://video.weibo.com/
+62.搜狐视频          http://tv.sohu.com/
+63.天天动听          http://www.dongting.com/
+64.土豆            http://www.tudou.com/
+65.虾米            http://www.xiami.com/
+66.阳光卫视          http://www.isuntv.com/
+67.音悦Tai         http://www.yinyuetai.com/
+68.优酷            http://www.youku.com/
+69.战旗TV          http://www.zhanqi.tv/lives
+70.央视网           http://www.cntv.cn/

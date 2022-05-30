@@ -1,0 +1,20 @@
+Event(事件)
+1.Event 是一个事务处理的机制，用于通知多个异步任务某个事件已经发生了。比如在交通红绿灯中多辆在行驶中的汽车可以表示成程序中的多个异步任务，
+红绿灯的亮起可以表示成一个通知，红灯通知这个汽车的行驶任务必须停止了，绿灯通知这个汽车的行驶任务可以继续驾驶了。
+2.Event 管理着一个全局的内部标志 flag，该 flag 默认为 False，当 flag 等于 False 的时候，调用 wait() 函数后程序就会被阻塞，
+只有当 flag 等于 True 的时候程序才会继续执行。在红绿灯中红灯相当于 flag 等于 False 的时候调用了 wait() 函数，绿灯相当于 flag被设置为了True，
+汽车允许通行，程序被允许执行 wait()之后的代码。
+
+Event事件对象
+Event 通过 threading 模块的 Event() 类创建对象：event = threading.Event()
+Event 是一个低配版的 Condition，在源代码 init 函数中创建了 Condition 对象，并将 flag 设置为 False
+
+def __init__(self):
+    self._cond = Condition(Lock())
+    self._flag = False
+
+Event 事件中只有4个函数：
+set(): 将 flag 设为 True，通知所有处于阻塞状态的线程恢复运行状态。
+clear(): 将 flag 设为 False。
+wait(timeout): 如果 flag 为 True 将立即返回，否则线程将处于阻塞状态，等待其他线程将 flag 设置为 True
+isSet(): 获取 flag 的状态，返回 True 或 False。

@@ -1,0 +1,104 @@
+Tkinter:    是python最简单的图形化模块，总共只有14种组建
+Pyqt:       是python最复杂也是使用最广泛的图形化
+Wx:         是python当中居中的一个图形化，学习结构很清晰
+Pywin:      是python windows 下的模块，摄像头控制(opencv)，常用于外挂制作
+
+wxpy 构造器：wx.Frame( wx.Window parent, id, string title, wx.Point pos=wx.DefaultPosition, wx.Size size=wx.DefaultSize,
+                      style = wx.DEFAULT_FRAME_STYEL, string name='frame' )
+
+------------------wx主要组件介绍--------------
+1、frame（窗口）
+parent = None    #父元素，假如为None，代表顶级窗口
+id = None    #组件的标识，唯一，假如id为-1代表系统分配id
+title = None    #窗口组件的名称
+pos = None    #组件的位置，就是组件左上角点距离父组件或者桌面左和上的距离
+size = None    #组件的尺寸，宽高
+style = None    #组件的样式
+name = None    #组件的名称，也是用来标识组件的，但是用于传值
+
+2、TextCtrl（文本框）
+parent = None    #父元素，假如为None，代表顶级窗口
+id = None    #组件的标识，唯一，假如id为-1代表系统分配id
+value = None      #文本框当中的内容
+    GetValue    #获取文本框的值
+    SetValue    #设置文本框的值
+pos = None    #组件的位置，就是组件左上角点距离父组件或者桌面左和上的距离
+size = None    #组件的尺寸，宽高
+style = None    #组件的样式
+validator = None    #验证
+name = None    #组件的名称，也是用来标识组件的，但是用于传值
+
+3、Button（按钮）
+parent = None    #父元素，假如为None，代表顶级窗口
+id = None    #组件的标识，唯一，假如id为-1代表系统分配id
+lable = None    #按钮的标签
+pos = None    #组件的位置，就是组件左上角点距离父组件或者桌面左和上的距离
+size = None    #组件的尺寸，宽高
+style = None    #组件的样式
+validator = None    #验证
+name = None    #组件的名称，也是用来标识组件的，但是用于传值
+
+》》若Button继承frame框架，由于我们各个组件都固定了大小，因此在框体拉伸时，对应的组件不会对应进行拉伸，比较影响用户体验。
+》》为了解决上述这个问题，我们可以使用尺寸器进行布局，类似于HTML的CSS样式。
+1、BoxSizer（尺寸器，横向box，中纵向vbox，设置构件的比例关系）
+尺寸器作用于画布（panel）
+默认水平布局
+垂直布局可以调整
+按照相对比例
+2、步骤
+实例化尺寸器（可以是多个）
+添加组件到不同尺寸器中
+设置相对比例、填充的样式和方向、边框等参数
+设置主尺寸器
+box.Add(path_text,proportion = 5,flag = wx.EXPAND|wx.ALL,border = 3)    # 添加组件
+     #proportion：相对比例
+     #flag：填充的样式和方向,wx.EXPAND为完整填充，wx.ALL为填充的方向
+     #border：边框
+
+》》》鼠标指针样式
+wx.CURSOR_ARROW
+wx.CURSOR_RIGHT_ARROW
+wx.CURSOR_BLANK
+wx.CURSOR_BULLSEYE
+wx.CURSOR_CHAR
+wx.CURSOR_CROSS
+wx.CURSOR_HAND
+wx.CURSOR_IBEAM
+wx.CURSOR_LEFT_BUTTON
+wx.CURSOR_MAGNIFIER
+wx.CURSOR_MIDDLE_BUTTON
+wx.CURSOR_NO_ENTRY
+wx.CURSOR_PAINT_BRUSH
+wx.CURSOR_PENCIL
+wx.CURSOR_POINT_LEFT
+wx.CURSOR_POINT_RIGHT
+wx.CURSOR_QUESTION_ARROW
+wx.CURSOR_RIGHT_BUTTON
+wx.CURSOR_SIZENESW
+wx.CURSOR_SIZENS
+wx.CURSOR_SIZENWSE
+wx.CURSOR_SIZEWE
+wx.CURSOR_SIZING
+wx.CURSOR_SPRAYCAN
+wx.CURSOR_WAIT
+wx.CURSOR_WATCH
+wx.CURSOR_ARROWWAIT
+
+》》》Add(wx.Window window, integer proportion=0, integer flag=0, integer border=0)
+1.proportion 参数定义了在定义的方向上构件改变的比例。假设我们有三个按纽，它们的 proportion 属性分别为0、1和2。它们被加入一个水平的 wx.BoxSizer。proportion 参数为 0 的按纽根本不发生变化。而这个参数值为 2 的按纽在水平方向改变的程序将是参数值为 1 的那个按纽的两倍。
+
+2.flag 参数可以更深入的设置构件的属性。我们可以控制构件之间的边框。我们可以在构件之间增加一些空白象素。在要使用边框的地方我们需要定义边界。我们可以使用 | 符号来连接它们。比如 wx.LEFT | wx.BOTTOM 。flag参数的值可以是：
+* wx.LEFT
+* wx.RIGHT
+* wx.BOTTOM
+* wx.TOP
+* wx.ALL
+
+3.wx.EXPAND 构件将占据所有分配给它的空间。最后，我们还可以定义构件的对齐方式。有以下几种：
+* wx.ALIGN_LEFT
+* wx.ALIGN_RIGHT
+* wx.ALIGN_TOP
+* wx.ALIGN_BOTTOM
+* wx.ALIGN_CENTER_VERTICAL
+* wx.ALIGN_CENTER_HORIZONTAL
+* wx.ALIGN_CENTER

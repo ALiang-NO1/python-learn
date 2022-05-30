@@ -1,0 +1,47 @@
+{
+  "GENERAL_SETTINGS": {
+    "TITLE": "Kontoinställningar",
+    "SUBMIT": "Uppdatera inställningar",
+    "BACK": "Back",
+    "UPDATE": {
+      "ERROR": "Kunde inte uppdatera inställningar, försök igen!",
+      "SUCCESS": "Uppdaterade kontoinställningar"
+    },
+    "FORM": {
+      "ERROR": "Vänligen åtgärda formulärfel",
+      "GENERAL_SECTION": {
+        "TITLE": "Allmänna inställningar",
+        "NOTE": ""
+      },
+      "NAME": {
+        "LABEL": "Konto namn",
+        "PLACEHOLDER": "Ditt kontonamn",
+        "ERROR": "Ange ett giltigt kontonamn"
+      },
+      "LANGUAGE": {
+        "LABEL": "Webbplatsens språk (Beta)",
+        "PLACEHOLDER": "Ditt kontonamn",
+        "ERROR": ""
+      },
+      "DOMAIN": {
+        "LABEL": "Incoming Email Domain",
+        "PLACEHOLDER": "The domain where you will receive the emails",
+        "ERROR": ""
+      },
+      "SUPPORT_EMAIL": {
+        "LABEL": "Support Email",
+        "PLACEHOLDER": "Your company's support email",
+        "ERROR": ""
+      },
+      "AUTO_RESOLVE_DURATION": {
+        "LABEL": "Number of days after a ticket should auto resolve if there is no activity",
+        "PLACEHOLDER": "30",
+        "ERROR": "Please enter a valid auto resolve duration (minimum 1 day)"
+      },
+      "FEATURES": {
+        "INBOUND_EMAIL_ENABLED": "Conversation continuity with emails is enabled for your account.",
+        "CUSTOM_EMAIL_DOMAIN_ENABLED": "You can receive emails in your custom domain now."
+      }
+    }
+  }
+}

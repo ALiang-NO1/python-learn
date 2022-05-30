@@ -1,0 +1,24 @@
+更多资讯请关注公众号【[全面资源集](https://mp.weixin.qq.com/s/Fmjj8m7Tq7bV4SGKUxB0VA)】
+![全面资源集公众号](https://img-blog.csdnimg.cn/2021050414225271.gif)
+
+"""
+文章描述：
+作者：ALiang
+最新修改时间：2021-4-
+公众号：【全面资源集】
+博客：https://blog.csdn.net/weixin_49012647
+"""
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+1175*500
+"""
+Description:
+Author: Jack Cui（2020）
+Modifier: ALiang（2021.4）
+Blog：https://blog.csdn.net/weixin_49012647
+Wchat: 【全面资源集】
+"""
+
+Host: cookdata.cn
+Origin: http://cookdata.cn
+Referer: http://cookdata.cn/course/20/lecture/1109/5882/
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36

@@ -1,0 +1,25 @@
+def petrol():
+    n = 100
+    k = 5
+    d = [23,45,39,70,54,62]
+    # 表示加油站之间的距离
+    num = 0
+    # 表示加油次数
+    for i in range(k):
+        if d[i] > n:
+            print('没有适合的')
+            # 如果距离中得到任何一个数值大于n 则无法计算
+            return
+    i, s = 0, 0
+    # 利用s进行迭代
+    while i <= k:
+        s += d[i]
+        if s >= n:
+            # 当局部和大于n时则局部和更新为当前距离
+            s = d[i]
+            # 贪心意在令每一次加满油之后跑尽可能多的距离
+            num += 1
+        i += 1
+        print(num)
+if __name__ == '__main__':
+    petrol()

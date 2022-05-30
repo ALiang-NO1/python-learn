@@ -1,0 +1,58 @@
+-------------添加代理---------
+import requests
+proxies = {'http': 'http://localhost:8888', 'https': 'http://localhost:8888'}
+url = 'http://www.baidu.com'
+requests.post(url, proxies=proxies, verify=False)   # verify是否验证服务器的SSL证书
+
+from selenium import webdriver
+proxy='124.243.226.18:8888'
+option=webdriver.ChromeOptions()
+option.add_argument('--proxy-server=http://'+proxy)
+driver = webdriver.Chrome(options=option)
+driver.get('http://httpbin.org/get')
+
+-------------session------------
+》》所谓Session，是指一段会话。网站会把每一个会话的ID（Session ID）保存在浏览器的Cookies中用来标识用户的身份。
+requests的Session模块可以自动保存网站返回的一些信息
+》》但是每调用一次requests.get()，都会创建一个新的Session。对服务器来说，就像是每次都新开一个浏览器来访问。
+》》对于HTTPS的网站，在requests发送请求的时候需要带上verify=False这个参数，否则爬虫会报错。带上这个参数以后，爬虫依然会报一个警告，这是因为没有HTTPS的证书。
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+session = requests.Session()
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                         'Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3775.400 QQBrowser/10.6.4209.400'}
+login_url = 'https://www.zhihu.com/signin?next=%2F'     # 知乎登入页面
+date = {'username': 'user', 'password': 'psd'}
+response = session.post('https://www.zhihu.com/api/v3/oauth/sign_in', headers=headers, data=date)
+print(session.cookies.get_dict())
+url = 'https://www.zhihu.com/collection/595531374'     # 登入后可见的页面
+response2 = session.get(url).text
+print(response.status_code)
+
+# 身份认证: 请将username和password替换成自己在该网站的登录用户名和密码
+res = requests.get('https://www.zhihu.com/api/v3/oauth/sign_in', auth=HTTPBasicAuth('user', 'psd'))
+print(res.status_code)
+
+# 证书认证（检查验证某个主机的 SSL 证书）
+r = requests.get('https://httpbin.org', verify=True)
+print(r.text)
+
+# 代理设置
+proxies = {'http': 'https://175.44.109.53', 'https': 'https://127.0.0.2:9002'}
+requests.get('http://www.baidu.com', proxies=proxies)
+
+# 提供请求方法的缺省数据
+s = requests.Session()      # 创建一个session对象
+s.auth = ('user', 'pass')   # 设置session对象的auth属性，用来作为请求的默认参数
+"""设置session的headers属性，通过update方法，将其余请求方法中的headers属性合并起来作为最终的请求方法的headers"""
+s.headers.update({'x-test': 'true'})
+"""发送请求，这里没有设置auth会默认使用session对象的auth属性，这里的headers属性会与session对象的headers属性合并"""
+# r = s.get('http://httpbin.org/headers', headers={'x-test2': 'true'})
+r = s.get('http://httpbin.org/headers', auth=('user', 'hah'), headers={'x-test2': 'true'})
+print(r.request.headers)    # 查看发送请求的请求头
+
+# 'Authorization': 'Basic dXNlcjpwYXNz'
+# 'Authorization': 'Basic dXNlcjpoYWg='
+

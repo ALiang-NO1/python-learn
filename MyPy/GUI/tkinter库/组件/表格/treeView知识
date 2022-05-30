@@ -1,0 +1,197 @@
+方法    描述
+bbox(item, column=None)    返回指定item的框选范围，或者单元格的框选范围
+column( cid, option=None, **kw)    设置或者查询某一列的属性
+delete(*items)    删除指定行或者节点（含子节点）
+vdetach(*items)    与delete类似，不过不是真正删除，而是隐藏了相关内容。可以用move方法重新显示v
+exists(item)    判断指定的item是否存在
+focus(item=None)    获得选定item的iid，或者选中指定item。
+get_children(item=None)    返回指定item的子节点
+heading(column, option=None, **kw)    设置或者查询表头行的配置参数
+identify(component, x, y)    返回在坐标(x,y)处的部件信息。部件包括：region(heading,cell等), item, column, row, 和 element。
+identify_element(x, y)    返回在(x,y)处的元素。
+identify_region(x, y)    返回坐标(x,y)处的Tree view组成部分
+identify_row(y)    给定y坐标，返回指定item索引
+index(item)    返回数字化的item索引，从0开始
+set_children(item, *newchildren)    设置item的新子节点为newchildren，现有的子节点会被移除。一般用于树形结构中。
+insert(parent, index, iid=None, **kw)    插入一个新的item
+item(item, option=None, **kw)    返回item节点的相关信息
+move(item, parent, index)    move()方法有两种作用：
+（1）将detach的item重新显示（reattach）
+（2）移动item指定的节点到parent的子节点中，位置由index指定
+next(item)    返回item的下一个节点
+parent(item)    返回item的父节点
+prev(item)    返回item的前一个节点
+see(item)    保证item指定的节点在Treeview控件中可见
+selection(items=None)    返回当前选定的节点的iid
+selection_set(*items)    选中items指定的节点
+selection_remove(*items)    从当前选择中移除items指定的节点
+selection_add(*items)    将items指定的节点添加到当前的选择中
+selection_toggle(*items)    选中的节点变为不选中，未选中的节点变为选中
+set(item, column=None, value=None)    设置或者获得节点信息
+tag_bind( tagname, sequence=None, callback=None)    给tagname指定的tag绑定事件以及回调函数
+tag_configure( tagname, option=None, **kw)    配置或者获得tag的有关信息
+tag_has(tagname, item=None)    判断tag是否存在或者是tag与那些节点关联
+
+1.box(item, column=None)
+获取指定item的框选范围。如果指定的item可见，返回值是一个四元组(x,y,w,h)。(x,y)是矩形框选的左上角坐标，(w,h)是矩形的宽度与高度。
+有这个四元组设定的矩形正好可以框选指定的item。如果column不为空，返回的是指定单元格的框选范围。
+坐标值是以Treeview控件为基准的，而不是以窗口或者屏幕。
+
+2.column( cid, option=None, **kw)
+查询或者修改指定列的配置。cid可以是整数，也可以列的别名。如果不输入option，则返回目前的配置选项字典。
+Treeview列的选项有：
+
+anchor	对齐模式。取值有n,e,s,w,ne,nw,se,sw和center。
+id	列的名称或者标识
+minwidth	列的最小宽度，调整列宽的时候，不会小于这个数值。默认值是20
+stretch	是否随着窗口大小的调整而拉伸Treeview。默认值是True
+width	定义列宽。默认值是200
+
+3.delete(items)
+删除指定的item。子节点也会被一起删除，但是第一层节点不会被删除。
+
+4.detach(items)
+detach的方法与delete类似，不过detach不是真正的删除了指定的item，而是隐藏了内容，可以使用move的方法重新将隐藏的数据再显示出来。
+
+5.exists(item)
+判断指定的item是否存在。需要注意的是，使用detach()方法隐藏的item会被认为是存在的，因为相应的id等信息是依然被系统记录没有清空的。
+返回值为True，如果指定的item不存在，否则返回False。
+
+6.focus(item=None)
+focus()方法有三种情况：
+（1）有item被选中同时参数为None
+返回当前被选中的item的标识iid
+（2）无item被选中同时参数为None
+返回空字符串’’
+（3）输入item参数
+指定的item会获得focus。
+注意：获得focus不表示被选中。
+
+9.heading(column, option=None, **kw)
+设置或者查询表头行的配置参数。如果是表格形式的，column是列的位置(就是第几列，从0计数）或者列的别名。如果是树形结构的（比如文件目录），column的值为’#0’。
+如果没有option参数，返回的是当前的配置数据。
+heading的选项有：
+选项	含义
+anchor	对齐模式。取值有n,e,s,w,ne,nw,se,sw和center。
+command	与指定列相关的回调函数
+image	在表头显示图片
+text	在表头显示文本
+state	当前列的状态
+
+8.identify(component, x, y)
+返回在坐标(x,y)处的部件信息。部件包括：region(heading,cell等), item, column, row, 和 element。
+
+identify_column(x)
+给定x坐标，返回所属的列号。返回值的格式是’#n’。n是从1开始计数的列号。注意返回的是实际的显示列号，而不是逻辑定义的列号。如果使用了displaycolumns就可以实际显示的列号与columns定义的列号是不一致的情况。具体的用法与identify类似，可以参考。
+22.2.11 identify_element(x, y)
+返回在(x,y)处的元素。使用方法是： tv.identify_element(140,25)
+22.2.12 identify_region(x, y)
+返回坐标(x,y)处的Tree view组成部分。Treeview 的组成部分有：
+
+组成部分	含义
+nothing	不在Treeview控件内
+heading	位于表头的位置
+separator	在分隔线上
+tree	位于图标列（树形列表表示展开/折叠的图标）
+cell	位于单元格内
+使用方法是：
+
+tv.identify_region(140,25)
+1
+22.2.13 identify_row(y)
+给定y坐标，返回指定item索引(如‘I002’)。如果没有内容，返回空字符串。
+使用方法：
+
+tv.identify_row(i)
+1
+22.2.14 index(item)
+返回数字化的item索引，计数从0开始。使用方法：
+
+tv.index(‘I002’)
+1
+*22.2.15 set_children(item, newchildren)
+设置item的新子节点为newchildren，现有的子节点会被移除。一般用于树形结构中。
+
+tv.set_children('I003','I00E')
+1
+说明：将I00E作为新的I003的子节点。
+22.2.16 insert(parent, index, iid=None, **kw)
+插入一个新的item。
+（1）parent
+对于表格类型的Treeview，parent一般为空。对于树形类型的Treeview，parent为父节点。
+（2）index
+指明在何处插入新的item。可以是’end’，也可以是数字。比如，如果要让新插入的item成为第一个子节点或者在第一行，index就设为0。如果是第二个子节点或者第二行，就是设置index=1。如果在最末端插入item，就设置index=’end’
+（3）iid
+如果没有赋值，就使用系统自动生成的id。如果输入了id，必须保证与现有的id不重复。否则系统会自动生成id。
+（4）**kw
+设置插入item的属性。支持的属性有：
+
+选项	含义
+image	显示图像
+open	针对树形结构，确认插入的item是打开还是折叠状态。True打开，False为折叠。
+tags	为新插入的item设置tag标签
+text	显示文字
+values	在表格结构中，要显示的数值。这些数值是按照逻辑结构赋值的，也就是按照columns设定的列次序来赋值。如果输入的个数少于columns指定列数，则插入空白字符串
+在前面章节的例子中已经使用了insert，可以参考。
+22.2.17 item(item, option=None, **kw)
+item()方法有3种功能：
+（1）只有item参数
+返回item有关数据字典。数据字典的键值(key)包括：
+text，image，open，tags以及values。values就是item参数指定的节点的内容。
+
+tv.item('I002')
+1
+结果：
+{'text': '', 'image': '', 'values': ['李四', 100, 92, 90], 'open': 0, 'tags': ''}
+1
+2
+（2）输入item和option参数
+返回item指定节点中由option指定的选项值。比如：
+
+tv.item('I002',option='values')
+1
+就是返回节点的内容。见前一节有关返回数据字典的键值。
+
+（3）item和kw
+使用kw中的键值对（就是选项值）修改item指定的节点的相关选项。最常用的是使用values来修改节点的内容。
+比如：
+
+tv.item('I002',values=('李峰','90','88','66'))
+
+move(item, parent, index)
+move()方法有两种作用：
+（1）将detach的item重新显示（reattach）
+（2）移动item指定的节点到parent的子节点中，位置由index指定
+需要注意的是，不能把父节点移动到子节点下面。因为这是无法实现的。还有就是index的值如果是0或者负数，则表示item的位置在parent的第一个子节点。如果index的值大于或者等于子节点的总数，则表示把item放置在子节点的最后一个。
+22.2.19 next(item)
+(1)如果item不是当前父节点的最后一个子节点，则返回下一个子节点
+(2)如果item已经是最后一个子节点，返回空字符串
+(3)如果是表格类型的Treeview，则返回下一item对象。或者返回空字符串如果item已经是最后一个item对象。
+22.2.20 parent(item)
+树形结构的Treeview，该方法返回父节点的ID；如果是表格类型的Treeview，则返回空字符串。
+22.2.21 prev(item)
+与next()类似，不过是返回前一个item的ID。
+22.2.22 see(item)
+保证item指定的节点在Treeview控件中可见。针对有比较多节点的情况下，此方法可以让希望显示的节点快速显示在窗口中而不需要用滚动条的去滚动。
+22.2.23 selection(items=None)
+返回当前选定的节点的iid。
+*22.2.24 selection_set(items)
+选中item指定的节点。items可以是单个节点的ID，或者多个节点ID的元组。
+
+ tag_configure( tagname, option=None, **kw)
+与item()方法有些类似，也是有三种功能：
+（1）只有tagname
+返回tagname指定tag的选项/属性数据字典。比如tv.tag_configure(‘2’)的返回值为：
+{‘text’: ‘’, ‘image’: ‘’, ‘anchor’: ‘’, ‘background’: ‘’, ‘foreground’: ‘’, ‘font’: ‘’}
+
+（2）tagname和option
+返回tagname指定的tag中option指定的属性值。比如option=’anchor’,则返回anchor属性值。
+
+（3）tagname和kw
+对tagname指定的tag，使用kw中的参数设置有关属性。属性值见（1）中的说明。
+22.2.31 tag_has(tagname, item=None)
+（1）只有tagname
+返回所有与tagname指定的tag有关的子节点。
+
+（2）tagname和item
+如果item指定的子节点的有tagname指定的tag，则返回True，否则返回False。判断tag是否存在。

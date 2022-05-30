@@ -1,0 +1,60 @@
+---------------知识归纳-------------
+turtle 库知识补充
+screensize(canvwidth, canvheight, bg)
+setup(width, height, startx, starty)
+pensize(N+); pendown(); pencolor(); resizemode(auto| user | noresize); strentchfoctor(N+,N+), outline(N+), tilt(n)
+sorted(pen().items())
+speed() fastest(0) fast(10) normal(6) slow(3) slowest(1)
+setx(); setpos()=goto()=setposition() --> x,y|(x,y)
+headint() --> angle; setheading(angle)
+dot()
+filling(); fillcolor(color)
+color(pen_color, bg_color)  # (r,g,b) (str)
+colormode(1~256)
+filling(); begin_fill()
+初始状态: 白色背景，无背景片，无事件绑定并启用追踪。
+home(); clear()|clearscreen(); reset()|resetscreen(); undo()
+stamp() --> id：留下一个海龟图形；clearstamp(id)：清除ID为id的海龟图形；clearstamps(n)：n>0，前个；n<0后个；n=None，全部
+write(str, font=('font-name', font-size, 'font-type')
+mode(standard |logo)  # standard：右、逆时针 logo：上、顺 world：世界坐标系
+delay()
+get_poly(); begin_poly()
+circle(radius, extend, steps)
+write(str, line, align(left/center/right), fontsize, fontype)
+pos()=getposition()
+towards(x, y)
+xcor(); ycor() --> y
+distance(x, y) --> sqr(x**2+y**2)
+degree(360) --> 一个圆周度数；radians(): 设置弧度制
+isdown(): 是否落笔
+————龟形
+showturtle()=st(); hideturtle()=ht(); isvisible()
+shape(classic| arrow| square| circle| triangle| turtle); 注册形状：register_shape()
+resizemode(auto| user| noresize)
+turtlesize(宽度，高度，轮廓); shapesize(wid, len, outline)
+tilt(angle)：倾斜但不改变乌龟方向
+shearfactor(-0.5); shapetransform(t1, |t2, |t3, |t4); get_shapepoly() --> ((x,y),(x,y),(x,y),(x,y),)
+colone()：返回克隆体 getturtle；返回无名龟
+不同颜色多边形构成的复合海龟形状：
+>>> s = Shape("compound")
+>>> poly1 = ((0,0),(10,-5),(0,10),(-10,-5))
+>>> s.addcomponent(poly1, "red", "blue")
+>>> poly2 = ((0,0),(10,-5),(-10,-5))
+>>> s.addcomponent(poly2, "blue", "red")
+————事件
+onclick(函数，1| 2， True| False)；onclick(None)：注销绑定 onrelease(fun,btn=1,add=None) ondrag(...)->ondrag(goto)
+————屏幕
+ts=getscreen()->ts.bgcolor()
+setundobuffer(size) undobufferentries()-->num_undo
+setworldcoordinates(llx, lly, urx, ury)：设置直角坐标位置，若设置，所有坐标重绘，如 setworldcoordinates(-50,-7.5,50,7.5)
+tracer(n,delay)：启用/禁用海龟动画并设置刷新图形的延迟时间
+listen(xdummy=None, ydummy=None)；onkey(fun, key)； onkeyrelease(fun, key)；onkeypress(fun, key=None)
+.onclick(fun, btn=1, add=None)|onscreenclick(); ontimer(fun, t=0)
+mainloop()|done()
+textinput(title, prompt) -> (str,str); numinput(title, prompt, default=None, minval=None, maxval=None)
+getcanvas() getshapes() register_shape(name, shape=None)|addshape(name, shape=None)
+>>> screen.register_shape("triangle", ((5,-3), (0,5), (-5,-3)))
+————Screen专有方法
+bye()；exitonclick()；setup (width=200, height=200, startx=0, starty=0)
+setup (width=200, height=200, startx=0, starty=0); setup(width=.75, height=0.5, startx=None, starty=None)
+title(str)

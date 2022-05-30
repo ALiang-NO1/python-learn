@@ -1,0 +1,477 @@
+html_template = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+{content}
+</body>
+</html>
+"""
+————从文件转PDF
+pdfkit.from_file(文件列表list, 最终PDF名 + ".pdf", options=其他参数)
+
+————从字符串转PDF
+path_wk = r"D:\program\wkhtmltopdf\bin\wkhtmltopdf.exe"
+config = pdfkit.configuration(wkhtmltopdf=path_wk)
+options = {'enable-local-file-access': None}
+pdfkit.from_string(html, 保存文件路径, configuration=config, options=options)
+
+-------------合并PDF-------
+from PyPDF2 import PdfFileReader, PdfFileWriter
+parent_bookmark = pdf_output.addBookmark(first_level_title, pagenum=pagenum)
+pdf_input = PdfFileReader(open(pdf_path, 'rb'))
+pdf_output = PdfFileWriter()
+# 获取 pdf 共用多少页
+page_count = pdf_input.getNumPages()
+for i in range(page_count):
+    pdf_output.addPage(pdf_input.getPage(i))
+
+# 添加书签
+pdf_output.addBookmark(second_level_title, pagenum=pagenum, parent=parent_bookmark)
+# 增加页数
+pagenum += page_count
+pdf_output.write(open(outfn, 'wb'))
+
+
+------wkthmltopdf.txt 文档说明---------
+
+——基本语法：wkhtmltopdf [global option] [object] <output file>
+——作用：单个网页、网页封面、目录 （命令行）----> 指定内容
+——页面对象：能通过全局选项、页面选项添加头、页眉页脚
+——封面对象：不显示在目录中，无标题、页眉和页脚，所有对页面起作用的选项也适用于封面
+——toc：除了页面选项，还有更深入的选项，目录是通过XSLT生成的，可以被设计成你想要的样子。通过
+--dump-default-toc-xsl
+--dump-outline
+获取大纲选项
+
+------------全局命令----------
+--collate
+
+--no-collate    打印多个多张时不校对？
+
+--cookie-jar    从提供的cookie jar 文件中读取并写入 cookie
+
+--copies <number>           副本的数目（默认为1）
+
+-d, --dpi <dpi>             显式更改dpi（这没有对基于X11的系统的影响（默认值96）
+
+-H, --extended-help         显示更广泛的帮助，详细说明不太常见的命令开关
+
+-g, --grayscale             PDF将以灰度形式生成
+
+-h, --help           ——————展示帮助
+
+  --htmldoc                 输出程序 HTML 帮助
+
+  --image-dpi <integer>    嵌入图像时，将其缩小到此dpi（默认为600）
+
+  --image-quality <integer>  jpeg压缩图像时使用质量（默认值94）
+
+  --license                 输出许可证信息并退出
+
+  --log-level <level>       将日志级别设置为：无、错误、警告或信息（默认信息）
+
+-l, --lowquality       ————生成较低质量的pdf/ps。对缩小结果文档空间
+
+  --manpage            输出程序手册页
+
+-B, --margin-bottom <unitreal>      设置页面下边距
+
+-L, --margin-left <unitreal>        设置页面左边距（默认为10mm）
+
+-R, --margin-right <unitreal>       设置页面右边距（默认为10mm）
+
+-T, --margin-top <unitreal>         设置页顶边距
+
+-O, --orientation <orientation>     ————将方向设置为横向或纵向（默认纵向）
+
+  --page-height <unitreal>        页面高度
+
+-s, --page-size <Size>            ————将纸张大小设置为：A4、Letter等。（默认A4）
+
+  --page-width <unitreal>         页面宽度
+
+  --no-pdf-compression            不要对pdf使用无损压缩
+
+-q, --quiet                       ————不要太啰嗦，保持向后兼容性；与使用--log level相同
+
+  --read-args-from-stdin          从stdin读取命令行参数
+
+  --readme                        输出程序自述
+
+  --title <text>                  生成的pdf文件的标题如果没有，则使用第一个文档的标题（指定）
+
+  --use-xserver                   使用X服务器（一些插件和其他如果没有X11，东西可能无法工作）输出版本信息并退出
+
+-V, --version                     输出版本信息然后退出
+
+
+
+Outline Options:
+
+  --dump-default-toc-xsl          将默认的TOC xsl样式表转储到tostdout
+
+  --dump-outline <file>           将大纲转储到文件
+
+  --outline                       将大纲放入pdf（默认）
+
+  --no-outline                    不要在pdf中添加大纲
+
+  --outline-depth <level>         设置轮廓的深度（默认值为4）
+
+
+Page Options:
+
+  --allow <path>                  允许加载指定文件夹中的一个或多个文件（可重复）
+
+  --background                    不打印背景（默认）
+
+  --no-background                 不打印背景
+
+  --bypass-proxy-for <value>      绕过主机代理（可重复）
+
+  --cache-dir <path>              Web缓存目录
+
+  --checkbox-checked-svg <path>   在呈现复选框时使用此SVG文件
+
+  --checkbox-svg <path>           在呈现未选中的复选框时使用此SVG文件
+
+  --cookie <name> <value>         设置一个额外的cookie（可重复），值应该是url编码的。
+
+  --custom-header <name> <value>  设置额外的HTTP头（可重复）
+
+  --custom-header-propagation     为每个资源请求添加由--custom header指定的HTTP头。
+
+  --no-custom-header-propagation  不要为每个资源请求添加由--custom header指定的HTTP头。
+
+  --debug-javascript              显示javascript调试输出
+
+  --no-debug-javascript           不显示javascript调试输出（默认）
+
+  --default-header                添加一个默认标题，左边是页面名称，右边是页码，这是以下简称：
+
+                                  --header-left='[webpage]'
+
+                                  --header-right='[page]/[toPage]' --top 2cm
+
+                                  --header-line
+
+  --encoding <encoding>           为输入设置默认文本编码
+
+  --disable-external-links        不要链接到远程网页
+
+  --enable-external-links         创建到远程网页的链接（默认）
+
+  --disable-forms                 不要将HTML表单域转换为pdf表单域（默认）
+
+  --enable-forms                  将HTML表单域转换为pdf表单域
+
+  --images                        不加载或打印图像（默认）
+
+  --no-images                     请勿加载或打印图像
+
+  --disable-internal-links        不要建立本地链接
+
+  --enable-internal-links         生成本地链接（默认）
+
+-n, --disable-javascript          不允许网页运行javascript
+
+  --enable-javascript             不允许网页运行javascript（默认）
+
+  --javascript-delay <msec>       等待几毫秒，等待javascript完成（默认值为200）
+
+  --keep-relative-links           保持相对外部链接为相对外部链接
+
+  --load-error-handling <handler> 指定如何处理加载失败的页面：中止、忽略或跳过（默认中止）
+
+  --load-media-error-handling <handler> 指定如何处理加载失败的媒体文件：中止、忽略或跳过（默认忽略）
+
+  --disable-local-file-access     不允许将本地文件转换为读入其他本地文件，除非使用--allow（默认值）显式允许
+
+  --enable-local-file-access      允许将本地文件转换为读入其他本地文件。
+
+  --minimum-font-size <int>       最小字体大小
+
+  --exclude-from-outline          不要在目录和大纲中包含该页
+
+  --include-in-outline            在目录和大纲中包括页面（默认）
+
+  --page-offset <offset>          设置起始页码（默认为0）
+
+  --password <password>           HTTP身份验证密码
+
+  --disable-plugins               禁用已安装的插件（默认）
+
+  --enable-plugins                启用已安装的插件（插件可能无法工作）
+
+  --post <name> <value>           添加一个附加的post字段（可重复）
+
+  --post-file <name> <path>       发布附加文件（可重复）
+
+  --print-media-type              使用打印媒体类型而不是屏幕
+
+  --no-print-media-type           不要使用打印介质类型而不是屏幕（默认）
+
+-p, --proxy <proxy>               使用代理
+
+  --proxy-hostname-lookup         使用代理解析主机名
+
+  --radiobutton-checked-svg <path> 在呈现选中的单选按钮时使用此SVG文件
+
+  --radiobutton-svg <path>        在呈现未选中的单选按钮时使用此SVG文件
+
+  --resolve-relative-links        将相对外部链接解析为绝对链接（默认）
+
+  --run-script <js>               在页面加载完成后运行这个额外的javascript（可重复）
+
+  --disable-smart-shrinking       禁用WebKit使用的使像素/dpi
+
+  --enable-smart-shrinking        启用WebKit使用的智能收缩策略，使像素/dpi 比率非常量（默认）
+
+  --ssl-crt-path <path>           ssl客户端证书公钥的路径，后面可选地跟中间ca和可信证书
+
+  --ssl-key-password <password>   ssl客户端证书私钥的密码
+
+  --ssl-key-path <path>           OpenSSL PEM格式的ssl客户端证书私钥的路径
+
+  --stop-slow-scripts             停止缓慢运行的javascripts（默认）
+
+  --no-stop-slow-scripts          不要停止运行缓慢的javascripts
+
+  --disable-toc-back-links        不从节标题链接到目录（默认）
+
+  --enable-toc-back-links         从节标题链接到目录
+
+  --user-style-sheet <path>       指定要随每个页面加载的用户样式表
+
+  --username <username>           HTTP身份验证用户名
+
+  --viewport-size <>              如果有自定义滚动条或css属性溢出来模拟窗口大小，请设置视口大小
+
+  --window-status <windowStatus>  重定向页面之前等待页面状态等于该字符串
+
+  --zoom <float>                  使用此缩放因子（默认值为1）
+
+
+
+Headers And Footer Options:
+
+  --footer-center <text>          居中页脚文本
+
+  --footer-font-name <name>       设置页脚字体名称（默认为Arial）
+
+  --footer-font-size <size>       设置页脚字体大小（默认12）
+
+  --footer-html <url>             添加html页脚
+
+  --footer-left <text>            左对齐页脚文本
+
+  --footer-line                   在页脚上方显示行
+
+  --no-footer-line                不在页脚上方显示行（默认）
+
+  --footer-right <text>           右对齐页脚文本
+
+  --footer-spacing <real>         页脚和内容之间的间距（mm）（默认值为0）
+
+  --header-center <text>          居中标题文本
+
+  --header-font-name <name>       设置标题字体名称（默认为Arial）
+
+  --header-font-size <size>       设置页眉字体大小（默认12）
+
+  --header-html <url>             添加html标题
+
+  --header-left <text>            左对齐标题文本
+
+  --header-line                   标题下方的显示行
+
+  --no-header-line                不在标题下显示行（默认）
+
+  --header-right <text>           右对齐标题文本
+
+  --header-spacing <real>         标题和内容之间的间距（mm）（默认值为0）
+
+  --replace <name> <value>        将[名称]替换为页眉和页脚中的值（可重复）
+
+
+
+TOC Options:
+
+  --disable-dotted-lines          不要在目录中使用虚线
+
+  --toc-header-text <text>        目录的标题文本（默认目录）
+
+  --toc-level-indentation <width> 对于目录中的每一级标题，按此长度缩进（默认1em）
+
+  --disable-toc-links             不要从目录链接到节
+
+  --toc-text-size-shrink <real>   对于目录中的每一级标题，字体按此系数缩放（默认值为0.8）
+
+  --xsl-style-sheet <file>        使用提供的xsl样式表打印目录
+
+
+————Page sizes:
+默认 A4 ，使用 --page-size 可以改成任意大小，如A3、信封、Legal
+所有支持的尺寸大小请参考：<https://doc.qt.io/archives/qt-4.8/qprinter.html#PaperSize-enum>.
+对页面尺寸更精确的控制请使用 --page-height and --page-width 选项
+
+————Reading arguments from stdin:
+如果要批量处理大量页面，并感觉很慢，请使用 --read-args-from-stdin 选项
+
+◆从 stdin 读取发送到 stdin 上 wkhtmltopdf 的每行输入的参数将作为 wkhtmltopdf 的单独调用，
+并指定参数在给定的行上，与给定给wkhtmltopdf的参数相结合
+◆例如你可以执行以下命令：
+echo "https://doc.qt.io/archives/qt-4.8/qapplication.html qapplication.pdf" >> cmds
+
+echo "cover google.com https://en.wikipedia.org/wiki/Qt_(software) qt.pdf" >> cmds
+
+wkhtmltopdf --read-args-from-stdin --book < cmds
+
+————Specifying A Proxy:
+◆默认情况下，将从环境变量中读取代理信息: proxy, all_proxy 及 http_proxy, 代理选项可以通过命令 -p 转换
+<type> := "http://" | "socks5://"
+
+<serif> := <username> (":" <password>)? "@"
+
+<proxy> := "None" | <type>? <string>? <host> (":" <port>)?
+
+
+
+下面是一些示例（如果您不熟悉BNF）:
+http://user:password@myproxyserver:8080
+socks5://myproxyserver
+None
+
+————Footers And Headers:
+页眉和页脚可以依次通过 --header-* 和 --footer* 添加到文档中
+页眉和页脚文本字符串，提供有例如 --header-left，下面变量可选。
+
+* [page]       替换为当前正在打印的页数
+
+* [frompage]   替换为要打印的第一页的编号
+
+* [topage]     替换为要打印的最后一页的编号
+
+* [webpage]    替换为正在打印的页面的URL
+
+* [section]    替换为当前节的名称
+
+* [subsection] 替换为当前子节的名称
+
+* [date]       替换为系统本地格式的当前日期
+
+* [isodate]    替换为ISO 8601扩展格式中的当前日期
+
+* [time]       替换为系统本地格式的当前时间
+
+* [title]      替换为当前页对象的标题
+
+* [doctitle]   替换为输出文档的标题
+
+* [sitepage]   替换为当前站点中正在转换的页的编号
+
+* [sitepages]  替换为当前站点中正在转换的页数
+
+◆例如，指定 --header right “第[Page]页，共[topage]” 将生成在文本“第x页，共y页”中，
+x是当前页的编号，y是最后一页的编号，显示在文档左上角
+◆页眉和页脚也可以与HTML文档一起提供。举个例子可以指定 --header-html header.html 并且在HTML文本中使用以下内容。
+
+<!DOCTYPE html>
+
+<html><head><script>
+
+function subst() {
+
+  var vars = {};
+
+  var query_strings_from_url = document.location.search.substring(1).split('&');
+
+  for (var query_string in query_strings_from_url) {
+
+      if (query_strings_from_url.hasOwnProperty(query_string)) {
+
+          var temp_var = query_strings_from_url[query_string].split('=', 2);
+
+          vars[temp_var[0]] = decodeURI(temp_var[1]);
+
+      }
+
+  }
+
+  var css_selector_classes = ['page', 'frompage', 'topage', 'webpage', 'section', 'subsection', 'date', 'isodate', 'time', 'title', 'doctitle', 'sitepage', 'sitepages'];
+
+  for (var css_class in css_selector_classes) {
+
+      if (css_selector_classes.hasOwnProperty(css_class)) {
+
+          var element = document.getElementsByClassName(css_selector_classes[css_class]);
+
+          for (var j = 0; j < element.length; ++j) {
+
+              element[j].textContent = vars[css_selector_classes[css_class]];
+
+          }
+
+      }
+
+  }
+
+}
+
+</script></head><body style="border:0; margin: 0;" onload="subst()">
+
+<table style="border-bottom: 1px solid black; width: 100%">
+
+<tr>
+
+  <td class="section"></td>
+
+  <td style="text-align:right">
+
+    Page <span class="page"></span> of <span class="topage"></span>
+
+  </td>
+
+</tr>
+
+</table>
+
+</body></html>
+
+从示例中可以看出，参数被发送到页眉/页脚形成的html文档。
+
+
+————Outlines（书签）:
+◆带有补丁qt的Wkhtmltopdf支持PDF大纲，也称为书签，这可以通过指定--outline开关来启用。
+◆大纲是基于<h？>标签，以深入描述请参阅目录部分。
+◆大纲树有时可能很深，如果 <h？> 标签在文档中很多的话，--outline depth 开关可用于限制书签深度。
+
+————Table Of Contents（目录）:
+◆通过向命令行添加toc对象，可以将目录添加到文档中。例如：
+wkhtmltopdf toc https://doc.qt.io/archives/qt-4.8/qstring.html qstring.pdf
+◆目录是基于输入文档中的H标记生成的。首先生成一个XML文档，然后使用XSLT将其转换为HTML。
+◆生成的XML文档可以通过使用 --dump-outline switch 查看，例如：
+>>> wkhtmltopdf --dump-outline toc.xml https://doc.qt.io/archives/qt-4.8/qstring.html qstring.pdf
+
+◆The XSLT 文档可以通过 --xsl-style-sheet switch 选项指定，例如：
+>>> wkhtmltopdf toc --xsl-style-sheet my.xsl https://doc.qt.io/archives/qt-4.8/qstring.html qstring.pdf
+
+◆这个 --dump-default-toc-xsl 开关可用于输出默认 XSLT 样式表表到 stdout。
+>>> wkhtmltopdf --dump-default-toc-xsl
+
+◆XML文档位于命名空间 “http://wkhtmltopdf.org/outline“ 中，它有一个名为 “outline” 的根节点，其中包含多个“item”节点。
+一个项可以包含任意数量的项，这些都是这个项所代表的大纲子项。
+◆一个项节点有如下属性：
+    * "title" the name of the section.
+
+    * "page" the page number the section occurs on.
+
+    * "link" a URL that links to the section.
+
+    * "backLink" the name of the anchor the section will link back to.
+其余的TOC选项只影响默认样式表，因此在指定自定义样式表时它们将不起作用。
+
+如果遇到 bugs 或者想要新的特色，请访问：<https://wkhtmltopdf.org/support.html>

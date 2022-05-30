@@ -1,0 +1,299 @@
+-----------这个框架的每个部分的功能-----------
+Scrapy Engine(引擎): 负责Spider、ItemPipeline、Downloader、Scheduler中间的通讯，信号、数据传递等。
+Scheduler(调度器): 它负责接受引擎发送过来的Request请求，并按照一定的方式进行整理排列，入队，当引擎需要时，交还给引擎。
+Downloader（下载器）：负责下载Scrapy Engine(引擎)发送的所有Requests请求，并将其获取到的Responses交还给Scrapy Engine(引擎)，由引擎交给Spider来处理，
+Spider（爬虫）：它负责处理所有Responses,从中分析提取数据，获取Item字段需要的数据，并将需要跟进的URL提交给引擎，再次进入Scheduler(调度器)，
+Item Pipeline(管道)：它负责处理Spider中获取到的Item，并进行进行后期处理（详细分析、过滤、存储等）的地方.
+Downloader Middlewares（下载中间件）：你可以当作是一个可以自定义扩展下载功能的组件。
+Spider Middlewares（Spider中间件）：你可以理解为是一个可以自定扩展和操作引擎和Spider中间通信的功能组件（比如进入Spider的Responses;和从Spider出去的Requests）
+
+-----------相关配置文件说明-----------
+items.py：定义爬虫程序的数据模型
+middlewares.py：定义数据模型中的中间件
+pipelines.py：管道文件,负责对爬虫返回数据的处理
+settings.py：爬虫程序设置,主要是一些优先级设置,优先级越高,值越小
+    >>> ROBOTSTXT_OBEY = True   # 是否遵守爬虫协议
+    >>> SPIDER_MIDDLEWARES = {
+    'wxz.middlewares.WxzSpiderMiddleware': 800,     # 这里的数值越低，速度越快
+    }
+scrapy.cfg:内容为scrapy的基础配置
+
+
+-----------运行语法-----------
+scrapy startproject -h  调出start-project的帮助信息，在这里可以看到scrapy startproject具体可以添加哪些参数
+--logfile=FILE参数主要用来指定日志文件，其中的FILE为指定的日志文件的路径地址。
+将日志文件存储在当前目录的上一层目录下，并且日志文件名为logf.log --> scrapy startproject '../logf.log'
+--loglevel=LEVEL, -L LEVEL参数主要用来控制日志信息的等级，默认为DEBUG模式，即会将对应的调试信息都输出
+其他选项：CRITICAL（最严重的措误）/ERROR/WARNING/INFO（提示信息）
+--nolog参数可以控制不输出日志信息。
+
+cmd模式：
+无参模式（打印帮助和命令）：Scrapy X.Y - no active project
+获取帮助：scrapy <command> -h
+scrapy settings --get BOT_NAME |DOWNLOAD_DELAY 和 setting.py 中的变量值相同
+scrapy version  获取版本号，加-v获取其他使用模块信息
+scrapy genspider -l     获取可用爬虫模板
+基于其中的任意一个爬虫模板来生成一个爬虫文件: scrapy genspider -t 模板 新爬虫名 爬取的域名
+>>> scrapy genspider [-t basic] liang ruiliang.com
+scrapy genspider -d csvfeed  查看某个爬虫模板的内容
+scrapy check [myscrapy -l]    实现对某个爬虫文件进行合同（contract）检查。
+scrapy crawl myscrapy    启动 scrapy 爬虫
+scrapy list     列出所有爬虫文件
+scrapy edit spider1   对该爬虫文件进行编辑
+scrapy parse -h     参数命令
+ScrapyDownloader下载给定的URL，并将内容写入标准输出：scrapy fetch <url>
+    --spider=SPIDER ：绕过Spider自动检测并强制使用特定Spider
+    --headers ：打印响应的HTTP头而不是响应的正文
+    --no-redirect ：不遵循HTTP 3xx重定向（默认为遵循它们）
+
+
+-----------创建项目实例-----------
+cd E:\python文档\my_py\scrapy\项目
+scrapy startproject baidu
+cd baidu  # 切换到主目录
+
+修改example.py：print(response.body.decode())
+修改settings.py：ROBOTSTXT_OBEY = False
+
+scrapy genspider example baidu.com  # 项目名（example） 爬取的域名（baidu.com）
+运行爬虫：scrapy crawl <爬虫名>
+
+——通过python文件操作scrapy
+创建main.py并运行
+
+————xpath的使用
+Scrapy的XPath语句后面需要用.extract()这个方法才能提取内容
+
+-----------多个setting文档的使用-----------
+如果定义了几个settings文件，在 scrapy.cfg 里要修改：
+default = myproject1.settings
+project1 = myproject1.settings
+project2 = myproject2.settings
+爬行时使用某个设置文件：
+export SCRAPY_PROJECT=project2
+scrapy settings --get BOT_NAME
+
+
+-----------shell 下交互-----------
+————保存内容至本地
+获取标签里的字符串：response.css('div.page::text').get()/getall()
+保存爬取内容到json文件：scrapy crawl yield_test -O quotes.json
+    -O 覆盖现有文件
+    -o 在后面追加，附加文件会使文件内容无效，考虑使用 quotes.jl（JSonline格式如：）
+        {"name": "Gilbert", "wins": [["straight", "7♣"], ["one pair", "10♥"]]}
+        {"name": "Alexa", "wins": [["two pair", "4♠"], ["two pair", "9♠"]]}
+        {"name": "May", "wins": []}
+        {"name": "Deloise", "wins": [["three of a kind", "5♣"]]}
+
+为 tag 参数将通过 self.tag. 只获取带有特定标记的引号，并基于以下参数构建URL
+scrapy crawl quotes -O quotes-humor.json -a tag=humor
+
+class QuotesSpider(scrapy.Spider):
+    name = "quotes"
+
+    def start_requests(self):
+        url = 'http://quotes.toscrape.com/'
+        tag = getattr(self, 'tag', None)
+        if tag is not None:
+            url = url + 'tag/' + tag
+        yield scrapy.Request(url, self.parse)
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').get(),
+                'author': quote.css('small.author::text').get(),
+            }
+
+        next_page = response.css('li.next a::attr(href)').get()
+        if next_page is not None:
+            yield response.follow(next_page, self.parse)
+
+————选择器
+scrapy shell [url]
+支持选项：
+--spider=SPIDER ：绕过Spider自动检测并强制使用特定Spider
+-c code ：评估shell中的代码，打印结果并退出
+--no-redirect ：不遵循HTTP 3xx重定向（默认为遵循它们）；这只影响在命令行上作为参数传递的URL；一旦进入shell， fetch(url) 默认情况下仍将遵循HTTP重定向。
+>>> scrapy shell --no-redirect --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c '(response.status, response.url)'
+
+scrapy shell "http://quotes.toscrape.com/page/1/"
+返回的部分内容：
+[s] Available Scrapy objects:
+[s]   scrapy     scrapy module (contains scrapy.Request, scrapy.Selector, etc)
+[s]   crawler    <scrapy.crawler.Crawler object at 0x00000284DDA8A280>
+[s]   item       {}
+[s]   request    <GET http://quotes.toscrape.com/page/1/>
+[s]   response   <200 http://quotes.toscrape.com/page/1/>
+[s]   settings   <scrapy.settings.Settings object at 0x00000284DDA8A310>
+[s]   spider     <YeildTestSpider 'yeild_test' at 0x284ddf6b1c0>
+[s] Useful shortcuts:
+[s]   fetch(url[, redirect=True]) Fetch URL and update local objects (by default, redirects are
+ followed)
+[s]   fetch(req)                  Fetch a scrapy.Request and update local objects
+[s]   shelp()           Shell help (print this help)
+[s]   view(response)    View response in a browser
+————使用css获取
+获取标签（返回列表地址）：response.css('title')
+获取标签（字符串）：response.css('title').get(default='')
+获取所有标签（列表）：response.css('title').getall()
+获取标签里的文本：response.css('title::text').get()
+获取属性：
+    response.css('li.next a::attr(href)').get()
+    response.css('li.next a').attrib['href']
+
+————使用正则：
+    response.css('title::text').re(r'Quotes.*')
+    response.css('title::text').re(r'Q\w+')
+    response.css('title::text').re(r'(\w+) to (\w+)')
+————使用xpath：
+    response.xpath('//title').get()
+    response.xpath('//title/text()').get()
+    response.xpath('//a[contains(@href, "image")]/text()').re_first(r'Name:\s*(.*)')
+    xpath变量
+    response.xpath('//div[@id=$val]/a/text()', val='images').get()
+    response.xpath('//div[count(a)=$cnt]/@id', cnt=5).get()
+————所有extract
+    response.css('a::attr(href)').extract_first() -> 字符串
+    response.css('a::attr(href)').extract() -> 列表
+
+————控制台使用Selector
+>>> from scrapy import Selector
+>>> sel = Selector(text='<div class="hero shout"><time datetime="2014-07-23 19:00">Special date</time></div>')
+>>> sel.css('.shout').xpath('./time/@datetime').getall()
+>>> xp = lambda x: sel.xpath(x).getall()
+>>> xp("//li[1]")
+
+————删除名称空间
+>>> scrapy shell https://feeds.feedburner.com/PythonInsider
+>>> response.xpath("//link") -> []
+>>> response.selector.remove_namespaces()
+>>> response.xpath("//link")
+
+————exslt扩展
+>>> sel.xpath('//li[re:test(@class, "item-\d$")]//@href').getall()
+
+————集合运算
+>>>sel = Selector(text=doc, type="html")
+>>> for scope in sel.xpath('//div[@itemscope]'):
+        props = scope.xpath('''
+                    set:difference(./descendant::*/@itemprop,
+                                   .//*[@itemscope]/*/@itemprop)''')
+        print(f"    properties: {props.getall()}")
+
+————其他XPath扩展（慢）
+>>>response.xpath('//p[has-class("foo")]')
+>>> response.xpath('//p[has-class("foo", "bar-baz")]')
+
+
+-----------scrapy.speders.Spider-----------
+所有蜘蛛继承该类，提供默认方法 start_requests() 发送请求和 parse 对于每个结果响应。
+name: 蜘蛛名，常根据域名定义：mywebsite.com -> mywebsite .
+allow_domins: 蜘蛛爬行的域的字符串的可选列表，https://www.example.com/1.html -> 'example.com'
+start_urls：起始爬行网址列表
+custom_settings：从项目范围配置中重写的设置字典
+crawler：由 from_crawler() 初始化类后的类方法，并链接到 Crawler 此蜘蛛实例绑定到的对象。
+settings：一个 Settings 实例
+logger：用蜘蛛创建的python记录器 name ，使用它通过它发送日志消息
+
+————from_crawler(crawler, *args, **kwargs)
+————start_requests()    必须返回一个iterable，其中包含对此spider进行爬网的第一个请求（Scrapy只调用一次）
+重写：
+def start_requests(self):
+    return [scrapy.FormRequest("http://www.example.com/login",
+       formdata={'user': 'john', 'pass': 'secret'},
+       callback=self.logged_in)]
+————parse(response)     Scrapy在请求未指定回调时用来处理下载响应的默认回调
+————log(message[, level, component])
+————closed(reason)  蜘蛛关闭时调用
+
+————网址目录限制
+scrapy crawl myspider -a category=electronics
+class MySpider(scrapy.Spider):
+    name = 'myspider'
+
+    def __init__(self, category=None, *args, **kwargs):
+        super(MySpider, self).__init__(*args, **kwargs)
+        self.start_urls = [f'http://www.example.com/categories/{category}']
+或者：
+class MySpider(scrapy.Spider):
+    name = 'myspider'
+
+    def start_requests(self):
+        yield scrapy.Request(f'http://www.example.com/categories/{self.category}')
+
+————根据爬取的网页获取下一爬取页
+if next_page is not None:
+    # yield response.follow(next_page, callable=self.parse)  # 无需拼接url
+
+直接传递 response.follow 而不是字符串
+for href in response.css('ul.pager a::attr(href)'):
+    yield response.follow(href, callback=self.parse)
+
+为了 <a> 元素有一个快捷方式： response.follow 自动使用其href属性
+for a in response.css('ul.pager a'):
+    yield response.follow(a, callback=self.parse)
+
+从iterable创建多个请求
+anchors = response.css('ul.pager a')
+yield from response.follow_all(anchors, callback=self.parse)
+
+或者，进一步缩短：
+yield from response.follow_all(css='ul.pager a', callback=self.parse)
+
+
+-----------pipline运行命令-----------
+用途：
+- 清理HTML数据
+- 验证抓取的数据（检查项目是否包含某些字段）
+- 检查重复项（并删除它们）
+- 将爬取的项目存储在数据库中
+
+获取数据：adapter = ItemAdapter(item) if adapter.get('price'):
+将项目写入json格式文件：line = json.dumps(ItemAdapter(item).asdict()) + "\n"
+打开爬虫命令：
+def open_spider(self, spider):
+    self.file = open('items.jl', 'w')
+爬虫结束命令；
+def close_spider(self, spider):
+    self.file.close()
+
+-----------scrapy.item.Item-----------
+————项目对象：classscrapy.item.Item([arg])
+函数：copy()
+函数：deepcopy()  返回A deepcopy() 这个项目的。
+from scrapy.item import Item, Field
+class Product(scrapy.Item):
+    name = scrapy.Field()
+    price = scrapy.Field()
+    stock = scrapy.Field()
+    tags = scrapy.Field()
+    last_updated = scrapy.Field(serializer=str)
+创建对象：product = Product(name='Desktop PC', price=1000)
+或者字段：product['name'] | product.get('name', None)
+查询字段：'last_updated' in product --> False
+        'last_updated' in product.fields  --> True
+设置字段值：product['last_updated'] = 'today'，product.items()
+创建字典：dict(product)
+从dicts创建项目：Product({'name': 'Laptop PC', 'price': 1500})
+扩展项子类：
+class DiscountedProduct(Product):
+    discount_percent = scrapy.Field(serializer=str)
+    discount_expiration_date = scrapy.Field()
+class SpecificProduct(Product):
+    name = scrapy.Field(Product.fields['name'], serializer=my_serializer)
+
+————数据类对象
+from dataclasses import dataclass
+@dataclass
+class CustomItem:
+    one_field: str
+    another_field: int
+
+————属性对象
+import attr
+@attr.s
+class CustomItem:
+    one_field = attr.ib()
+    another_field = attr.ib()
+

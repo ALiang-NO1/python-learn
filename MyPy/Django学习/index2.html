@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>web</title>
+</head>
+<body>
+  <h2>姓名：{{name}}</h2>
+  <h2>爱好：</h2>
+  <ul>
+    {% for hobby in hobby_list%}
+    <li>{{hobby}}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "GENERAL_SETTINGS": {
+    "TITLE": "Configurações da conta",
+    "SUBMIT": "Atualizar configurações",
+    "BACK": "Back",
+    "UPDATE": {
+      "ERROR": "Não foi possível atualizar as configurações, tente novamente!",
+      "SUCCESS": "Configurações de conta atualizadas com sucesso"
+    },
+    "FORM": {
+      "ERROR": "Por favor, corrigir erros de formulário",
+      "GENERAL_SECTION": {
+        "TITLE": "Configurações gerais",
+        "NOTE": ""
+      },
+      "NAME": {
+        "LABEL": "Nome da Conta",
+        "PLACEHOLDER": "Nome da sua conta",
+        "ERROR": "Por favor, insira um nome de conta válido"
+      },
+      "LANGUAGE": {
+        "LABEL": "Idioma do site (Beta)",
+        "PLACEHOLDER": "Nome da sua conta",
+        "ERROR": ""
+      },
+      "DOMAIN": {
+        "LABEL": "Incoming Email Domain",
+        "PLACEHOLDER": "The domain where you will receive the emails",
+        "ERROR": ""
+      },
+      "SUPPORT_EMAIL": {
+        "LABEL": "E-mail de Suporte",
+        "PLACEHOLDER": "E-mail de suporte da sua empresa",
+        "ERROR": ""
+      },
+      "AUTO_RESOLVE_DURATION": {
+        "LABEL": "Number of days after a ticket should auto resolve if there is no activity",
+        "PLACEHOLDER": "30",
+        "ERROR": "Please enter a valid auto resolve duration (minimum 1 day)"
+      },
+      "FEATURES": {
+        "INBOUND_EMAIL_ENABLED": "Conversation continuity with emails is enabled for your account.",
+        "CUSTOM_EMAIL_DOMAIN_ENABLED": "You can receive emails in your custom domain now."
+      }
+    }
+  }
+}

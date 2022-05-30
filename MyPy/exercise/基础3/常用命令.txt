@@ -1,0 +1,115 @@
+高速下载外部库：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple
+更新pip：python -m pip install -U pip
+设置为默认下载通道：pip config set global.index-url 加速网址
+
+设为外部库默认下载通道，升级 pip 到最新的版本 (>=10.0.0) 后进行配置：
+pip install pip -U
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+执行结果：
+Writing to C:\Users\win10\AppData\Roaming\pip\pip.ini
+报错：ModuleNotFoundError: No module named 'pip'
+执行： python -m ensurepip
+easy_install pip
+
+pip检查哪些软件需要更新：pip list --outdated
+pip查看已经安装的包：pip list
+pip升级软件包：pip install --upgrade 包名
+pip搜索包：pip search 包名
+pip查看包的详细信息：pip show 包名
+pip安装指定版本的包：（安装指定版本的包是，可通过使用==, >=, <=, >, <来指定一个版本号）
+pip查看版本：pip.exe -V
+pip读取文件下载依赖库：pip install -r requirements.txt
+
+安装模块方法：1.tar.gz格式的文件下载，下载好后将其解压后复制到Python安装目录的：Python 3.7.2\Lib\site-packages\包名，
+（例如：D:\软件安装目录\Python 3.7.2\Lib\site-packages\pygame）文件夹里即可；
+2.此方法不用到指定的Python安装目录，直接在CMD命令窗口进入到.whl文件的下载目录即可。
+执行此命令：pip install 包名.whl
+
+1.chromedriver 下载地址：-https://code.google.com/p/chromedriver/downloads/list
+                       -http://chromedriver.storage.googleapis.com/index.html
+ Chrome Driver Mirror: -http://npm.taobao.org/mirrors/chromedriver/
+浏览器下载地址：http://npm.taobao.org/mirrors/chromedriver/
+2.Firefox的驱动geckodriver 下载地址：https://github.com/mozilla/geckodriver/releases/
+3.IE的驱动IEdriver 下载地址：http://www.nuget.org/packages/Selenium.WebDriver.IEDriver/
+
+清华python库：https://pypi.tuna.tsinghua.edu.cn/packages/
+tar.gz 安装方法：先解压，进入setup.py所在目录，
+目录中：直接在地址栏输入%comspec%，进入该目录的命令提示符，然后输入 python.exe setup.py install 回车
+
+linux许可：
+UY758-0RXEQ-M81WP-8ZM7Z-Y3HDA
+VF750-4MX5Q-488DQ-9WZE9-ZY2D6
+UU54R-FVD91-488PP-7NNGC-ZFAX6
+YC74H-FGF92-081VZ-R5QNG-P6RY4
+YC34H-6WWDK-085MQ-JYPNX-NZRA2
+
+python 5个就业方向及薪资（北京）：
+1.Linux运维工程师    ¥14,130（偏低）   20,527份样本     ↓25%
+2.python开发       ¥20950（偏低）       4,480        ↑48%
+3.python数据分析    ¥17,500（偏低）      10,333      74%
+4.机器学习          ¥31,410（偏高）      4,327       172%
+
+中高级python工程师要求：
+1、Python基础扎实，熟悉常用的类库；掌握Django、Tornado、Flask其中任一web框架；
+2、了解Kafka、Redis、Nginx、k8s、docker等的基本原理和使用；
+3、掌握linux环境下的开发和部署，掌握gitlab的使用；
+4、熟悉常用的数据结构、算法和设计模式等；
+5、有安装部署、集群，备份恢复等相关工作经验者优先。
+工作职责：
+1、负责智能运维产品的设计，包括需求分析、架构设计、技术选型；
+2、负责智能运维产品的开发交付，包括编码实现，承担重点、难点的技术攻坚，验证上线；
+3、负责产品的架构看护并持续优化。
+4、负责产品的负向改进、持续提升产品质量和竞争力。
+
+
+python2
+#!usr/bin/env python
+#coding:utf-8
+# -*- coding:utf-8 -*-
+
+cd返回上一级目录   cd cd ...回到上一层目录    cd /返回到根目录。
+
+Visual Studio Code（简称 VS Code）插件：
+Python 扩展（代码分析、高亮和规范化）
+下载地址：https://marketplace.visualstudio.com/items?itemName=ms-python.python
+Python Snippets （包含许多内置代码段，比如 string、list、sets、tuple、dictionary、class及代码示例）
+下载地址：https://marketplace.visualstudio.com/items?itemName=frhtylcn.pythonsnippets
+Python Docstring Generator （自动创建 docstring ）
+下载地址：https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring
+Python Test Explorer （允许开发者使用 Test Explorer UI 运行 Python unittest 或 Pytest tests）
+下载地址：https://marketplace.visualstudio.com/items?itemName=LittleFoxTeam.vscode-python-test-adapter
+Python Preview （将可视化调试添加到 Python 代码中）
+下载地址：https://marketplace.visualstudio.com/items?itemName=dongli.python-preview
+Python Type Hint （内置类型、预估类型、typing 模块提供类型提示补全目录）
+下载地址：https://marketplace.visualstudio.com/items?itemName=njqdev.vscode-python-typehint
+Jupyter 下载地址：https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter
+
+github加速网址：
+1、镜像访问
+https://codechina.csdn.net/mirrors + https://github.com/xiaocong/uiautomator#uiautomator
+>>>https://codechina.csdn.net/mirrors/xiaocong/uiautomator#uiautomator
+https://hub.fastgit.org
+https://github.com.cnpmjs.org
+2、加速下载
+只要复制 GitHub 地址到输入框中即可代理下载。地址：http://toolwa.com/github/
+或者复制仓库地址到下面网址使用 git ssh 下载：https://github.zhlh6.cn
+
+启动weditor：python -m weditor
+
+"""
+#-------------------------------------------------------------------
+#                   CONFIDENTIAL --- CUSTOM STUDIOS
+#-------------------------------------------------------------------
+#
+#                   @Project Name : 王者荣耀壁纸下载
+#
+#                   @File Name    : main.py
+#
+#                   @Programmer   : Felix
+#
+#                   @Start Date   : 2020/7/30 14:42
+#
+#                   @Last Modifier  : 2021/4/4
+#
+#-------------------------------------------------------------------"""

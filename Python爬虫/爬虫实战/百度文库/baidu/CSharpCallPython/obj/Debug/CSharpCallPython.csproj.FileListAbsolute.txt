@@ -1,0 +1,133 @@
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\CSharpCallPython.exe.config
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\CSharpCallPython.exe
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\CSharpCallPython.pdb
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.dll
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.Modules.dll
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.SQLite.dll
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.Wpf.dll
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Dynamic.dll
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.dll
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.dll
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.dll
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.xml
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.Modules.xml
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.SQLite.xml
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.Wpf.xml
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Dynamic.xml
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.xml
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.xml
+E:\Work\Test\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.xml
+E:\Work\Test\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.Form1.resources
+E:\Work\Test\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.Properties.Resources.resources
+E:\Work\Test\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.GenerateResource.Cache
+E:\Work\Test\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.exe
+E:\Work\Test\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.pdb
+E:\Work\Test\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.csprojResolveAssemblyReference.cache
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\CSharpCallPython.exe.config
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\CSharpCallPython.exe
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\CSharpCallPython.pdb
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.dll
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.Modules.dll
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.SQLite.dll
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.Wpf.dll
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.dll
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.dll
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.xml
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.Modules.xml
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.SQLite.xml
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\IronPython.Wpf.xml
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.xml
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.xml
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.xml
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.csprojAssemblyReference.cache
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.Form1.resources
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.Properties.Resources.resources
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.GenerateResource.cache
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.CoreCompileInputs.cache
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.CopyComplete
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.exe
+C:\Users\zll\Desktop\CSharpCallPython\CSharpCallPython\obj\Debug\CSharpCallPython.pdb
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\CSharpCallPython.exe.config
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\CSharpCallPython.exe
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\CSharpCallPython.pdb
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\IronPython.dll
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\IronPython.Modules.dll
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\IronPython.SQLite.dll
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\IronPython.Wpf.dll
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.dll
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\Microsoft.Scripting.dll
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\IronPython.xml
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\IronPython.Modules.xml
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\IronPython.SQLite.xml
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\IronPython.Wpf.xml
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\Microsoft.Scripting.xml
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.xml
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.xml
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\obj\Debug\CSharpCallPython.csprojAssemblyReference.cache
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\obj\Debug\CSharpCallPython.Form1.resources
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\obj\Debug\CSharpCallPython.Properties.Resources.resources
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.GenerateResource.cache
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.CoreCompileInputs.cache
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.CopyComplete
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\obj\Debug\CSharpCallPython.exe
+C:\Users\zll\Documents\c sharp code\爬取百度文库\CSharpCallPython\obj\Debug\CSharpCallPython.pdb
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\CSharpCallPython.exe.config
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\CSharpCallPython.exe
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\CSharpCallPython.pdb
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\IronPython.dll
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\IronPython.Modules.dll
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\IronPython.SQLite.dll
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\IronPython.Wpf.dll
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.dll
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.dll
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\IronPython.xml
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\IronPython.Modules.xml
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\IronPython.SQLite.xml
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\IronPython.Wpf.xml
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.xml
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.xml
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.xml
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.csprojAssemblyReference.cache
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.Form1.resources
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.Properties.Resources.resources
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.GenerateResource.cache
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.CoreCompileInputs.cache
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.CopyComplete
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.exe
+C:\Users\zll\Documents\c sharp code\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.pdb
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\CSharpCallPython.exe.config
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\CSharpCallPython.exe
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\CSharpCallPython.pdb
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\IronPython.dll
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\IronPython.Modules.dll
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\IronPython.SQLite.dll
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\IronPython.Wpf.dll
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.dll
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.dll
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\IronPython.xml
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\IronPython.Modules.xml
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\IronPython.SQLite.xml
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\IronPython.Wpf.xml
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.xml
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.AspNet.xml
+C:\Users\zll\Desktop\baidu\CSharpCallPython\bin\Debug\Microsoft.Scripting.Metadata.xml
+C:\Users\zll\Desktop\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.csprojAssemblyReference.cache
+C:\Users\zll\Desktop\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.Form1.resources
+C:\Users\zll\Desktop\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.Properties.Resources.resources
+C:\Users\zll\Desktop\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.GenerateResource.cache
+C:\Users\zll\Desktop\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.CoreCompileInputs.cache
+C:\Users\zll\Desktop\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.csproj.CopyComplete
+C:\Users\zll\Desktop\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.exe
+C:\Users\zll\Desktop\baidu\CSharpCallPython\obj\Debug\CSharpCallPython.pdb

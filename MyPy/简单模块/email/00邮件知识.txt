@@ -1,0 +1,71 @@
+电子邮件软件被称为 MUA：Mail User Agent——邮件用户代理。
+
+Email 从 MUA 发出去，不是直接到达对方电脑，而是发到 MTA：Mail Transfer Agent——邮件传输代理，就是那些 Email 服务提供商，比如网易、新浪等等。
+
+Email 到达新浪的 MTA 后，由于对方使用的是@sina.com 的邮箱，
+因此，新浪的 MTA 会把 Email 投递到邮件的最终目的地 MDA：Mail Delivery Agent——邮件投递代理。
+Email 到达 MDA 后，就静静地躺在新浪的某个服务器上，存放在某个文件或特殊的数据库里，我们将这个长期保存邮件的地方称之为电子邮箱。
+
+同普通邮件类似，Email 不会直接到达对方的电脑，因为对方电脑不一定开机，开机也不一定联网。
+对方要取到邮件，必须通过 MUA 从 MDA上把邮件取到自己的电脑上。
+
+所以，一封电子邮件的旅程就是：
+发件人 -> MUA -> MTA -> MTA -> 若干个 MTA -> MDA <- MUA <- 收件人
+
+◇有了上述基本概念，要编写程序来发送和接收邮件，本质上就是：
+1. 编写 MUA 把邮件发到 MTA；
+2. 编写 MUA 从 MDA 上收邮件。
+
+发邮件时，MUA 和 MTA 使用的协议就是 SMTP：Simple Mail Transfer Protocol，后面的 MTA 到另一个 MTA 也是用 SMTP 协议。
+
+收邮件时，MUA 和 MDA 使用的协议有两种：POP：Post Office Protocol，目前版本是 3，俗称 POP3；
+IMAP：Internet Message Access Protocol，目前版本是 4，优点是不但能取邮件，还可以直接操作 MDA 上存储的邮件，比如从收件箱移到垃圾箱，等等。
+
+◇SMTP 发送邮件
+SMTP 是发送邮件的协议，Python 内置对 SMTP 的支持，可以发送纯文本邮件、HTML 邮件以及带附件的邮件。
+Python 对 SMTP 支持有 smtplib 和 email 两个模块，email 负责构造邮件，smtplib 负责发送邮件。
+
+◇发送图片
+如果要把一个图片嵌入到邮件正文中怎么做？直接在 HTML 邮件中链
+大部分邮件服务商都会自动屏蔽带有外链的图片，因为不知道这些链接是否指向恶意网站。
+
+要把图片嵌入到邮件正文中，我们只需按照发送附件的方式，先把邮件作为附件添加进去，
+然后，在 HTML 中通过引用 src="cid:0"就可以把附件作为图片嵌入了。
+如果有多个图片，给它们依次编号，然后引用不同的 cid:x 即可。
+
+◇同时支持 HTML 和 Plain 格式
+如果我们发送 HTML 邮件，收件人通过浏览器或者 Outlook 之类的软件是可以正常浏览邮件内容的
+但是，如果收件人使用的设备太古老，查看不了 HTML 邮件怎么办？
+办法是在发送 HTML 的同时再附加一个纯文本，如果收件人无法查看HTML 格式的邮件，就可以自动降级查看纯文本邮件
+利用 MIMEMultipart 就可以组合一个 HTML 和 Plain，要注意指定 subtype是 alternative：
+msg = MIMEMultipart('alternative')
+msg['From'] = ...
+msg['To'] = ...
+msg['Subject'] = ...
+msg.attach(MIMEText('hello', 'plain', 'utf-8'))
+msg.attach(MIMEText('<html><body><h1>Hello</h1></body></html>', 'html', 'utf-8'))
+
+◇加密 SMTP
+使用标准的 25 端口连接 SMTP 服务器时，使用的是明文传输，发送邮件的整个过程可能会被窃听。
+要更安全地发送邮件，可以加密 SMTP 会话，实际上就是先创建 SSL 安全连接，然后再使用 SMTP 协议发送邮件。
+某些邮件服务商，例如 Gmail，提供的 SMTP 服务必须要加密传输。
+Gmail 的 SMTP 端口是 587
+
+smtp_server = 'smtp.gmail.com'
+smtp_port = 587
+server = smtplib.SMTP(smtp_server, smtp_port)
+server.starttls()
+# 剩下的代码和前面的一模一样:
+server.set_debuglevel(1)
+只需要在创建 SMTP 对象后，立刻调用 starttls()方法，就创建了安全连接。后面的代码和前面的发送邮件代码完全一样。
+
+Message
++- MIMEBase
+ +- MIMEMultipart
+ +- MIMENonMultipart
+ +- MIMEMessage
+ +- MIMEText
+ +- MIMEImag
+
+
+

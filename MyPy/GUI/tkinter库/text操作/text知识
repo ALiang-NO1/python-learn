@@ -1,0 +1,89 @@
+bbox(index)	计算指定字符串的矩形边界。
+Index	字符串标识索引
+返回值：
+一个（x,y,width,height）的四元组。或者None，如果字符串不可见
+compare(index1, op, index2)	比较两个索引的大小。比较方法是：“<”, “<=”, “==”, “>=”, “>”, or “!=”。
+根据比较结果返回True或者False。
+count(index1, index2, *args)	统计标识index1和index2之间的字符数、行数等信息。args包括：-chars, -displaychars, -displayindices, -displaylines, -indices, -lines, -update, -xpixels, -ypixels
+debug(boolean=None)	设置文本控件内部B-Tree一致性检查的开关
+delete(first, last=None)	删除选中的文本。起始是first，last如果没有定义，则只删除当前字符。
+dlineinfo(index)	计算包含有指定字符串的矩形范围。这个方法只有在文本控件刷新时才有效。
+返回值：一个五元数组（x,y,width,height,baseline）。
+x,y:窗口坐标
+width,height：矩形的大小
+dump(index1, index2=None, command=None, **kw)	输出控件的内容。
+edit(*args)	方法edit_modified, edit_redo, edit_reset, edit_separator和 edit_undo的统一入口
+edit_modified(arg=None)	文本控件中，内容是否修改的标志。是一个Boolean类型的值
+edit_redo()	执行redo
+edit_reset()	清空undo和redo堆栈中的内容
+edit_separator()	在undo堆栈中，添加一个separator（分隔标识）
+edit_undo()	执行undo
+get(index1, index2=None)	获取指定的内容。Index1是起始索引，index2是结束索引（不包括index2本身指定的字符）。
+image_cget(index, option)	返回index指定图片的属性
+image_configure(index, **options)	修改index指定的图片的属性。属性包括:
+align：对齐属性
+image:图片对象
+name:图片的名字
+padx:水平内边距
+pady：垂直内边距
+image_create(index, cnf={}, **kw)	在指定的位置插入一个图片。
+image_names()	返回文本控件中所有图片的名字。
+index(index)	返回index指定的字符串所在的行与列
+insert(index, text, *tags)	在index指定的位置插入字符串。
+mark_gravity(self, name, direction=None)	设定标识（mark）如何移动当有文本插入时。如果是LEFT，则标识不动。如果是RIGHT,则标识移动到插入文字的最后面。默认是RIGHT。
+mark_names()	返回文本控件内的所有标识的名字。放在一个元组中返回。
+mark_next(index)	返回index后面的第一个位置标识(mark)的名字
+mark_previous(index)	返回index前面的第一个位置标识(mark)的名字
+mark_set(name, index)	在index指定的位置，创建一个新的标识。
+mark_unset(*name)	从文本控件中删除已经命名的标识。内置的标识INSERT和CURRENT是不能删除的。
+search(pattern, index, stopindex=None, forwards=None, backwards=None, exact=None, regexp=None, nocase=None, count=None)	使用正则表达式来搜索字符。
+see(index)	保证index指定的位置可见。
+tag_add(tagName, index1, *args)	添加标签名字
+tag_bind(tagName, sequence, func, add=None)	将特定事件绑定到标签上。
+tag_cget(tagName, option)	获得标识tagName的配置选项
+tag_config(tagName, cnf={}, **kw)
+tag_configure(tagName, cnf={}, **kw)	对用tagName标识的字符串进行设置
+tag_delete(*tagNames)	删除一个标签
+tag_lower(tagName, belowThis=None)	向下调整tag的优先级
+tag_names(index=None)	返回所有的tag名字
+tag_nextrange(tagName, index1, index2=None)	搜索tagName是否在index1和index2定义的区域内
+tag_prevrange(tagName, index1, index2=None)	反向搜索tagName是否在index1和index2定义的区域内
+tag_raise(tagName, aboveThis=None)	向上调整tag的优先级
+tag_ranges(tagName)	返回tagName代表的所有区间
+tag_remove(tagName, index1, index2=None)	从tagName中移除在区间[index1,index2]之间的字符。
+注意:不是从文本控件中删除字符。
+tag_unbind(tagName, sequence, funcid=None)	解除与tagName有关的事件绑定
+window_cget(index, option)	返回在index处的窗口的配置参数
+window_config(index, **options)	配置index处的子控件属性。支持的属性有：
+align
+create
+padx
+pady
+stretch
+window
+window_configure(index, cnf=None, **kw)	同上
+window_create(index, **options)	在指定位置创建一个窗口
+window_names()	返回所有的子控件的名字
+xview(*what)	水平滚动文本控件内容
+xview_moveto(fraction)	水平滚动文本控件内容
+xview_scroll(number, what)	水平滚动文本控件内容
+yview(*what)	垂直滚动文本控件内容
+yview_moveto(fraction)	垂直滚动文本控件内容
+yview_pickplace(*what)	垂直滚动文本控件内容
+yview_scroll(number, what)	垂直滚动文本控件内容
+
+
+_________tag_configure
+background	标识字符串背景颜色。不能使用缩写bg。
+bgstipple	设置背景色的底纹。比如’gray75’,‘gray50’, ‘gray25’, 'gray12’等
+borderwidth	围绕字符串的边框。默认是0。没有效果
+fgstipple v 设置文字颜色的底纹。见bgstipple
+font	设置文本字体
+foreground	文本的颜色。
+justify	对齐方式。可以是tk.LEFT,tk.RIGHT,或者tk.CENTER
+lmargin1	第一行文字的缩进
+lmargin2	如果有折行，其他行的缩进。如果不是tag标识的，就不起作用了。
+offset	上下角标。就是文字向上或者向下的距离。
+overstrike	在文字上画一道横线
+relief	文本的3D背景效果。无效果
+rmargin	右侧的空白

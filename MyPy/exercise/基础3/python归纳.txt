@@ -1,0 +1,414 @@
+---------------常用命令-------------
+ctr+alt+shift+t  快捷编辑文件
+
+import sys
+print(sys.modules.keys())
+print(sys.modules.values())
+
+print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)
+objects -- 复数，表示可以一次输出多个对象。输出多个对象时，需要用 , 分隔。
+sep -- 用来间隔多个对象，默认值是一个空格。
+end -- 用来设定以什么结尾。默认值是换行符 \n，我们可以换成其他字符串。
+file -- 要写入的文件对象。
+flush -- 输出是否被缓存通常决定于 file，但如果 flush 关键字参数为 True，流会被强制刷新。
+
+1.字符串前加 u 作用:表示后面字符串以 Unicode 格式 进行编码,一般用在中文字符串前面 例:u"我是含有中文字符组成的字符串。"
+2.字符串前加 r 作用:去掉反斜杠的转移机制。 例:r"\n\n\n\n” # 表示一个...
+3.字符串前加 b 作用:b" "前缀表示:后面字符串是bytes 类型
+
+当前文档路径：os.path.dirname(__file__), os.getcwd()  # \
+当前文件路径：os.path.realpath(__file__)  # /
+
+私有方法：def __name():
+
+判断子类：issubclass(a, b)
+
+ascii里的字母：import string; string.ascii_code|ascii_uppercase|ascii_lowcerase
+将l后的字母大写：string.capwords('helplaa','l')
+
+获取文档注释：def square(): square.__doc__
+
+列出模块中的所有方法：import x; x.__all__
+所有属性: dir(x)
+
+执行系统操作：os.system('cd e:/java')
+
+当前时间转字符串：import time; time.asctime()
+秒转时间组：time.localtime(1888888888)
+时间元组转秒：time.mktime((2020, 7, 3, 21, 48, 56, 4, 21, 0)) 1593784136.0
+字符串转时间元组：time.strtime('Sun Jul  5 08:29:51 2020')
+计时：time.pref_counter()
+
+用列表推导式将字符串转Unicode码：str='abc'; codes=[ord(i) for i i str]
+
+使⽤⽣成器表达式产⽣笛卡尔积:
+>>>for tshirt in ('%s %s'%(c, s) for c in colors for s in sizes):
+        print(tshirt)
+使⽤ itertools ⾥的 product ⽣成器函数:
+>>> import itertools
+>>> list(itertools.product(['blacks', 'white'], ['S', 'M', 'L']))
+
+1~10的阶乘：
+>>> import itertools >>> import operator
+>>> list(itertools.accumulate(range(1, 11), operator.mul)) [1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800]
+
+快速拼接字符串和序列生成列表：
+>>> import itertools
+>>> list(itertools.chain('ABC', range(5)))       # ['A', 'B', 'C', 0, 1, 2, 3, 4]
+
+反转字符串: a='abcde'; a[::-1]; reversed(a)
+
+可迭代对象拆包时，赋值给占位符：
+>>> player_infos = [('Kobe', '24'), ('James', '23'), ('Iverson', '3')]
+>>> for player_names, _ in player_infos:
+        print(player_names)
+
+用*args接受任何不确定参数：
+>>> a, *b, c, d = range(5)
+>>> a,b,c,d (0, [1, 2], 3, 4)
+
+列表头部插入元素：
+1.>>> l = [1, 2, 3, 4, 5]
+>>> l[0:0] = 'Python
+2.>>> l = [1, 2, 3, 4, 5]
+>>> l.insert(0, 'first')
+
+?列表中最小和最大值的索引: return min(range(len(list), key=list.__item__)
+
+双向队列deque 类可以指定这个队列的⼤⼩，如果这个队列满员了，还可以从反向端删除过期的元素，然后在尾端添加新的元素
+>>> from collections import deque
+>>> dp = deque(range(10), maxlen=15)
+>>> dp deque([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+>>> dp.appendleft(-1)
+>>> dp deque([-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+
+构造字典：
+1.d = dict([('two', 2), ('one', 1), ('three', 3)])
+2.dial_code = [(86, 'China'), (91, 'India'), (1, 'US'), (55, 'Brazil'), (7, 'Russia'), (81, 'Japan') ]
+coutry_code = {coutry:code for code, coutry in dial_code}
+
+合并字典：d1={}; d2={}
+1.print({**d1, **d2})
+2.print(dict(d1.items() | d2.items())
+3.d1.update(d2); print(d1)
+
+一次查询并赋值字典中不存在的键：
+coutry_code = {'China': 86, 'India': 91, 'US': 1, 'Brazil': 55, 'Russia': 7, 'Japan': 81}
+coutry_code.setdefault('china', []).append(86)
+
+排序字典：
+1.sorted(dict.items(), key=lambada x: x[1])
+2.sorted(zip(dict.keys(), dict.values()))
+
+统计字符个数：ct = collections.Counter('adcfadcfgbsdcv')
+排名前n的元素：ct.most_commom(n)
+查找列表中频率最高的值：a = [...]; max(set(a), key=a.count))
+
+检查两个字符串是不是由相同字母不同顺序组成: Conter(str1) == Counter(str2)
+
+获得类的事例列表：sorted(set(dir(func)) - set(dir(obj)))
+
+不想⽀持数量不定的定位参数，但是想 ⽀持仅限关键字参数：def f(a, *, b=2); f(1, 2)
+
+内存占用：var =10; sys.getsizeof(var)
+字节占用：len('aa'.encode('utf8'))
+
+分块：math.ceil; lst=[1,2,3,4,5]; size=2;
+list(map(lambda x: lst[x*size: x*size+size], list(range(ceil(len(lst)/size)))))
+
+过滤布尔值、空值：list(filter(bool, lst))
+
+提取对应位：array = [['a', 'b'], ['c', 'd'], ['e', 'f']]; transposed = zip(*array)
+
+计算元音个数：len(len(re.findall('[aeiou'],'foobar',re.IGNORECASE)))
+
+展平列表：
+def revel(arg):
+    print(arg)
+    ret = []
+    for i in arg:
+        if isinstance(i, list):
+            ret.extend(i)
+        else:
+            ret.append(i)
+    return ret
+def flat(lst):
+    result = []
+    result.extend(revel(list(map(lambda x: flat(x) if type(x)==list else x,lst))))
+    return result
+
+def dif(a,b,fn):  # 求差异元素
+    return [item for item in a if f(item) not in set(map(f,b))]
+
+求出现次数最多的元素：list=[1,1,2]; max(set(list),key=list.count)
+
+判断回文序列：string=re.sub('[\W_','',string.lower); print(string==string[::])
+
+operator库实现运算
+action = {
+    '+': operator.add,
+    '-': operator.sub,
+    '*': operator.mul,
+    '/': operator.truediv,
+    '**': pow
+}
+print(action['*'](2, 8))
+
+shuffle函数：
+def shuffle(lst):
+    tmp=deepcopy(lst)
+    m=len(tmp)
+    while(m):
+        m-=1
+        i=randint(0, m)
+        print(m,i)
+        tmp[m],tmp[i]=tmp[i],tmp[m]
+    return tmp
+
+优化递归：
+>>> import functools
+>>> @functools.lru_cache()
+def fibonacci(n):
+
+格式化显示对象：
+>>> now = datetime.now()
+>>> format(now, '%H:%M:%S')
+
+定义私有属性：
+在属性前加两个前导下划线，尾部没有或多有⼀个下划线
+
+打印分数：
+>>> from fractions import Fraction
+>>> print(Fraction(1, 3))
+
++和+=区别：两边必须是同类型的对象才能相加，+= 右操作数往往可以是任何可迭代对象。
+
+
+进度条：
+>>> import time
+>>> from tqdm import tqdm
+>>> for i in tqdm(range(1000)):
+        time.sleep(.01)
+
+链式函数的调用：
+def product(a, b):
+    return a * b
+def add(a, b):
+    return a + b
+print((product if True else add)(3, 4))
+
+str.rfind(substr)  # 找最后一个
+str.ljust()
+
+[]: insert([...]] remove() del [][1]
+str.index(substr)
+
+————元组
+a = tuple(range(3)/'apk'/[2, 3])
+
+s = (x*2 for x in range(4))
+s.__next__()
+
+————字典
+a = fromkeys(['name', 'age', 'job'])
+b = dict()
+a.update(b) a.popitem()
+
+————对象信息获取
+dir(obj)
+obj.__dict__
+
+————类方法
+class Student:
+    company = 'cd'
+    
+    @classmethod
+    def fun(cls):
+        print(cls.company)
+        
+————静态方法
+class Student:
+    company = 'cd'
+    
+    @staticmethod
+    def fun():
+        print('hello')
+        print(company)
+
+Student.fun()
+
+————垃圾回收
+class Person:
+    def __del__():
+        print('销毁对象：', self)
+p1 = Person()
+del p1
+p2 = Person()
+del p2
+
+————call方法
+class SalaryAccount:
+    def __call__(self, salary):
+        print(salary*10)
+s = SalaryAccount()
+s(1000)
+
+————重载
+class dog:
+    def run(self):
+        print('slowly run')
+    def run(self, name)
+        print(name, 'is running fast')
+
+————方法动态性
+class Person:
+    def work(self):
+        print('study')
+def play():
+    print('play')
+Person.play = play
+Person.play()
+
+————私有方法
+
+————修饰器
+class Employee:
+    @property
+    def salary(self):
+        return 30000
+print(Employee().salary)
+Employee().salary = 40000
+# Employee().salary = 40000  # 报错，默认只读
+
+
+————文件操作
+seek(offset, where)  # offset：相对where移动，正表示往结尾移动。where：1，0，-1
+tell()
+truncate(size)  # 只留下指针前size个内容
+ 
+os.system('notepade.exe')
+os.startfile('exe文件路径')
+mkdir() madedirs() rmdir() removedirs()
+
+os.path
+isabs(path) getsize() abspath() dirname()
+
+————模块导入
+import importlib
+a = importlib.import_module(module)
+importlib.reload()
+
+__init__.py 中指定：__all__ = [module_1, module_2...]
+
+
+————模块的发布
+1、创建包（包名=模块名）
+2、包中创建'setup.py':
+setup(name='模块对外包名', version='版本号', description='包的描述', autor=‘作者', author_email='', py_modules=('要发布的模块名'))
+3、在setup.py中使用命令：python setup.py sdist upload
+
+sys 模块
+sys.path->[]
+sys.path.append('path')
+sys.argv->[]    # argv[0] = cur_filepath
+
+
+      
+
+缓存：小整数对象（5~256），pycharm 保存并执行时优化为（5，正无穷）
+ord()--将字符转为 unicode 编码
+chr()--将十进制转为对应字符串
+
+----------格式化输出-------
+————%用法
+●1、整数的输出
+%o —— oct 八进制
+%d —— dec 十进制
+%x —— hex 十六进制
+
+●2、浮点数输出
+（1）格式化输出
+%f ——保留小数点后面六位有效数字
+　　%.3f，保留3位小数位
+%e ——保留小数点后面六位有效数字，指数形式输出
+　　%.3e，保留3位小数位，使用科学计数法
+%g ——在保证六位有效数字的前提下，使用小数方式，否则使用科学计数法
+　　%.3g，保留3位有效数字，使用小数或科学计数法
+（2）内置round()——前单进双舍
+round(number[, ndigits])
+参数：
+number - 这是一个数字表达式。
+ndigits - 表示从小数点到最后四舍五入的位数。默认值为0。
+返回值：该方法返回x的小数点舍入为n位数后的值。
+
+●3、字符串输出
+%s
+%10s——右对齐，占位符10位
+%-10s——左对齐，占位符10位
+%.2s——截取2位字符串
+%10.2s——10位占位符，截取两位字符串
+
+-----------format用法-----------
+相对基本格式化输出采用‘%’的方法，format()功能更强大，该函数把字符串当成一个模板，通过传入的参数进行格式化，
+并且使用大括号‘{}’作为特殊字符代替‘%’
+————位置匹配
+　　（1）不带编号，即“{}”
+　　（2）带数字编号，可调换顺序，即“{1}”、“{2}”
+　　（3）带关键字，即“{a}”、“{tom}”
+————通过名字匹配
+>>> print('{a} {tom} {a}'.format(tom='hello',a='world'))  # 带关键字
+>>> '{2}, {1}, {0}'.format('a', 'b', 'c')
+————通过对象属性匹配
+class Point:
+...     def __init__(self, x, y):
+...         self.x, self.y = x, y
+...     def __str__(self):
+...         return 'Point({self.x}, {self.y})'.format(self=self)
+————通过下标匹配
+>>> coord = (3, 5)
+>>> 'X: {0[0]};  Y: {0[1]}'.format(coord)
+
+————格式转换
+'b' - 二进制。将数字以2为基数进行输出。
+'c' - 字符。在打印之前将整数转换成对应的Unicode字符串。
+'d' - 十进制整数。将数字以10为基数进行输出。
+'o' - 八进制。将数字以8为基数进行输出。
+'x' - 十六进制。将数字以16为基数进行输出，9以上的位数用小写字母。
+'e' - 幂符号。用科学计数法打印数字。用'e'表示幂。
+'g' - 一般格式。将数值以fixed-point格式输出。当数值特别大的时候，用幂形式打印。
+'n' - 数字。当值为整数时和'd'相同，值为浮点数时和'g'相同。不同的是它会根据区域设置插入数字分隔符。
+'%' - 百分数。将数值乘以100然后以fixed-point('f')格式打印，值后面会有一个百分号。
+>>> print('{0:b}'.format(3))
+>>> print('{:c}'.format(20))
+>>> print('{:%}'.format(20))
+
+————进制转换
+>>> "int: {0:d};  hex: {0:x};  oct: {0:o};  bin: {0:b}".format(42)
+>>> "int: {0:d};  hex: {0:#x};  oct: {0:#o};  bin: {0:#b}".format(42)  # 在前面加“#”，则带进制前缀
+————左中右对齐及位数补全
+（1）< （默认）左对齐、> 右对齐、^ 中间对齐、= （只用于数字）在小数点后进行补齐
+（2）取位数“{:4s}”、"{:.2f}"等
+>>> print('{0} is {0:>10.2f}'.format(1.123))  # 取2位小数，右对齐，取10位
+>>>'{:0=30}'.format(11)  # 还有“=”只能应用于数字，这种方法可用“>”代替
+————正负符号显示
+>>> '{:+f}; {:+f}'.format(3.14, -3.14)  # 总是显示符号
+>>> '{: f}; {: f}'.format(3.14, -3.14)  # 若是+数，则在前面留空格
+>>> '{:-f}; {:-f}'.format(3.14, -3.14)  # -数时显示-，与'{:f}; {:f}'一致
+
+————百分数%
+>>> points = 19
+>>> total = 22
+>>> 'Correct answers: {:.2%}'.format(points/total)
+'Correct answers: 86.36%'
+
+————逗号","分隔金钱
+>>> '{:,}'.format(1234567890)
+
+————占位符嵌套
+>>> for align, text in zip('<^>', ['left', 'center', 'right']):
+...     '{0:{fill}{align}16}'.format(text, fill=align, align=align)
+>>> int(_, 16)  # 官方文档给出来的，无法在IDLE复现
+
+————占位符%s和%r
+>>> "repr() shows quotes: {!r}; str() doesn't: {!s}".format('test1', 'test2')
+"repr() shows quotes: 'test1'; str() doesn't: test2"  # 输出结果是一个带引号，一个不带

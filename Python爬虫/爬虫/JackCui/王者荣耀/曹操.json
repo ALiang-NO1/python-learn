@@ -1,0 +1,298 @@
+{
+    "error_code": 0,
+    "info": {
+        "name": "曹操",
+        "title": "鲜血枭雄",
+        "half_img": "http://pic.wankacn.com/2017-06-23_594c875f68550.png",
+        "type": [
+            "1"
+        ],
+        "background_story": "召唤师战争是什么？\r\n是符文？是力量？是权力？\r\n不，这是一场游戏，一场野心与欲望的游戏。\r\n既然是游戏，必然有游戏的规则。\r\n曹操想做的，就是那个制订游戏秩序的人。\r\n然而，阻碍实在太多太多：人间界的守护者夫子和他的稷下学院，不知踪迹的太古魔导姜子牙，最强帝国大唐和它的统治者……\r\n他不得不一边思考着如何打破游戏秩序，一边扩张势力。很快，狡诈与野心大放异彩，不仅收揽了神秘的佣兵组织“龙”，连挡在前路的战神吕布也死于他的计算与阴谋。\r\n但这样太慢了。支配这个世界的，是机关术和魔道。要打破这两者的秩序，还需要新的力量源泉。\r\n契机出现在沧海之滨，血族之王徐福自东瀛扶桑归来，为卷土重来谋求合作：若曹操愿提供战俘建立血族大军，他将助其统一三国。\r\n曹操却表示，自己想成为血族。\r\n徐福发出了低哑的笑声，他认为曹操已经被自己展现的力量迷惑，终究会成为芈月那样受自己操纵的傀儡。\r\n然而转化为血族后，曹操所做的第一件事，是制造意外名义下的屠杀，将通晓机关术与魔道，却不愿为自己效力的好友蔡邕及其一族全部置于死地。\r\n蔡邕所收养的卑贱野兽，则被疯狂蒙蔽双眼，反倒投效了曹操。至于幼小的蔡文姬，她的天才也将在成人后为其所用。\r\n朋友什么的，就是用来出卖的。\r\n曹操开始下自己的棋。\r\n他大张旗鼓依据蔡邕的研究寻找上古遗留的大规模杀伤性武器。当他探寻到东风祭坛的所在，并将大军派往赤壁时，所有人都以为其意图在于统一三国，感受到危机的吴国和蜀国结为盟友。联军将全部注意力投向东风祭坛。殊不知这只是一招障眼法。他谋划的是更为惊天的阴谋，也是计划中颠覆人间界秩序的第一步。\r\n敌人什么的，就是用来玩弄的。\r\n离东海不远的小岛上，徐福精心雕琢着继白起之后又一得意之作：曾震撼整个大陆的战神吕布，正在秘密重生。这才是曹操真正的杀手锏。徐福沉浸在鲜血进化的艺术中，却忘记了螳螂捕蝉，黄雀在后的真理。\r\n队友什么的，就是用来垫背的。\r\n是的，卧榻之侧，岂容他人酣睡！不仅要统一三国，连虎视眈眈的徐福，也将被一并剿灭。如果计划成功，血族之力将完全为曹操所独占。\r\n这是一局很大的棋。\r\n“宁教我负天下人！”",
+        "levels": {
+            "survival": "6",
+            "attack": "6",
+            "skill": "5",
+            "difficulty": "4"
+        },
+        "diamond_price": "0",
+        "gold_price": "13888",
+        "ticket_price": "588",
+        "text_price": "",
+        "recommend_summoner_skill": [
+            {
+                "name": "闪现",
+                "icon": "http://pictest.wankacn.com/2017-04-27_5901deac66009.jpeg",
+                "description": "120秒CD：向指定方向位移一段距离"
+            }
+        ],
+        "rec_inscriptions": [
+            {
+                "title": "four",
+                "list": [
+                    {
+                        "name": "荆棘",
+                        "level": "4",
+                        "icon": "http://pictest.wankacn.com/2017-04-27_5901c32a64904.png",
+                        "attrs": "物理攻击+1.5|攻击速度+0.4%"
+                    },
+                    {
+                        "name": "正义",
+                        "level": "4",
+                        "icon": "http://pictest.wankacn.com/2017-04-27_5901c330a8b0a.png",
+                        "attrs": "物理攻击+0.6|最大生命+36"
+                    },
+                    {
+                        "name": "野性",
+                        "level": "4",
+                        "icon": "http://pictest.wankacn.com/2017-04-27_5901c336d98bc.png",
+                        "attrs": "最大生命+13.5|物理穿透+3.8"
+                    }
+                ]
+            },
+            {
+                "title": "five",
+                "list": [
+                    {
+                        "name": "宿命",
+                        "level": "5",
+                        "icon": "http://pictest.wankacn.com/2017-04-27_5901c32c6be73.png",
+                        "attrs": "攻击速度+1%|最大生命+33.7|物理防御+2.3"
+                    },
+                    {
+                        "name": "鹰眼",
+                        "level": "5",
+                        "icon": "http://pictest.wankacn.com/2017-04-27_5901c337e8523.png",
+                        "attrs": "物理攻击+0.9|物理穿透+6.4"
+                    },
+                    {
+                        "name": "狩猎",
+                        "level": "5",
+                        "icon": "http://pictest.wankacn.com/2017-04-27_5901c332dbb04.png",
+                        "attrs": "攻击速度+1%|移动速度+1%"
+                    }
+                ]
+            }
+        ],
+        "skin_imgs": [
+            {
+                "skin_name": "鲜血枭雄",
+                "big_img": "http://pictest.wankacn.com/2017-04-28_5902c4433f404.jpeg"
+            },
+            {
+                "skin_name": "超能战警",
+                "big_img": "http://pictest.wankacn.com/2017-05-05_590c38b0f1927.jpeg"
+            },
+            {
+                "skin_name": "死神来了",
+                "big_img": "http://pictest.wankacn.com/2017-04-28_5902dce8751e9.jpeg"
+            },
+            {
+                "skin_name": "幽灵船长",
+                "big_img": "http://pictest.wankacn.com/2017-04-28_5902c4459525a.jpeg"
+            },
+            {
+                "skin_name": "烛龙",
+                "big_img": "http://pic.wankacn.com/2018-02-01_5a728f84bf2a5.jpeg"
+            }
+        ],
+        "hero_id": "22",
+        "big_img": "http://pictest.wankacn.com/2017-05-09_5911a3ba7b780.png",
+        "history_intro": "曹操，东汉末年杰出的政治家、军事家和文学家，自群雄割据的乱世中统一了北方，开创了曹魏政权，其事迹见于《三国志·魏书》。 陈寿在《三国志》中评其“运筹演谋，鞭挞宇内，揽申、商之法术，该韩、白之奇策……抑可谓非常之人，超世之杰矣。” 曹操还具有深厚的文学，书法，音乐等艺术修养。著有多种兵书，文章和诗歌。《观沧海》、《短歌行》、《龟虽寿》等都是他的传世名篇。",
+        "skill_tips": "曹操的被动增强了他的清野能力，因此曹操在前期发育最好选择是在野区和线上之间徘徊，增加经济的来源。曹操在对线时候，尽量往敌方兵线多的敌方和对面1V1，这样子开大招之后吸血的效果才能达到最佳，以免被击杀。",
+        "recommend_summoner_skill_tips": "闪现：向指定方向位移一段距离",
+        "hero_tips": "现在的曹操已经大不如从前了，但是曹操的大招还是不容小觑的。如果在线上1V1的时候，曹操开大应该不要恋战，选择离开一会，等曹操大招效果退了之后再上，这样子单杀曹操并不难。",
+        "melee_tips": "现在的曹操想在团战中单杀敌方输出是有一定难度的。既然如此，我们不如选择站在人群中输出。因为曹操开大需要一点时间，所以开团时让肉先上，紧接着曹操放大后往敌方抱团的方向上，在集中火力的同时也能较快吸血续航，同时也为队友提供了切后排的机会。",
+        "skill_list": [
+            {
+                "name": "争霸",
+                "icon": "http://pic.wankacn.com/2018-05-17_5afd4a1a20e98.png",
+                "description": "被动：曹操每次施放技能会增加10%攻击速度，最多叠加5层，持续5秒",
+                "intro": "被动",
+                "tags": "",
+                "cd": "",
+                "mana_cost": "",
+                "attrs": []
+            },
+            {
+                "name": "霸道之刃",
+                "icon": "http://pictest.wankacn.com/2017-05-15_5919a848cd109.png",
+                "description": "曹操向指定方向发起斩击突袭，对路径上的敌人造成160/185/210/235/260/285（+84%物理加成）点物理伤害；最多可以发动3次，每次斩击间隔不能超过8秒，并且第三次斩击会将敌人击飞0.5秒",
+                "intro": "副升",
+                "tags": "物理/控制",
+                "cd": "10",
+                "mana_cost": "",
+                "attrs": [
+                    "基础伤害|160|185|210|235|260|285",
+                    "冷却时间|10|9.4|8.8|8.2|7.6|7"
+                ]
+            },
+            {
+                "name": "纵横天下",
+                "icon": "http://pictest.wankacn.com/2017-05-15_5919a84909d93.png",
+                "description": "曹操剑指天下，向指定方向挥出强大剑气，对路径上的敌人造成240/300/360/420/480/540（+90%物理加成）点物理伤害并减少其50%移动速度，持续2秒；被动：普通攻击命中敌人时减少1秒纵横天下的冷却时间",
+                "intro": "主升",
+                "tags": "物理/控制",
+                "cd": "12",
+                "mana_cost": "",
+                "attrs": [
+                    "基础伤害|240|300|360|420|480|540",
+                    "冷却时间|12|11|10|9|8|7"
+                ]
+            },
+            {
+                "name": "浴血枭雄",
+                "icon": "http://pictest.wankacn.com/2017-05-15_5919a84955461.png",
+                "description": "曹操以鲜血意志强化大剑立即解除自身控制效果并回复20%已损生命值，持续8秒，施放时对附近敌人造成300/375/450（+100%物理加成）点物理伤害，强化的大剑会增加100/150/200物理攻击力和20%韧性；并且每次普通攻击或技能命中敌方将回复120/180/240（+40%物理加成）点生命值",
+                "intro": "有大点大",
+                "tags": "物理",
+                "cd": "30",
+                "mana_cost": "",
+                "attrs": [
+                    "基础伤害|300|375|450",
+                    "提升攻击|100|150|200",
+                    "生命回复|120|180|240"
+                ]
+            }
+        ],
+        "equip_choice": [
+            {
+                "title": "逆风出装",
+                "description": "逆风局曹操出装半肉半输出，搭配上斧头的减防，大招和吸血剑的被动，可以让曹操在团战中站撸1V5。",
+                "list": [
+                    {
+                        "equip_id": "74",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_590316747f9e3.jpeg"
+                    },
+                    {
+                        "equip_id": "17",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031666c8cd6.jpeg"
+                    },
+                    {
+                        "equip_id": "22",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031667cae0d.jpeg"
+                    },
+                    {
+                        "equip_id": "64",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031670a4ba6.jpeg"
+                    },
+                    {
+                        "equip_id": "66",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_590316716e6b4.jpeg"
+                    },
+                    {
+                        "equip_id": "67",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031671e758b.jpeg"
+                    }
+                ]
+            },
+            {
+                "title": "顺风局出装",
+                "description": "顺风局中曹操会更加注重伤害输出，同时符文页搭配上攻击性符文最大化自己的输出能力。同时搭配闪现可以很好的弥补曹操的机动性。",
+                "list": [
+                    {
+                        "equip_id": "83",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_5903167882d00.jpeg"
+                    },
+                    {
+                        "equip_id": "75",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031675e2f15.jpeg"
+                    },
+                    {
+                        "equip_id": "12",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_590316660dfb9.jpeg"
+                    },
+                    {
+                        "equip_id": "18",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_590316670235d.jpeg"
+                    },
+                    {
+                        "equip_id": "22",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031667cae0d.jpeg"
+                    },
+                    {
+                        "equip_id": "67",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031671e758b.jpeg"
+                    }
+                ]
+            },
+            {
+                "title": "半肉出装",
+                "description": "这套出装不但为自己的技能减少了大量的CD，而且战斧的破甲对曹操的输出也有一定的提升，其他都选择防御装备是为了让曹操在团战中为队友抗得更高的伤害，为队友创造一定的输出环境！",
+                "list": [
+                    {
+                        "equip_id": "22",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031667cae0d.jpeg"
+                    },
+                    {
+                        "equip_id": "75",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031675e2f15.jpeg"
+                    },
+                    {
+                        "equip_id": "67",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_59031671e758b.jpeg"
+                    },
+                    {
+                        "equip_id": "66",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_590316716e6b4.jpeg"
+                    },
+                    {
+                        "equip_id": "68",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_5903167253618.jpeg"
+                    },
+                    {
+                        "equip_id": "71",
+                        "icon": "http://pictest.wankacn.com/2017-04-28_5903167373752.jpeg"
+                    }
+                ]
+            }
+        ],
+        "partner_hero": [
+            {
+                "hero_id": "15",
+                "name": "扁鹊",
+                "icon": "http://pictest.wankacn.com/2017-04-26_59005eda5ea34.png"
+            },
+            {
+                "hero_id": "16",
+                "name": "白起",
+                "icon": "http://pictest.wankacn.com/2017-04-26_59005edb6e265.png"
+            },
+            {
+                "hero_id": "30",
+                "name": "武则天",
+                "icon": "http://pictest.wankacn.com/2017-04-26_59005eed6c76f.png"
+            }
+        ],
+        "restrained_hero": [
+            null,
+            {
+                "hero_id": "7",
+                "name": "孙尚香",
+                "icon": "http://pictest.wankacn.com/2017-04-26_59005ed16af3b.png"
+            },
+            {
+                "hero_id": "28",
+                "name": "达摩",
+                "icon": "http://pictest.wankacn.com/2017-04-26_59005ee9d3300.png"
+            }
+        ],
+        "be_restrained_hero": [
+            {
+                "hero_id": "23",
+                "name": "典韦",
+                "icon": "http://pictest.wankacn.com/2017-04-26_59005ee344db8.png"
+            },
+            {
+                "hero_id": "24",
+                "name": "宫本武藏",
+                "icon": "http://pictest.wankacn.com/2017-04-26_59005ee432c52.png"
+            },
+            {
+                "hero_id": "27",
+                "name": "狄仁杰",
+                "icon": "http://pic.wankacn.com/2018-05-17_5afd6023b6fd7.png"
+            }
+        ]
+    },
+    "request_id": 1286080066
+}

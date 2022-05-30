@@ -1,0 +1,12 @@
+import parsel
+
+sel = parsel.Selector(response.text)  #注意这里的S要大写
+
+# re正则
+# print(sel.re('正则匹配格式'))
+
+# xpath
+# print(sel.xpath('xpath').getall()) #getall获取所有
+
+# css选择器
+# print(sel.css('css选择器 ::text').extract_first())#获取第一个

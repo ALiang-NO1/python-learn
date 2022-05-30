@@ -1,0 +1,951 @@
+tkinter是一个开放源码的图形接口开发工具，原来是用TCL（Tool Command Language，工具命令语言）编写的GUI函数库
+
+列出tkinter版本：tkinter.TKVersion
+
+◆ 窗口属性的设置
+
+>> 窗口相关的方法：
+ - maxsize(width,height)：拖拽时最大宽高，minsize(w,h)
+ - config(bg='')
+ - resizable(True, True)
+ - state('zoomed')：最大化窗口
+ - iconify()：缩小化窗口
+ - iconbitmap('xx.ico')：窗口图标
+ - wm_attributes('-topmost', 1)：窗口在最上层
+
+◆ 认识tkinter的Widget
+
+>> tkinter在后来也推出了加强版的模块，称为tkinter.ttk，有时简称ttk，这个模块中有17个Widget。
+ - 下列是原本tkinter有的Widget。
+（1）Button（2）Checkbutton（3）Entry（4）Frame（5）Label（6）LabelFrame（7）MenuButton（8）Radiobutton（9）Scale（10）Scrollbar（11）PanedWindow
+ - 下列是ttk模块新增的Widget。
+（1）Combobox（2）Notebook（3）Progressbar（4）Separator（5）Sizegrip：可以拖曳最上层窗口右下方更改最上层窗口的大小。（6）Treeview
+ - 如果使用下列方式导入ttk，可以覆盖原先tkinter的控件。
+     - from tkinter import *
+     - from tkinter.ttk import *
+
+>> 使用ttk可以有更好的外观，而且也可以跨平台使用，不过并没有100%兼容。
+例如，fg、bg参数或一些外观相关的参数tk和ttk是不相同。ttk使用的是ttk.Style类别。
+
+◆ Widget的共同方法
+
+### 1. Configuration
+（1）config(option=value)：Widget属性可以在建立时设置，也可以在程序执行时使用config( )重新设置
+（2）cget（"option"）：取得option参数值
+（3）keys( )：可以用此方法获得所有该Widget的参数
+### 2. Event Processing
+（1）mainloop( )：让程序继续执行，同时进入等待与处理窗口事件
+（2）quit( )：Python Shell窗口结束，但是所建窗口继续执行
+（3）update( )：更新窗口画面
+### 3. Event callbacks
+（1）bind(event,callback)：事件绑定
+（2）unbind(event)：解除绑定
+### 4. Alarm handlersafter(time,callback)：间隔指定时间后调用callback( )方法
+
+◆ 标签Label
+
+>> 下列是Label( )方法内其他常用的options参数。
+（1）anchor：如果空间大于所需时，控制标签的位置，默认是CENTER（居中）
+（2）bg或background：背景色彩。
+（3）bitmap：使用默认图标当作标签内容。
+（4）borderwidth或bd：标签边界宽度，默认是1。
+（5）compound：可以设置标签内含图像和文字时，彼此的位置关系。
+（6）cursor：当鼠标光标在标签上方时的外形。
+（7）fg或foreground：前景色彩。
+（8）font：可选择字形、字形样式与大小。
+（9）height：标签高度，单位是字符。
+（10）image：标签以图像方式呈现。
+（11）justify：存在多行文本时最后一行的对齐方式，可取值有LEFT/CENTER/RIGHT（靠左/居中/靠右），默认是居中对齐。
+（12）padx/pady：标签文字与标签区间的间距，单位是像素。
+（13）relief：默认是relief=FLAT，可由此控制标签的外框。
+（14）text：标签内容，如果有“\n”则可输入多行文字。
+（15）textvariable：可以设置标签以变量方式显示。
+（16）underline：可以设置第几个文字有下画线，从0开始算起，默认是-1，表示无下画线。
+（17）width：标签宽度，单位是字符。
+（18）wraplength：本文到多少宽度后换行，单位是像素。我们在设计程序时，也可以将上述参数设置称为属性设置。
+
+◆ Widget的共同属性Dimensions
+
+>> height可以设置Widget控件（此例是标签）的高度，单位是字符高度。width可以设置Widget控件（此例是标签）的宽度，单位是字符宽度。
+
+◆ Widget的共同属性Font
+
+（1）字形family：如Helvetica、Times等。
+（2）字号size：单位是像素。
+（3）weight：例如bold、normal。
+（4）slant：例如italic、roman，如果不是italic则是roman。
+（5）underline：例如True、False。
+（6）overstrike：例如True、False。
+
+◆ Widget的共同属性Bitmaps
+
+>> tkinter也提供了在标签位置放置内建位图的功能。
+
+◆ compound参数
+
+>> 图像与文字共存时，可以使用此参数定义文字与图像的位置关系。compound参数可以是下列值:
+ - left：图像在左。right：图像在右。top：图像在上。bottom：图像在下。center：文字覆盖在图像上方。
+
+◆ 图像PhotoImage
+
+>> 需留意PhotoImage( )方法早期只支持gif文件格式，不接受常用的jpg或png格式的图像，目前已经可以支持png格式了。
+
+◆ 分隔线Separator
+
+>> Separaetor( )方法的第一个参数是父对象，表示这个分隔线将建立在哪一个父对象内；options参数如果是HORIZONTAL则建立水平分隔线，VERTICAL则建立垂直分隔线。
+
+◆ pack方法
+
+>> 虽然我们称pack方法，其实在tkinter内这是一个类别。这是最常使用的控件配置管理方法，它是使用相对位置的概念处理Widget控件配置，至于控件的正确位置则是由pack方法自动完成。
+
+>> 使用pack方法时，也可以增加side参数设置组件的排列方式，此参数的取值如下：
+ - TOP：这是默认值，由上往下排列。BOTTOM：由下往上排列。LEFT：由左往右排列。RIGHT：由右往左排列。
+
+>> 在使用pack方法时，可以使用padx/pady参数设定控件边界与容器（可想成窗口边界）的距离或是控件边界间的距离。在默认环境下窗口控件间的距离是1像素，
+    如果希望有适度间距，可以设置参数padx/pady，代表水平间距/垂直间距，可以分别在组件间增加间距。
+
+>> ipadx参数可以控制标签文字与标签容器的x轴间距，ipady参数可以控制标签文字与标签容器的y轴间距。
+
+>> anchor参数这个参数可以设定Widget控件在窗口中的位置，（实际的例子中是指标签文字在标签区域的位置）。
+
+>> fill参数的主要功能是告诉pack管理程序，设置控件填满所分配容器区间的方式，
+ - 如果是fill=X表示控件可以填满所分配空间的X轴不留白，
+ - 如果是fill=Y表示控件可以填满所分配空间的Y轴不留白，
+ - 如果是fill=BOTH表示控件可以填满所分配空间的X轴和Y轴。
+ - fill默认值是NONE，表示保持原大小。
+
+>> 如果所分配容器区间已经满了，则使用此fill参数将不会有任何作用。fill参数在使用上仍有些复杂，如果要设计复杂的Widget控件布局，建议使用grid方法。
+
+>> 当Widget控件从左到右配置时，pack配置管理员所配置的空间是Y轴的空间。当Widget控件从上到下配置时，pack配置管理员所配置的空间是X轴的空间。
+    当扩充窗口大小时，“全面资源集”标签在Y轴的空间称为额外空间，这时需要借助expand参数设置。
+
+>> expand参数可设定Widget控件是否填满额外的父容器空间，默认是False（或是0），表示不填满，如果是True（或是1）表示填满。
+
+>> pack其实在Python tkinter中是一个类别，它提供下列方法供我们使用。
+ - slaves()：传回所有 Widget 对象
+ - info()：pack 选项对应值
+ - forget()：隐藏 Widget 控件，用 pack（）复原
+ - location(x,y)：是否在单元格，是-传回坐标，否则传回（-1，-1）
+ - size()：Widget 控件大小
+ - propagate(boolean)：True-窗口大小由子控件决定
+
+◆ grid方法
+
+>> 这是一种以格状或者类似Excel电子表格方式包装和定位窗口组件的方法。grid(options...)
+ - options参数可以是row、column、padx/pady、rowspan、columnspan、sticky
+
+>> sticky参数这个参数的功能类似anchor，但是只可以设定N/S/W/E，即上／下／左／右对齐。
+
+>> sticky参数的可能值N/S/W/E也可以组合使用。
+ - sticky=N+S：可以拉长高度让控件在顶端和底端对齐。
+ - sticky=W+E：可以拉长宽度让控件在左边和右边对齐。
+ - sticky=N+S+E：可以拉长高度让控件在顶端和底端对齐，同时切齐右边。
+ - sticky=N+S+W：可以拉长高度让控件在顶端和底端对齐，同时切齐左边。
+ - sticky=N+S+W+E：可以拉长高度让控件在顶端和底端对齐，同时切齐左右边。
+
+>> 在设计Widget控件的布局时，有时候会碰上窗口缩放大小，此时可以使用这两个方法设定第几个row或column的缩放比例。例如：
+ - rowconfigure(0, weight=1)   # weight表示缩放比
+ - columnconfigure(0, weight=1)
+
+◆ place方法
+
+>> place方法这是使用直接指定方式将Widget控件放在容器（可想成窗口）中的方法。这个方法的语法格式 place(options...)
+ - options参数可以是height/width、relx/rely、x/y、relheight/relwidth、bordermode、anchor。
+
+>> 有时候在设计窗口应用程序时，所预留的空间有限，如果想要将图片插入窗口内，却担心图片太大，
+可以在插入图片时同时设定图片的大小，此时可以使用width/height参数，这两个参数可以直接设定Widget控件的实体大小。
+
+>> relx/rely可以设置相对于父容器（可想成父窗口）的位置，relwidth/relheight设置相对大小。这个相对位置与相对大小是相对于父窗口而言，其值为0.0 ~ 1.0。
+
+◆ 功能按钮Button
+
+>> Button( )方法的第一个参数是父对象，表示这个功能按钮将建立在哪一个窗口内。下列是Button( )方法内其他常用的options参数。
+（1）borderwidth或bd：边界宽度默认是两个像素。
+（2）bg或background：背景色彩。
+（3）command：单击功能按钮时，执行此方法。
+（4）cursor：当鼠标光标移至按钮上时的形状。
+（5）fg或foreground：前景色彩。
+（6）font：字形。
+（7）height：高，单位是字符高。
+（8）highlightbackground：当功能按钮取得焦点时的背景颜色。
+（9）highlightcolor：当功能按钮取得焦点时的颜色。
+（10）image：功能钮上的图像。
+（11）justify：当有多行文字时，最后一行文字的对齐方式。
+（12）padx：默认是1，可设置功能按钮与文字的间隔。
+（13）pady：默认是1，可设置功能按钮的上下间距。
+（14）relief：默认是relief=FLAT，可由此控制文字外框。
+（15）state：默认是state=NORMAL，若设置为DISABLED则以灰阶显示功能按钮，表示暂时无法使用。
+（16）text：功能按钮名称。
+（17）underline：可以设置第几个文字有下画线，从0开始算起，默认是-1表示无下画线。
+（18）width：宽，单位是字符宽。
+（19）wraplength：限制每行的文字数，默认是0，表示只有“\n”才会换行。
+
+>> root.destroy()可以关闭root窗口对象，同时程序结束。quit()，可以让Python Shell内执行的程序结束，但是root窗口则继续执行
+
+◆ 建立含图像的功能按钮
+
+>> 一般功能按钮是用文字当作按钮名称，也可以用图像当作按钮名称。
+若是使用图像当作按钮，在Button( )内可以省略text参数设置按钮名称，但是在Button( )内要增加image参数设置图像对象。
+
+◆ 文本框Entry
+
+>> Entry( )方法的第一个参数是父对象，表示这个文本框将建立在哪一个窗口内。下面是Entry( )方法内其他常用的options参数。
+（1）bg或background：背景色彩。
+（2）borderwidth或bd：边界宽度默认是2像素。
+（3）command：当用户更改内容时，会自动执行此函数。
+（4）cursor：当鼠标光标在复选框上时的光标形状。
+（5）exportselection：如果执行选取时，所选取的字符串会自动输出至剪贴板，如果想要避免，可以设置exportselection=0。
+（6）fg或foreground：前景色彩。
+（7）font：字形。
+（8）height：高，单位是字符高。
+（9）highlightbackground：当文本框取得焦点时的背景颜色。
+（10）highlightcolor：当文本框取得焦点时的颜色。
+（11）justify：当含多行文字时，最后一行的对齐方式。
+（12）relief：默认是relief=FLAT，可由此控制文字外框。
+（13）selectbackground：被选取字符串的背景色彩。
+（14）selectborderwidth：选取字符串时的边界宽度，预设是1。
+（15）selectfroeground：被选取字符串的前景色彩。
+（16）show：显示输入字符，例如，show='*'表示显示星号，常用于输入密码字段。
+（17）state：输入状态，默认是NORMAL表示可以输入，DISABLE则表示无法输入。
+（18）textvariable：文字变量。（19）width：宽，单位是字符宽。
+（20）xscrollcommand：在x轴使用滚动条。
+
+◆ Entry的insert( )方法
+
+>> 在Widget的Entry控件中可以使用insert(index,s)方法插入字符串，其中，s是所插入的字符串，字符串会插入在index位置。
+设计程序时可以使用这个方法为文本框建立默认的文字，通常会将它放在Entry( )方法建立完文本框后。
+
+◆ 计算数学表达式使用eval( )
+
+>> Python内有一个非常好用的计算数学表达式的函数eval，该函数可以直接传回此数学表达式的计算结果。
+
+◆ get( )与set( )
+
+◆ 追踪trace( )
+
+>> 我们可以利用变量设置追踪Widget控件，当其内容更改时，让程序执行callback函数。
+
+>> 第一个参数是模式，w代表当有执行写入时，就自动去执行callback函数。也可以自行取函数名称，这个动作称为变动追踪。
+
+>> r代表当执行读取时，就自动去执行callbackR函数。也可以自行取函数名称，这个动作称为读取追踪。
+
+◆ trace( )方法调用的callback方法参数
+
+>> 其实是传递三个参数，分别是tk变量名称、index索引、mode模式。不过目前有关tk变量名称和index索引部分尚未完成实际支持，
+至于第三个参数则是可以列出是r或w模式。由于我们所设计的程序并不需要传递参数，所以可以直接用“*args”当作参数内容。
+
+
+◆ Radiobutton选项按钮
+
+>> 下列是Radiobutton( )方法内其他常用的options参数。
+（1）activebackground：鼠标光标在选项按钮上时的背景颜色。
+（2）activeforeground：鼠标光标在选项按钮上时的前景颜色。
+（3）anchor：如果空间大于所需时，控制选项按钮的位置，默认是CENTER。
+（4）bg：标签背景或indicator的背景颜色。
+（5）bitmap：位图图像对象。
+（6）borderwidth或bd：边界宽度默认是两个像素。
+（7）command：当用户更改选项时，会自动执行此函数。
+（8）cursor：当鼠标光标在选项按钮上时的光标形状。
+（9）fg：文字前景颜色。
+（10）font：字形。
+（11）height：选项按钮上的文字有几行，默认是1行。
+（12）highlightbackground：当选项按钮取得焦点时的背景颜色。
+（13）highlightcolor：当选项按钮取得焦点时的颜色。
+（14）image：图像对象，如果要建立含图像的选项按钮时，可以使用此参数。
+（15）indicatoron：当此值为0时，可以建立盒子选项按钮。
+（16）justify：当含多行文字时，最后一行文字的对齐方式。
+（17）padx：默认是1，可设置选项按钮与文字的间隔。
+（18）pady：默认是1，可设置选项按钮的上下间距。
+（19）selectcolor：当选项按钮被选取时的颜色。
+（20）selectimage：如果设置图像选项按钮时，可由此设置当选项按钮被选取时的不同图像。
+（21）state：默认是state=NORMAL，若是设置DISABLE则以灰阶显示选项按钮表示暂时无法使用。
+（22）text：选项按钮旁的文字。
+（23）textvariable：以变量方式显示选项按钮文字。
+（24）underline：可以设置第几个文字有下画线，从0开始算起，默认是-1，表示无下画线。
+（25）value：选项按钮的值，可以区分所选取的选项按钮。
+（26）variable：设置或取得目前选取的单选按钮，它的值类型通常是IntVar或StringVar。
+（27）width：选项按钮的文字有几个字符宽，省略时会自行调整为实际宽度。
+（28）wraplength：限制每行的文字数，默认是0，表示只有“\n”才会换行。
+
+>> 如果要建立含有图像和文字的选项按钮，需要在Radiobutton方法内增加text参数设置文字，增加compound参数设置图像与文字的位置。
+
+◆ Checkbutton复选框
+
+>> Checkbutton( )方法的第一个参数是父对象，表示这个复选框将建立在哪一个父对象内。
+下列是Checkbutton( )方法内其他常用的options参数。
+（1）activebackground：鼠标光标在复选框上时的背景颜色。
+（2）activeforeground：鼠标光标在复选框上时的前景颜色。
+（3）bg：标签背景或indicator的背景颜色。
+（4）bitmap：位图图像对象。
+（5）borderwidth或bd：边界宽度默认是两个像素。
+（6）command：当用户更改选项时，会自动执行此函数。
+（7）cursor：当鼠标光标在复选框上时的光标形状。
+（8）disabledforeground：当无法操作时的颜色。
+（9）font：字形。
+（10）height：复选框中的文字有几行，默认是1行。
+（11）highlightbackground：当复选框取得焦点时的背景颜色。
+（12）highlightcolor：当复选框取得焦点时的颜色。
+（13）image：图像对象，如果要建立含图像的选项按钮时，可以使用此参数。
+（14）justify：当含多行文字时，最后一行文字的对齐方式。
+（15）offvalue：这是控制变量，默认若复选框未选取值是0，可以由此更改设置此值。
+（16）onvalue：这是控制变量，默认若复选框未选取值是1，可以由此更改设置此值。
+（17）padx：默认是1，可设置复选框与文字的间隔。
+（18）pady：默认是1，可设置复选框的上下间距。
+（19）relief：默认是relief=FLAT，可由此控制复选框外框。
+（20）selectcolor：当复选框被选取时的颜色。
+（21）selectimage：如果设置图像复选框，可由此设置当复选框被选取时的不同图像。
+（22）state：默认是state=NORMAL，若是设置DISABLED则以灰阶显示复选框，表示暂时无法使用。如果鼠标光标在复选框上方表示ACTIVE。
+（23）text：复选框旁的文字。
+（24）underline：可以设置第几个文字有下画线，从0开始算起，默认是-1，表示无下画线。
+（25）variable：设置或取得目前选取的复选框，它的值类型通常是IntVar或StringVar。
+（26）width：复选框的文字有几个字符宽，省略时会自行调整为实际宽度。
+（27）wraplength：限制每行的文字数，默认是0，表示只有“\n”才会换行。
+
+◆ 框架Frame
+
+>> Frame( )方法的第一个参数是父对象，表示这个框架将建立在哪一个父对象内。
+下列是Frame( )方法内其他常用的options参数。
+（1）bg或background：背景色彩。
+（2）borderwidth或bd：标签边界宽度，默认是2。
+（3）cursor：当鼠标光标在框架上时的光标形状。
+（4）height：框架的高度，单位是像素。
+（5）highlightbackground：当框架没有取得焦点时的颜色。
+（6）highlightcolor：当框架取得焦点时的颜色。
+（7）highlighthickness：当框架取得焦点时的厚度。
+（8）relief：默认是relief=FLAT，可由此控制框架外框。
+（9）width：框架的宽度，单位是像素，省略时会自行调整为实际宽度。
+
+>> 在标准的Frame框架中，对于relief属性并没有完全支持，例如，solid和sunken属性，此时可以使用tkinter.ttk的Frame和Style模块
+
+◆ 标签框架LabelFrame
+
+>> 标签框架的基本概念这也是一个容器控件，主要是将一系列相关的Widget组织在一个标签框架内，然后给它一个名称。
+LabelFrame( )方法的第一个参数是父对象，表示这个标签框架将建立在哪一个父对象内。
+下列是LabelFrame( )方法内其他常用的options参数。
+（1）bg或background：背景色彩。
+（2）borderwidth或bd：标签边界宽度，默认是2。
+（3）cursor：当鼠标光标在框架上时的光标形状。
+（4）font：标签框架中文字的字形。
+（5）height：框架的高度，单位是像素。
+（6）highlightbackground：当框架没有取得焦点时的颜色。
+（7）highlightcolor：当框架取得焦点时的颜色。
+（8）highlighthickness：当框架取得焦点时的厚度。
+（9）labelAnchor：设置放置标签的位置。
+（10）relief：默认是relief=FLAT，可由此控制框架的外框。
+（11）text：标签内容。
+（12）width：框架的宽度，单位是像素，省略时会自行调整为实际宽度。
+
+>> 标签框架的应用范围很广泛，也常应用于将选项按钮或是复选框组织起来
+
+◆ 顶层窗口Toplevel
+
+>> Toplevel窗口的基本概念这个控件的功能类似于Frame，但是这个控件所产生的容器是一个独立的窗口，有自己的标题栏和边框。
+
+>> 下列是LabelFrame( )方法内其他常用的options参数。
+（1）bg或background：背景色彩。
+（2）borderwidth或bd：标签边界宽度，默认是2。
+（3）cursor：当鼠标光标在Toplevel窗口上时的光标形状。
+（4）fg：文字前景颜色。
+（5）font：字形。
+（6）height：窗口高度。
+（7）width：窗口宽度。
+
+>> 设置Toplevel窗口的标题和大小，和Tk窗口一样。
+
+◆ Scale的数值输入控制
+
+>> Scale( )方法的第一个参数是父对象，表示这个尺度条将建立在哪一个父对象内。下列是Scale( )方法内其他常用的options参数。
+（1）activebackground：鼠标光标在尺度条上时的背景颜色。
+（2）bg：背景颜色。
+（3）borderwidth或bd：3D边界宽度默认是两个像素。
+（4）command：当使用者更改数值时，会自动执行此函数。
+（5）cursor：当鼠标光标在尺度条上时的光标形状。
+（6）digits：尺度数值，读取时需使用IntVar、DoubleVar或StringVar变量类型读取。
+（7）fg：文字前景颜色。
+（8）font：字形。
+（9）from_：尺度条范围值的初值。
+（10）highlightbackground：当尺度条取得焦点时的背景颜色。
+（11）highlightcolor：当尺度条获得焦点时的颜色。
+（12）label：默认是没有标签文字，如果尺度条是水平的则此标签出现在左上角，如果尺度条是垂直的则此标签出现在右上角。
+（13）length：默认是100像素。
+（14）orient：默认是水平，可以设置水平HORIZONTAL或垂直VERTICAL。
+（15）relief：默认是FLAT，可由此更改边界外观。
+（16）repeatdelay：可设置需要按住尺度条多久后才可移动此尺度条，单位是ms，默认是300。
+（17）resolution：每次更改的数值，例如，from_=2.0，to=4.0，如果将resolution设为0.5，则尺度可能数值是2.0、2.5、3.0、3.5、4.0。
+（18）showvalue：正常会显示尺度条的目前值，如果设为0则不显示。
+（19）state：如果设为DISABLE则暂时无法使用此Scale。
+（20）takefocus：正常时此尺度条可以循环取得焦点，如果设为0则无法取得焦点。
+（21）tickinterval：尺度条的标记刻度，例如，from_=2.0，to=3.0，tickinterval=0.25，则刻度是2.0、2.25、2.50、2.75和3.0。
+（22）to：尺度条范围值的末端值。
+（23）troughcolor：槽（trough）的颜色。
+（24）variable：设置或取得目前选取的尺度值，它的值类型通常是IntVar或StringVar。
+（25）width：对于垂直尺度条这是槽的宽度，对于水平尺度条这是槽的高度。
+
+◆ Spinbox控件
+
+>> Spinbox控件也是一种输入控件，其实它是一种Entry和Button的组合体，它允许用户用鼠标单击up/down按钮，或是按上箭头／下箭头键达到在某一数值区间内增加数值与减少数值的目的。
+Spinbox( )方法的第一个参数是父对象，表示这个Spinbox将建立在哪一个父对象内。下列是Spinbox( )方法内其他常用的options参数。
+（1）activebackground：鼠标光标在Spinbox控件上时的背景颜色。
+（2）bg：背景颜色。
+（3）borderwidth或bd：3D边界宽度，默认是两个像素。
+（4）command：当用户更改选项时，会自动执行此函数。
+（5）cursor：当鼠标光标在Spinbox控件上时的光标形状。
+（6）disabledbackground：在Disabled状态时的背景颜色。
+（7）disabledforeground：在Disabled状态时的前景颜色。
+（8）fg：文字前景颜色。
+（9）font：字形。
+（10）format：格式化的字符串。
+（11）from_：范围值的初值。
+（12）increment：每次单击up/down按钮的增值或减值的量。
+（13）justify：在有多行文本时最后一行的对齐方式，可取值有LEFT/CENTER/RIGHT（靠左/居中/靠右），默认是居中对齐。
+（14）relief：默认是FLAT，可由此更改边界外观。
+（15）repeatdelay：可设置单击up/down按钮变化数字的间隔时间，单位是ms，默认是300。
+（16）state：如果设为DISABLE则暂时无法使用此Spinbox，默认是NORMAL，也可以设为READONLY。
+（17）textvariable：可以设置以变量方式显示。
+（18）values：可以是元组或其他序列值。
+（19）to：范围值的末端值。
+（20）width：对于垂直Spinbox这是槽的宽度，对于水平Spinbox这是槽的高度。
+（21）wrap：单击up/down按钮可以让数值重新开始。
+（22）xscrollcommand：在x轴使用滚动条。
+
+>> 可以使用get( )方法取得目前Spinbox的值。
+
+>> 以序列存储Spinbox的数值数据
+
+>> 在Spinbox内，可以是数值数据也可以是非数值数据，例如，字符串。
+
+◆ Message
+
+>> Message( )方法的第一个参数是父对象，表示这个标签将建立在哪一个父对象内。下列是Message( )方法内其他常用的options参数。
+（1）anchor：如果空间大于所需时，控制消息的位置，默认是CENTER。
+（2）aspect：控件宽度与高度比，默认是150%。
+（3）bg或background：背景色彩。
+（4）bitmap：使用默认位图当作Message内容。
+（5）cursor：当鼠标光标在Message上方时的形状。
+（6）fg或foreground：字形色彩。
+（7）font：可选择字形、字形样式与大小。
+（8）height：Message高度，单位是字符。
+（9）image：Message以图像方式呈现。
+（10）justify：在有多行文本时的对齐方式，取值为LEFT/CENTER/RIGHT（靠左/居中/靠右），默认是居中对齐。
+（11）padx/pady：Message文字与边框的间距，单位是像素。
+（12）relief：默认是relief=FLAT，可由此控制文字外框。
+（13）text：Message内容，如果有“\n”则可输入多行文字。
+（14）textvariable：可以设置Message以变量方式显示。
+（15）underline：可以设置第几个文字有下画线，从0开始算起，默认是-1，表示无下画线。
+（16）width：Message宽度，单位是字符。
+（17）wraplength：文本在多少宽度后换行，单位是像素。
+
+◆ Messagebox
+
+>> Python中的tkinter模块内有Messagebox模块，提供了8个对话框，这些对话框可以应用在不同场合。
+ - showinfo(title,message,options)：显示一般提示消息。
+
+>> title是对话框的名称，message是对话框内的文字，options是选择性参数，可能值有下列三种。
+（1）default constant：默认按钮是OK（确定）、Yes（是）、Retry（重试）在前面，也可更改此设定。
+（2）icon(constant)：可设定所显示的图标，有INFO、ERROR、QUESTION、WARNING4种图标可以设置。
+（3）parent(widget)：指出当对话框关闭时，焦点窗口将返回此父窗口。
+
+◆ 一个事件绑定多个事件处理程序
+
+>> 同样是使用bind( )方法，但是新增加的事件处理程序需要在bind( )方法内增加参数add="+"。
+
+◆ Protocols
+
+>> Protocols可以翻译为通信协议，在tkinter内可以解释为窗口管理程序（Windows Manager）与应用程序（Application）之间的通信协议。tkinter也支持使用绑定概念更改此通信协议。
+
+◆ 建立列表框
+
+>> Listbox( )方法的第一个参数是父对象，表示这个列表框将建立在哪一个父对象内。下列是Listbox( )方法内其他常用的options参数。
+（1）bg或background：背景色彩。
+（2）borderwidth或bd：边界宽度，默认是两个像素。
+（3）cursor：当鼠标光标在列表框上时的光标形状。
+（4）fg或froeground：字形色彩。
+（5）font：字形。
+（6）height：高，单位是字符，默认是10。
+（7）highlightcolor：当列表框获得焦点时的颜色。
+（8）highlightthickness：当列表框获得焦点时的厚度。
+（9）listvariable：以变量方式处理选项内容。
+（10）relief：默认是relief=FLAT，可由此控制列表框外框，默认是SUNKEN。
+（11）selectbackground：被选取字符串的背景色彩。
+（12）selectmode：可以决定有多少选项可以被选，以及鼠标拖曳如何影响选项。
+     - ① BROWSE：这是默认值，我们可以选择一个选项，如果选取一个选项同时拖曳鼠标，将造成选项最后的位置是被选取的项目位置。
+     - ② SINGLE：只能选择一个选项，可以用单击方式选取，不可用拖曳方式更改所选的项目。
+     - ③ MULTIPLE：可以选择多个选项，单击项目可以切换是否选择该项目。
+     - ④ EXTENDED：单击第一个项目然后拖曳到最后一个项目，即可选择这个区间的一系列选项。单击可以选择第一个项目，此时若是按住Shift键并单击另一个项目，可以选取区间项目。
+（13）width：宽，单位是字符。
+（14）xscrollcommand：在x轴使用滚动条。
+（15）yscrollcommand：在y轴使用滚动条。
+
+◆ 建立列表框项目insert( )
+
+>> 目前插入选项皆是插在最后面，所以语法是insert（END,elements），其实第一个参数是索引值，
+如果将END改为ACTIVE，表示是在目前选项前面加入一个项目，如果尚未选择选项则此ACTIVE是0。
+
+◆ Listbox的基本操作
+（1）size( )：传回列表项目的数量
+（2）selection_set( )：选取特定索引项
+（3）delete( )：删除特定索引项
+（4）get( )：传回指定索引项
+（5）curselection( )：传回选取项目的索引
+（6）selection_include( )：检查指定索引是否被选取
+
+>> 如果selection_set( )方法内含一个参数，表示选取这个索引项，这个功能常被用于在建立好Listbox后，设定初次选择的项目。
+
+>> 如果delete( )方法内含一个参数，表示删除这个索引项。
+
+>> 如果在delete( )方法内有两个参数时，则表示删除区间选项，第一个参数是区间的起始索引项，第二个参数是区间的结束索引项。
+
+>> 如果get( )方法内含一个参数，表示传回这个索引项的元素内容。
+
+>> 如果在get( )方法内有两个参数时，则表示传回区间选项，第一个参数是区间的起始索引项，第二个参数是区间的结束索引项，所传回的值用元组方式传回。
+
+>> 检查索引3的项目是否被选取，如果被选取单击Check按钮可以显示True，否则显示False。
+
+◆ Listbox与事件绑定
+
+>> 当单击Listbox中选项时会产生虚拟的<<ListboxSelect>>事件，此时可以触发itmeChanged( )方法处理此事件。
+
+◆ Listbox项目的排序
+
+>> 在使用Listbox时常需要处理项目排序工作
+
+
+◆ 滚动条的设计
+
+>> Scrollbar( )方法的第一个参数是父对象，表示这个滚动条将建立在哪一个窗口内。下列是Scrollbar( )方法内其他常用的options参数。
+（1）activebackground：当光标经过滚动条时，滚动条和方向箭头的颜色。
+（2）bg或background：当光标没有经过滚动条时，滚动条和方向箭头的颜色。
+（3）borderwidth或bd：边界宽度，默认是两个像素。
+（4）command：滚动条移动时所触发的方法。
+（5）cursor：当鼠标光标在滚动条上时的光标形状。
+（6）elementborderwidth：滚动条和方向箭头的外部宽度，默认是1。
+（7）highlightbackground：当滚动条没有获得焦点时的颜色。
+（8）highlightcolor：当滚动条获得焦点时的颜色。
+（9）highlightthickness：当获得焦点时的厚度，默认是1。
+（10）jump：每次短距离地拖曳滚动条时都会触发command的方法，默认是0，如果设为1则只有放开鼠标按键时才会触发command的方法。
+（11）orient：可设置HORIZONTAL/VERTICAL分别是水平轴／垂直轴。
+（12）repeatdelay：单位是ms，默认是300ms，可以设置按住滚动条移动的停滞时间。
+（13）takefocus：正常可以用按Tab键的方式切换滚动条成为焦点，如果设为0则取消此设置。
+（14）troughcolor：滚动条槽的颜色。
+（15）width：滚动条宽，默认是16。
+
+◆ OptionMenu与Combobox
+
+>> OptionMenu可以翻译为下拉式列表，用户可以从中选择一项。
+
+>> 上述程序虽然可以建立列表，但是当列表中项目较多时，不是太方便，不过我们可以将列表项目建在元组内，再将元组数据放入OptionMenu( )构造方法内。
+
+>> 我们可以使用set( )方法为这个OptionMenu建立默认选项。
+
+>> 建议既然已经使用了元组建立列表项目，可以使用元组变量名称+索引方式设置默认选项。
+
+>> 获得选项内容get( )
+
+◆ 组合框Combobox
+
+>> Combobox可以翻译为组合框，这是tkinter.ttk的Widget控件，它的特性与OptionMenu类似，可以说它是Entry和下拉菜单的组合。常用options参数如下。
+ - （1）textvariable：可以设置Combobox的变量值。
+ - （2）value：Combobox的选项内容，内容以元组方式存在。
+
+>> Combobox创建完成后，可以使用current(index)方法建立默认选项。
+
+>> 在前面建立Combobox过程中有textvariable=var，可以使用var.get( )获得目前选项内容。
+
+>> 当Combobox中的选项有变动时，会产生虚拟<<ComboboxSelected>>事件，也可以使用这个特性将此事件绑定处理方法。
+
+◆ 容器PanedWindow和Notebook
+
+>> PanedWindow可以翻译为面板，是一个Widget容器控件，可以在此容器内建立任意数量的子控件。
+不过一般是在此控件内建立二三个子控件，而控件是以水平方式或垂直方式排列。
+PanedWindow( )方法的第一个参数是父对象，表示它将建立在哪一个父对象内。下列是PanedWindow( )方法内其他常用的options参数。
+（1）bg或background：当鼠标光标不在此控件上时，若是有滚动条或方向盒时，滚动条或方向盒的背景色彩。
+（2）bd：3D显示时的宽度，默认是2。
+（3）borderwidth：边界线宽度，默认是2。
+（4）cursor：当鼠标光标在标签上方时的形状。
+（5）handlepad：面板显示宽度，默认是8。
+（6）handlesize：分割线大小，默认是8，颜色和背景一样。
+（7）height：没有默认高度。
+（8）orient：面板配置方向默认是HORIZONTAL。
+（9）relief：默认是relief=FLAT，可由此控制文字外框。
+（10）sashcursor：分隔线光标，没有默认值。
+（11）sashrelief：面板分隔线外框，默认是RAISED。
+（12）showhandle：滑块属性，可设定是否显示，没有默认值。
+（13）width：面板整体宽度，没有默认值。
+
+>> 建立LabelFrame当作子对象
+
+◆ Notebook
+
+>> Notebook也是一个Widget容器控件，这个控件的特点是有许多选项卡，当选择不同选项卡时可以看到不同的子控件内容，也可以当作子窗口内容。
+options参数如下：
+（1）height：默认是使用最大可能高度，如果设置数值则使用设置高度。
+（2）padding：设置Notebook外围的额外空间，可以设置4个数值代表left、top、right、bottom四周的空间。
+（3）width：默认是使用最大可能宽度，如果设置数值则使用设置宽度。
+整个建立Notebook框架的步骤如下：
+（1）使用Notebook( )建立Notebook对象，假设对象名称是notebook。
+（2）使用notebook对象调用add( )方法。
+（3）上述代码可以将子对象插入notebook，同时产生“xxx”选项卡名称。如果用正规语法表示add( )方法，它的语法格式如下。
+options参数如下。
+（1）compound：可以设置当选项卡内同时含图像和文字时，彼此之间的位置关系。
+（2）image：选项卡以图像方式呈现。
+（3）padding：可以设置Notebook和面板Pane的额外空间。
+（4）state：可能值是normal、disabled、hidden，如果是disabled表示无法被选取使用，如果是hidden表示被隐藏。
+（5）sticky：指出子窗口面板的配置方式，n/s/e/w分别代表North、South、East、West。
+（6）text：选项卡中的字符串内容。
+（7）underline：从0开始计算的索引，指出第几个字母含下画线。
+
+>> 绑定选项卡与子控件内容
+
+◆ 进度条Progressbar
+
+>> Progressbar可以解释为进度条，主要是当作一个工作进度指针，在这个控件中会有一个指针，由此指针可以了解工作进度，例如，档案下载、档案解压缩等。
+用户可以由这个工作进度指针确认系统仍在进行中，同时也可以了解目前进行到哪一个阶段。
+Progressbar( )方法的第一个参数是父对象，表示这个Progressbar将建立在哪一个父对象内。下列是Progressbar( )方法内其他常用的options参数。
+（1）length：进度条的长度，默认是100像素。
+（2）mode：可以有下列两种模式。
+ - ① determinate：一个指针会从起点移至终点，通常当我们知道所需工作时间时，可以使用此模式，这是默认模式。
+ - ② indeterminate：一个指针会在起点和终点间来回移动，通常当我们不知道工作所需时间时，可以使用此模式。
+（3）maximum：进度条的最大值，默认是100。
+（4）name：进度条的名称，供程序参考引用。
+（5）orient：进度条的方向，可以是HORIZONTAL（默认）或VERTICAL。
+（6）value：进度条的目前值。
+（7）variable：记录进度条目前的进度值。
+
+◆ Progressbar动画设计
+
+>> 设计带动画效果的Progressbar，最大值是100，从0开始，每隔0.05s可以移动一格。
+
+◆ Progressbar的方法start( )/step( )/stop( )
+
+>> Progressbar的方法start( )/step( )/stop( )这几个方法的含义如下。
+（1）start(interval)：每隔interval时间移动一次指针。interval的默认值是50ms，每次指针移动调用一次step(delta)。在step( )方法内的delta参数的意义是增值量。
+（2）step(delta)：每次增加一次delta，默认值是1.0，在determinate模式，指针不会超过maximum参数值。在indeterminate模式，当指针达到maximum参数值的前一格时，指针会回到起点。
+（3）stop( )：停止start( )的运行。
+
+◆ 菜单Menu和工具栏Toolbars
+
+>> 窗口中一般会有菜单设计，菜单是一种下拉式窗体，在这种窗体中可以设计菜单列表。建立菜单的方法是Menu( )
+Menu( )方法的第一个参数是父对象，表示这个菜单将建立在哪一个父对象内。下列是Menu( )方法内其他常用的options参数。
+（1）activebackground：当光标移至此菜单列表上时的背景色彩。
+（2）activeborderwidth：当被鼠标选取时它的外边框厚度，默认是1。
+（3）activeforeground：当光标移至此菜单列表上时的前景色彩。
+（4）bd：所有菜单列表的外边框厚度，默认是1。
+（5）bg：菜单列表未被选取时的背景色彩。
+（6）cursor：当菜单分离时，鼠标光标在列表上的外观。
+（7）disabledforeground：菜单列表是DISABLED时的颜色。
+（8）font：菜单列表文字的字形。
+（9）fg：菜单列表未被选取时的前景色彩。
+（10）image：菜单的图标。
+（11）tearoff：菜单上方的分隔线，这是一个虚线线条，有分隔线时tearof f值为True或1，此时菜单列表从位置1开始放置，同时可以让菜单分离，分离方式是开启菜单后单击分隔线。
+如果将tearof f设为False或0时，此时不会显示分隔线，也就是菜单无法分离，但是菜单列表将从位置0开始存放。下列是其他相关的方法。
+ - （1）add_cascade( )：建立分层菜单，同时让此子功能列表与父菜单建立链接。
+ - （2）add_command( )：增加菜单列表。
+ - （3）add_separator( )：增加菜单列表的分隔线。
+
+◆ Alt快捷键
+
+>> 快捷键是某个菜单类别或是列表指令的英文字符串内为单一字母增加下画线，然后可以用Alt键先启动此功能，
+当菜单显示下画线字母时，可以直接按指定字母键启动该功能。设计方式是在下列两个方法内增加underline参数。
+
+◆ 建立弹出式菜单
+
+>> 当使用Windows操作系统时，可以在桌面上单击鼠标右键，此时会弹出一个菜单，这就是弹出式菜单Popup menu，有人将此菜单称为快捷菜单。
+
+◆ add_checkbutton( )
+
+>> 设计当Status为True时可以显示状态栏，当Status为False时可以隐藏状态栏，这个程序的状态栏是用标签Label方式处理，
+
+◆ 文字区域Text的基本概念
+
+>> Text( )方法的第一个参数是父对象，表示这个文字区域将建立在哪一个父对象内。下列是Text( )方法内其他常用的options参数。
+（1）bg或background：背景色彩。
+（2）borderwidth或bd：边界宽度，默认是2像素。
+（3）cursor：当鼠标光标在复选框上时的光标形状。
+（4）exportselection：如果执行选择操作时，所选择的字符串会自动输出至剪贴板，如果想要避免如此可以设置exportselection=0。
+（5）fg或foreground：字形色彩。
+（6）font：字形。
+（7）height：高，单位是字符高，实际高度会视字符高度而定。
+（8）highlightbackground：当文本框取得焦点时的背景颜色。
+（9）highlightcolor：当文本框取得焦点时的颜色。
+（10）highlightthickness：取得焦点时的厚度，默认值是1。
+（11）insertbackground：插入光标的颜色，默认是黑色。
+（12）insertborderwidth：围绕插入游标的3D厚度，默认是0。
+（13）padx：Text左／右框与文字最左／最右的间距。
+（14）pady：Text上／下框与文字最上／最下的间距。
+（15）relief：默认是relief=SUNKEN，可由此控制文字外框。
+（16）selectbackground：被选取字符串的背景色彩。
+（17）selectborderwidth：选取字符串时的边界厚度，默认值是1。
+（18）selectforeground：被选取字符串的前景色彩。
+（19）state：输入状态，默认是NORMAL，表示可以输入，DISABLED则是无法编辑。
+（20）tab：可设置按Tab键时，如何定位插入点。
+（21）width：Text的宽，单位是字符宽。
+（22）wrap：可控制某行文字太长时的处理，默认是wrap=CHAR，当某行文字太长时，可从字符做断行；当wrap=WORD时，只能从字做断行。
+（23）xscrollcommand：在x轴使用滚动条。
+（24）yscrollcommand：在y轴使用滚动条。
+
+◆ Text加上滚动条Scrollbar设计
+
+>> 将Scrollbar应用在Text控件中，让整个Text文字区域增加y轴的滚动条。
+
+>> 增加x轴的滚动条。若是想显示x轴的滚动条必须设置wrap="none"。
+
+>> 让Text文字区域随着窗口扩充而扩充。为了让文字区域明显，
+
+◆ 选取文字
+
+>> Text对象的get( )方法可以取得目前所选的文字，在使用Text文字区域时，如果有选取文字操作发生时，
+Text对象会将所选文字的起始索引放在SEL_FIRST，结束索引放在SEL_LAST，将SEL_FIRST和SEL_LAST当作get( )的参数，就可以获得目前所选的文字
+
+◆ 认识Text的索引
+
+>> Text对象的索引并不是单一数字，而是一个字符串。索引的目的是让Text控件处理更进一步的文件操作。下列是常见的索引形式。
+（1）line/column（"line.column"）：计数方式line是从1开始，column从0开始计数，中间用句点分隔。
+（2）INSERT：目前插入点的位置。
+（3）CURRENT：光标目前位置相对于字符的位置。
+（4）END：缓冲区最后一个字符后的位置。
+（5）表达式Expression：索引使用表达式，下列是说明，
+ - ① “+count chars”，count是数字，例如，“+2c”索引往后移动两个字符。
+ - ② “-count chars”，count是数字，例如，“-2c”索引往前移动两个字符。
+ - 上述是用字符串形式表示，也可以使用index( )方法，实际用字符串方式列出索引内容。
+
+>> 列出INSERT、CURRENT、END的位置。
+
+◆ 建立书签
+
+>> 在编辑文件时，可以在文件特殊位置建立书签（Marks），方便查询。书签是无法显示的，但会在编辑系统内被记录。如果书签内容被删除，则此书签也将自动被删除。
+其实在tkinter内默认有两个书签：INSERT和CURRENT。下列是常用的书签相关方法。
+（1）index(mark)：传回指定书签的line和column。
+（2）mark_names( )：传回这个Text对象所有的书签。
+（3）mark_set(mark,index)：在指定的index位置设置书签。
+（4）mark_unset(mark)：取消指定书签设置。
+
+>> 设置两个书签，然后列出书签间的内容。
+
+◆ 标签
+
+>> 标签（Tags）是指一个区域文字，然后我们可以为这个区域取一个名字，这个名字称作标签，可以使用此标签名字代表这个区域文字。
+有了标签后，我们可以针对此标签做更进一步的工作，例如，将字形、色彩等应用在此标签上。下列是常用的标签方法。
+（1）tag_add(tagname,startindex[,endindex] …)：将startindex和endindex间的文字命名为tagname标签。
+（2）tag_config(tagname,options, … )：可以为标签执行特定的编辑，或动作绑定。
+ - ① background：背景颜色。
+ - ② borderwidth：文字外围厚度，默认是0。
+ - ③ font：字形。
+ - ④ foreground：前景颜色。
+ - ⑤ justify：对齐方式，默认是LEFT，也可以是RIGHT或CENTER。
+ - ⑥ overstrike：如果是True，加上删除线。
+ - ⑦ underline：如果是True，加上下画线。
+ - ⑧ wrap：当使用wrap模式时，可以使用NONE、CHAR或WORD。
+（3）tag_delete(tagname)：删除此标签，同时移除此标签特殊的编辑或绑定。
+（4）tag_remove(tagname[,startindex[,endindex]] … )：删除标签，但是不移除此标签特殊的编辑或绑定。
+
+>> 除了可以使用tag_add( )自行定义标签外，系统还有一个内建标签SEL，代表所选取的区间。
+
+◆ Cut/Copy/Paste功能
+
+>> 使用tkinter设计具有Cut/Copy/Paste功能的弹出菜单，这个菜单可以执行剪切／复制／粘贴（Cut/Copy/Paste）工作。
+
+◆ 复原与重复
+
+>> Text控件有一个简单复原（undo）和重做（redo）的机制，这个机制可以应用于文字删除（delete）和文字插入（insert）。
+Text控件在默认环境下没有开启这个机制，如果要使用这个机制，可以在Text( )方法内增加undo=True参数。
+
+◆ 查找文字
+
+>> 在Text控件内可以使用search( )方法查找指定的字符串，这个方法会传回找到第一个指定字符串的索引位置。
+假设Text控件的对象是text，它的语法如下。pos=text.search(key, startindex, endindex)
+（1）pos：传回所找到的字符串的索引位置，如果查找失败则传回空字符串。
+（2）key：所查找的字符串。
+（3）startindex：查找起始位置。
+（4）endindex：查找结束位置，如果查找到文档最后可以使用END。
+
+>> pos是加入标签的起始位置，标签的结束位置是一个索引的表达式。是pos位置加上key关键词的长度。
+
+◆ 打开文档
+
+>> 在tkinter.filedialog模块中有askopenfilename( )方法，可以使用此方法，让窗口出现对话框，再执行选择所要打开的文档。
+
+◆ 默认含滚动条的ScrolledText控件
+
+>> 可以使用tkinter含有滚动条的控件设计这类程序。在tkinter.scrolledtext模块内有ScrolledText控件，这是一个默认含有滚动条的Text控件。
+
+◆ 插入图像
+
+>> Text控件是允许插入图像文件的，所插入的图像文件会被视为一个字符方式进行处理，所呈现的大小会是实际图像的大小。
+
+◆ Treeview的基本概念
+
+>> Treeview是tkinter.ttk的控件，这个控件主要是提供多栏的显示功能，我们可以称其为树状表格数据（Treeview）。
+在设计时也可以在左边栏设计成树状结构或是称层次结构，用户可以显示或隐藏任何部分，这个最左边的栏称为图标栏。
+
+>> Treeview( )方法的第一个参数是父对象，表示这个Treeview将建立在哪一个父对象内。下列是Treeview( )方法内其他常用的options参数。
+（1）columns：栏位的字符串，其中，第一个栏位是图标栏是默认的，不在此设置范围，如果设置columns=（"Name","Age"），则控件有三栏，
+首先是最左栏的图标栏，可以进行展开（expand）或是隐藏（collapse）操作，另外两栏是Name和Age。
+（2）cursor：可以设置光标在此控件上的外观。
+（3）displaycolumns：可以设置栏位显示顺序。
+ - ① 如果参数是“#all”表示显示所有栏，同时依建立顺序显示。
+ - ② 如果设置columns=（"Name","Age","Date"），使用insert( )插入元素时需要依次插入元素。同样状况如果使用columns（2,0），
+（2,0）是指实体索引，则图标栏在最前面，紧跟着是Date栏，然后是Name栏。这种状况也可以写成columns=（"Date","Name"）
+（4）height：控件每行的高度。
+（5）padding：可以使用1～4个参数设置内容与控件框的间距。
+（6）selectmode：用户可以使用鼠标选择项目的方式。
+ - ① selectmode=BROWSE，一次选择一项，这是默认。
+ - ② selectmode=EXTENDED，一次可以选择多项。
+ - ③ selectmode=NONE，无法用鼠标执行选择。
+（7）show：默认是设置显示图标栏的标签show="tree"，如果省略则是显示图标栏，如果设为show="headings"，则不显示图标栏。
+（8）takefocus：默认是True，如果不想被访问可以设为False。
+
+>> columns=（"cities"），指出栏标题名称是cities，我们可以使用此字符串代表栏位。如果使用“#1”代表cities栏，其实可以使用此“cities”取代“#1”。
+
+>> insert( )方法中第4个参数values是设置所插入的内容，上述由于除了图标栏外只有一个栏位，所以只是设置values等于字符串内容，
+如果有多栏时，须使用values=（value1, value2, … ），如果所设置的内容数太少时其他栏将是空白，如果所设置的内容数太多时多出来的内容将被抛弃
+
+◆ 格式化Treeview栏位内容
+
+>> Treeview控件的column( )方法主要用于格式化特定栏位的内容，它的语法格式如下。
+其中，id是指出特定栏位，可以用字符串表达，或是用“#index”索引方式。下列是options的可能参数。
+（1）anchor：可以设置栏内容参考位置。
+（2）minwidth：最小栏宽，默认是20像素。
+（3）stretch：默认是1，当控件大小改变时栏宽将随着改变。
+（4）width：默认栏宽是200像素。如果使用此方法不含参数，将以字典方式传回特定栏所有参数的内容。
+
+◆ 建立不同颜色的行内容
+
+>> 建立Treeview控件内容时，常常会需要在不同行之间用不同底色作区分，以方便使用者查看，若是想要设计这方面的程序，可以使用Text控件的标签。
+Treeview控件有tag_configure( )方法，可以使用这个方法建立标签，然后定义此标签的格式：tag_configure('tagname', options, ...)
+
+>> 上述第一个参数tagName是标签名称，可以用此名称将此标签导入栏位数据。options的可能参数如下。
+（1）background：标签背景颜色。
+（2）font：字形设置。
+（3）foreground：标签前景颜色。
+（4）image：图像与列表同时显示。
+
+>> 要将标签导入栏位使用的是insert( )方法，这时需在此方法内增加tags参数设置：insert(..., tags='tagname')
+
+◆ 建立层级式的Treeview
+
+>> 层级式（Hierarchy）只要在图标栏先建立top-level的项目id，然后将相关子项目放在所属的top-level项目id即可。
+
+>> 建立层级式数据最关键的是使用insert( )方法时，必须在第一个参数放置top-level的id
+
+◆ 插入图像
+
+>> 在insert( )方法内若是增加image参数可以添加图像，在添加图像时需要考虑的是可能row的高度不足，所以必须增加高度。这时可以用下列Style( )方法处理
+Style().configure('Treeview', rowheight=xx)
+
+◆ Selection选项发生与事件触发
+
+>> 在Treeview控件中可以有三种选择模式，分别是BROWSE（默认）、EXTENDED、NONE，这是使用selectmode参数设置的，
+当有新选择项目发生时会产生虚拟事件<<TreeviewSelect>>，其实我们可以针对此特性设计相关功能。
+
+◆ 插入项目
+
+>> 在使用Treeview控件时，除了删除控件项目外，另一个常用功能是插入项目。插入的方式与建立控件的插入方法insert( )是一样的。至于所插入的内容则可以使用tkinter的Entry控件。
+
+◆ 双击某个项目
+
+>> identify( )第一个参数xxx可以是item、column、row，分别是使用双击时的坐标，取得双击时的item、column或row的信息
+
+◆ Treeview绑定滚动条
+
+>> 将滚动条应用在Treeview控件中。
+
+◆ 排序
+
+>> 在创建Treeview控件后，有一个很常见的功能是将栏目信息做排序，通常是可以单击栏位标题就可以执行排序
+
+>> get_children( )方法：getchildren(item)
+它会传回item的一个tuple的iid值，如果省略则是得到一个tuple，此tuple是top-level的iid值。
+
+>> move( )方法：move(iid, parent, index)
+将iid所指项目移至parent层次的index位置，此程序用“”代表parent层次。
+
+◆ 绘图功能
+
+>> 绘制线条create_line(x1, y1, x2, y2..., options...)
+线条将会沿着（x1,y1）,（x2,y2）, …绘制下去，下列是常用的options用法。
+（1）arrow：默认是没有箭头，使用arrow=tk.FIRST在起始线末端有箭头，arrow=tk.LAST在最后一条线末端有箭头，使用arrow=tk.BOTH在两端有箭头。
+（2）arrowshape：使用元组（d1, d2, d3）代表箭头，默认是（8,10,3）。
+（3）capstyle：这是线条终点的样式，默认是BUTT，也可以选择PROJECTING、ROUND。
+（4）dash：建立虚线，使用元组储存数字数据，第一个数字是实线，第二个数字是空白，如此循环当所有元组数字用完又重新开始。
+例如，dash=（5,3）产生5像素实线，3像素空白，如此循环。再如，dash=（8,1,1,1）产生8像素实线和点的线条，dash=（5,）产生5像素实线5像素空白。
+（5）dashoffset：与dash一样产生虚线，但是一开始数字是空白的宽度。
+（6）fill：设置线条颜色。
+（7）joinstyle：同一条线条闭合处的设置，默认是ROUND，也可以选择BEVEL、MITER。
+（8）stipple：绘制位图（Bitmap）线条，以位图图片填充，如：gray25,info...
+（9）width：线条宽度。
+
+>> 绘制矩形create_rectangle( )（x1,y1）和（x2,y2）是矩形左上角和右下角的坐标，下列是常用的options用法。
+（1）dash：建立虚线，与create_line( )相同。
+（2）dashoffset：与dash一样产生虚线，但是一开始数字是空白的宽度。
+（3）fill：矩形填充颜色。
+（4）outline：设置矩形线条颜色。
+（5）stipple：绘制位图矩形。
+（6）width：矩形线条宽度。
+
+>> 绘制圆弧create_arc( )（x1,y1）和（x2,y2）分别是圆弧左上角和右下角的坐标，下列是常用的options用法。
+（1）dash：建立虚线，与create_line( )相同。
+（2）dashoffset：与dash一样产生虚线，但是一开始数字是空白的宽度。
+（3）extent：如果要绘制圆形extent值是359，如果写成360会视为0°。如果extent介于1～359，则是绘制这个角度的圆弧。
+（4）fill：填充圆弧颜色。
+（5）outline：设置圆弧线条颜色。
+（6）start：圆弧起点位置。
+（7）stipple：绘制位图圆弧。
+（8）style：有三种格式——ARC、CHORD、PIESLICE。
+（9）width：圆弧线条宽度。
+
+>> 绘制圆或椭圆create_oval( )（x1,y1）和（x2,y2）分别是圆或椭圆的左上角和右下角坐标，下列是常用的options用法。
+（1）dash：建立虚线，与create_line( )相同。
+（2）dashoffset：与dash一样产生虚线，但是一开始数字是空白的宽度。
+（3）fill：设置圆或椭圆的填充颜色。
+（4）outline：设置圆或椭圆边界颜色。
+（5）stipple：绘制位图边界的圆或椭圆。
+（6）width：圆或椭圆线条宽度。
+
+>> 绘制多边形create_polygon( )（x1,y1）, …,（xn,yn）是多边形各角的（x,y）坐标，下列是常用的options用法。
+（1）dash：建立虚线，与create_line( )相同。
+（2）dashoffset：与dash一样产生虚线，但是一开始数字是空白的宽度。
+（3）fill：设置多边形的填充颜色。
+（4）outline：设置多边形的边界颜色
+（5）stipple：绘制位图边界的多边形。
+（6）width：多边形线条宽度。
+
+>> 输出文字create_text( )。create_text (x,y,text=字符串, options)默认（x,y）是文字字符串输出的中心坐标，下列是常用的options用法。
+（1）anchor：默认是anchor=CENTER。
+（2）fill：文字颜色。
+（3）font：字形的使用。
+（4）justify：当输出多行时，默认是靠左LEFT。
+（5）stipple：绘制位图线条的文字，默认是“”表示实线。
+（6）text：输出的文字。（7）width：多边形线条宽度。
+
+>> 插入图像create_image( )在Canvas控件内可以使用create_image( )在Canvas对象内插入图像文件（x,y）是图像左上角的位置，下列是常用的options用法。
+（1）anchor：默认是anchor=CENTER。
+（2）image：插入的图像。
+
+◆ 鼠标拖曳绘制线条
+
+>> Python的tkinter模块在Canvas控件部分并没有提供绘制点的工具，不过我们可以使用鼠标拖曳时绑定paint事件处理程序，在这个事件中可以取得鼠标坐标，
+然后使用create_oval( )方法绘制极小化的圆，方法是圆的左上角坐标与右下角左标相同，
+
+>> 如果想要让所绘制的线条变粗，可以适度将左上角的（x,y）坐标减1，右下角的（x,y）坐标加1。
+
+◆ 动画设计
+
+>> 动画设计所使用的方法是move(ID, xMove, yMove) xMove,yMove分别是沿x和y轴移动距离，单位是像素。
+
+>> 观念1：赌场作弊方式假设想让黄色球跑的速度快一些，它赢的概率是70%，可以利用randint( )产生1～100的随机数，
+   让随机数在1～70间移动黄球，在71～100间移动水蓝色球，这样可以作弊了。
+观念2：赌场作弊现形玩赛马赌具时必须下注，赌场作弊的最佳方式是，让下注最少的马匹有较高概率的移动机会，这样钱就滚滚而来了。
+观念3：不作弊我们可以设计随机数在1～50间移动黄球，在51～100间移动水蓝色球。
+
+◆ 反弹球游戏设计
+
+>> 定义画布窗口名称为Bouncing Ball，同时定义画布宽度（14行）与高度（15行）分别为640像素,480像素。这个球将往下移动然后消失，移到超出画布范围就消失了。
+
+>> 改进ch19_21.py，设计让球可以上下移动。其实这个程序只是更改Ball类别内容。
+
+>> 上述程序修改的思想是球局开始时，每个循环x轴的移动单位是随机数产生的。至于在ballMove( )方法中，我们须考虑到水平轴的移动可能碰撞画布左边与右边的状况，是如果球撞到画布左边，设置球沿x轴移动是正值，也就是往右移动。
+
+>> 扩充ch19_24.py，主要是增加球拍设计，在这里先增加球拍类。在这个类中，在第29行设计了球拍的大小和颜色，第30行设置了最初球拍的位置。
+
+>> 在Ball类的ballMove( )方法上方需增加下列hitRacket( )方法，检测球是否碰撞球拍，如果碰撞了会传回True，否则传回False。[插图]上述侦测是否球撞到球拍必须符合以下两个条件。（1）球的右侧x轴坐标ballPos[2]大于球拍左侧x坐标racketPos[0]，同时球的左侧x坐标ballPos[0]小于球拍右侧x坐标racketPos[2]。[插图]（2）球的下方y坐标ballPos[3]大于球拍上方的y坐标racketPos[1]，同时必须小于球拍下方的y坐标racketPos[3]。读者可能奇怪为何不是侦测碰到球拍上方即可，主要是球不是一次移动1像素，如果移动3像素，很可能会跳过球拍上方。
+

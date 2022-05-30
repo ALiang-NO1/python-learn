@@ -1,0 +1,56 @@
+option参数说明
+-h      显示帮助
+-v      显示版本号
+--distpath  生成文件放在哪里
+
+与生成结果相关的参数
+-D      生成one-folder的程序（包括第三方依赖、资源、EXE都储存在该目录）
+-F      生成one-file的程序（所有东西打包在EXE内）
+-n      生成.exe文件和.spec的文件名（用户脚本名称：main.py main.spec）
+
+window和Mac持有的参数
+-c      显示窗口命令（默认）
+-w      不显示窗口
+-i      为main.exe指定图标
+
+基本语法：PyInstaller -F -w -i  xxx.ico dev.py --hidden-import=pandas._libs.tslibs.timedeltas
+-F 指只生成一个exe文件，不生成其他dll文件
+-w 不弹出交互窗口,如果你想程序运行的时候，与程序进行交互，则不加该参数
+-i 设定程序图标 ，其后面的xxx.ico文件就是程序小图标
+dev.py 要打包的程序，如果你不是在dev.py同一级目录下执行的打包命令，这里得写上dev.py的路径地址
+–hidden-import=pandas._libs.tslibs.timedeltas 隐藏相关模块的引用
+
+避坑点
+1. 路径最好为英文，没有中文字符；
+2. 脚本名称里没有特殊字符
+3. 使用utf-8编码
+4. 图标文件必须是正常格式，为.ico文件
+5. 命令使用pyinstaller和pyinstaller.exe结果都是一样的
+6. 参数的添加得在pyinstaller和dev.py文件中间，不能随意位置添加
+7. 如果你打包的代码中用到了静态文件，如图片和资源文件，需手动复制到文件夹中，否则exe文件会报找不到文件的错
+8. 代码里导包最好使用from的方式，可节省打包后的文件大小
+9. 就是当你使用错误的参数去打包或者打包到一半中断，等等此类运行到一半没了的情况。会导致你原来的py文件变成一个0KB的空文件。里面的代码会全部消失！！！
+    所以以后需要有个良好的习惯，就是复制一份代码出来，用这个副本进行打包。
+    并且参数出错，或者打错了导致失败时，检查下副本文件的py文件是否还存在再继续重新打包，不然打出来的就是空的文件，自然一直闪退，因为压根没内容
+10. pygame代码调试的时候要在结束时加quit()不然程序会崩溃
+11. py文件运行没问题，不代表你打包后的文件运行就没问题，所以在打包好文件，打算运行exe文件测试时一定要录屏，因为报错会一闪而逝然后程序关闭，
+    不仔细看的话，发现不了还报错，只会认为程序一运行就闪退，会让人不明所以，都不知道为什么，只有清楚报的什么错才好去解决，所以，一定要录屏！！！！
+12. 如果在py文件中用到了多进程，且你在Windows下编译需要加一行代码在开头，multiprocessing.freeze_support()
+13. 打包的时候要进入到能运行这个py文件的虚拟环境中，不能在别的环境中对py文件打包，不然打包的结果还是你原来的环境，可能打包文件过大，或者引起缺失包等其他问题
+14. 如果有打包错误，具体看build里的warn***.txt文档，里面详细记载了错误的原因。一般都是库丢失
+
+BUG
+“IndexError: tuple index out of range”  当前的pyinstaller版本不支持python的版本
+
+ImportError: C extension: No module named‘pandas._libs.tslibs.timedeltas’ **
+因为代码中引用了pandas库，然后使用pyinstaller打包的时候显示模块缺失
+解决办法：
+1. 忽略此模块(打包时加上–hidden-import=pandas._libs.tslibs.timedeltas)
+2. 添加文件
+    在你的python3的安装路径下找到PyInstaller/hooks的位置
+        如C:\Python36\Lib\site-packages\PyInstaller\hooks
+    新建文件hook-pandas.py，并填写以下内容：
+                        hiddenimports=[
+                            #all your previous hidden imports
+                            'pandas', 'pandas._libs.tslibs.timedeltas'
+                        ]

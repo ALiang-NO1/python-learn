@@ -1,0 +1,252 @@
+------------异步IO----------
+CPU 的速度远远快于磁盘、网络等IO。在一个线程中，CPU 执行代码的速度极快，
+然而，一旦遇到 IO 操作，如读写文件、发送网络数据时，就需要等待 IO 操作完成，才能继续进行下一步操作。这种情况称为同步 IO。
+
+在 IO 操作的过程中，当前线程被挂起，而其他需要 CPU 执行的代码就无法被当前线程执行了
+
+因为一个 IO 操作就阻塞了当前线程，导致其他代码无法执行，所以我们必须使用多线程或者多进程来并发执行代码，为多个用户服务。
+每个用户都会分配一个线程，如果遇到 IO 导致线程被挂起，其他用户的线程不受影响。
+
+多线程和多进程的模型虽然解决了并发问题，但是系统不能无上限地增加线程。
+由于系统切换线程的开销也很大，所以，一旦线程数量过多，CPU 的时间就花在线程切换上了，真正运行代码的时间就少了，结果导致性能严重下降。
+
+一种解决 IO 问题的方法是异步 IO。当代码需要执行一个耗时的 IO操作时，它只发出 IO 指令，并不等待 IO 结果，然后就去执行其他代码了。
+一段时间后，当 IO 返回结果时，再通知 CPU 进行处理。
+
+当遇到IO 操作时，代码只负责发出 IO 请求，不等待 IO 结果，然后直接结束本轮消息处理，进入下一轮消息处理过程。
+当 IO 操作完成后，将收到一条“IO 完成”的消息，处理该消息时就可以直接获取 IO 操作结果。
+
+------------协程（Coroutine，又叫纤程）----------
+协程看上去也是子程序，但执行过程中，在子程序内部可中断，然后转而执行别的子程序，在适当的时候再返回来接着执行。
+注意，在一个子程序中中断，去执行其他子程序，不是函数调用，有点类似 CPU 的中断。
+
+优势：
+最大的优势就是协程极高的执行效率。因为子程序切换不是线程切换，而是由程序自身控制，因此，没有线程切换的开销，和多线程比，线程数量越多，协程的性能优势就越明显。
+第二大优势就是不需要多线程的锁机制，因为只有一个线程，也不存在同时写变量冲突，在协程中控制共享资源不加锁，只需要判断状态就好了，所以执行效率比多线程高很多
+
+利用多核 CPU：
+多进程+协程，既充分利用多核，又充分发挥协程的高效率，可获得极高的性能。
+
+------------async/await----------
+用 asyncio 提供的@asyncio.coroutine 可以把一个 generator 标记为coroutine 类型，
+然后在 coroutine 内部用 yield from 调用另一个 coroutine实现异步操作。
+
+async 和 await 是针对 coroutine 的新语法，要使用新的语法，
+只需要做两步简单的替换：
+1. 把@asyncio.coroutine 替换为 async；
+2. 把 yield from 替换为 await。
+
+@asyncio.coroutine
+def hello():
+    print("Hello world!")
+    r = yield from asyncio.sleep(1)
+    print("Hello again!")
+
+用新语法重新编写如下：
+async def hello():
+    print("Hello world!")
+    r = await asyncio.sleep(1)
+    print("Hello again!")
+
+
+------------yield 与 yield from----------
+yield from 后面需要加的是可迭代对象，它可以是普通的可迭代对象，也可以是迭代器，甚至是生成器。
+# 字符串
+astr='ABC'
+# 列表
+alist=[1,2,3]
+# 字典
+adict={"name":"wangbm","age":18}
+# 生成器
+agen=(i for i in range(4,8))
+
+def gen(*args, **kw):
+    for item in args:
+        for i in item:
+            yield i
+
+new_list=gen(astr, alist, adict， agen)
+print(list(new_list))
+# ['A', 'B', 'C', 1, 2, 3, 'name', 'age', 4, 5, 6, 7]
+
+# 字符串
+astr='ABC'
+# 列表
+alist=[1,2,3]
+# 字典
+adict={"name":"wangbm","age":18}
+# 生成器
+agen=(i for i in range(4,8))
+
+def gen(*args, **kw):
+    for item in args:
+        yield from item
+
+new_list=gen(astr, alist, adict, agen)
+print(list(new_list))
+# ['A', 'B', 'C', 1, 2, 3, 'name', 'age', 4, 5, 6, 7]
+yield from后面加上可迭代对象，他可以把可迭代对象里的每个元素一个一个的yield出来，对比yield来说代码更加简洁，结构更加清晰。
+
+------------生成器的嵌套----------
+当然实现生成器的嵌套，并不是一定必须要使用yield from，而是使用yield from可以让我们避免让我们自己处理各种料想不到的异常，而让我们专注于业务代码的实现。
+如果自己用yield去实现，那只会加大代码的编写难度，降低开发效率，降低代码的可读性。既然Python已经想得这么周到，我们当然要好好利用起来。
+1、调用方：调用委派生成器的客户端（调用方）代码
+2、委托生成器：包含yield from表达式的生成器函数
+3、子生成器：yield from后面加的生成器函数
+
+委托生成器的作用是：在调用方与子生成器之间建立一个双向通道。
+所谓的双向通道是什么意思呢？
+调用方可以通过send()直接发送消息给子生成器，而子生成器yield的值，也是直接返回给调用方。
+
+你可能会经常看到有些代码，还可以在yield from前面看到可以赋值。这是什么用法？
+
+你可能会以为，子生成器yield回来的值，被委托生成器给拦截了。你可以亲自写个demo运行试验一下，并不是你想的那样。
+因为我们之前说了，委托生成器，只起一个桥梁作用，它建立的是一个双向通道，它并没有权利也没有办法，对子生成器yield回来的内容做拦截。
+# 子生成器
+def average_gen():
+    total = 0
+    count = 0
+    average = 0
+    while True:
+        new_num = yield average
+        if new_num is None:
+            break
+        count += 1
+        total += new_num
+        average = total/count
+
+    # 每一次return，都意味着当前协程结束。
+    return total,count,average
+
+# 委托生成器
+def proxy_gen():
+    while True:
+        # 只有子生成器要结束（return）了，yield from左边的变量才会被赋值，后面的代码才会执行。
+        total, count, average = yield from average_gen()
+        print("计算完毕！！\n总共传入 {} 个数值， 总和：{}，平均数：{}".format(count, total, average))
+
+# 调用方
+def main():
+    calc_average = proxy_gen()
+    next(calc_average)            # 预激协程
+    print(calc_average.send(10))  # 打印：10.0
+    print(calc_average.send(20))  # 打印：15.0
+    print(calc_average.send(30))  # 打印：20.0
+    calc_average.send(None)      # 结束协程
+    # 如果此处再调用calc_average.send(10)，由于上一协程已经结束，将重开一协程
+
+if __name__ == '__main__':
+    main()
+
+------------为什么使用yield from----------
+因为它可以帮我们处理异常
+如果我们去掉委托生成器，而直接调用子生成器。那我们就需要把代码改成像下面这样，我们需要自己捕获异常并处理。而不像使yield from那样省心。
+# 子生成器
+def average_gen():
+    total = 0
+    count = 0
+    average = 0
+    while True:
+        new_num = yield average
+        if new_num is None:
+            break
+        count += 1
+        total += new_num
+        average = total/count
+    return total,count,average
+
+# 调用方
+def main():
+    calc_average = average_gen()
+    next(calc_average)            # 预激协程
+    print(calc_average.send(10))  # 打印：10.0
+    print(calc_average.send(20))  # 打印：15.0
+    print(calc_average.send(30))  # 打印：20.0
+
+    # ----------------注意-----------------
+    try:
+        calc_average.send(None)
+    except StopIteration as e:
+        total, count, average = e.value
+        print("计算完毕！！\n总共传入 {} 个数值， 总和：{}，平均数：{}".format(count, total, average))
+    # ----------------注意-----------------
+
+if __name__ == '__main__':
+    main()
+
+#一些说明
+"""
+_i：子生成器，同时也是一个迭代器
+_y：子生成器生产的值
+_r：yield from 表达式最终的值
+_s：调用方通过send()发送的值
+_e：异常对象
+"""
+
+_i = iter(EXPR)
+
+try:
+    _y = next(_i)
+except StopIteration as _e:
+    _r = _e.value
+
+else:
+    while 1:
+        try:
+            _s = yield _y
+        except GeneratorExit as _e:
+            try:
+                _m = _i.close
+            except AttributeError:
+                pass
+            else:
+                _m()
+            raise _e
+        except BaseException as _e:
+            _x = sys.exc_info()
+            try:
+                _m = _i.throw
+            except AttributeError:
+                raise _e
+            else:
+                try:
+                    _y = _m(*_x)
+                except StopIteration as _e:
+                    _r = _e.value
+                    break
+        else:
+            try:
+                if _s is None:
+                    _y = next(_i)
+                else:
+                    _y = _i.send(_s)
+            except StopIteration as _e:
+                _r = _e.value
+                break
+RESULT = _r
+
+◇迭代器（即可指子生成器）产生的值直接返还给调用者
+◇任何使用send()方法发给委派生产器（即外部生产器）的值被直接传递给迭代器。如果send值是None，则调用迭代器next()方法；
+  如果不为None，则调用迭代器的send()方法。如果对迭代器的调用产生StopIteration异常，委派生产器恢复继续执行yield from后面的语句；
+  若迭代器产生其他任何异常，则都传递给委派生产器。
+◇子生成器可能只是一个迭代器，并不是一个作为协程的生成器，所以它不支持.throw()和.close()方法,即可能会产生AttributeError 异常。
+◇除了GeneratorExit 异常外的其他抛给委派生产器的异常，将会被传递到迭代器的throw()方法。
+  如果迭代器throw()调用产生了StopIteration异常，委派生产器恢复并继续执行，其他异常则传递给委派生产器。
+◇如果GeneratorExit异常被抛给委派生产器，或者委派生产器的close()方法被调用，如果迭代器有close()的话也将被调用。
+  如果close()调用产生异常，异常将传递给委派生产器。否则，委派生产器将抛出GeneratorExit 异常。
+◇当迭代器结束并抛出异常时，yield from表达式的值是其StopIteration 异常中的第一个参数。
+◇一个生成器中的return expr语句将会从生成器退出并抛出 StopIteration(expr)异常。
+
+---------------------
+import time
+
+def A():
+    while True:
+        print("--------A--------")
+        yield
+        time.sleep(1.5)
+def B(c):
+    while True:
+        print('--------B--------')
+        c.__next__()
+B(A())

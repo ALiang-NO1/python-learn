@@ -1,0 +1,25 @@
+1. datetime
+datetime的使用方法为：
+datetime.datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None, *, fold=0)
+
+其中year，month和day是不能缺少的，tzinfo为时区参数，可以为None或其他参数，其余参数的范围如下：
+MINYEAR <= year <= MAXYEAR,
+
+1 <= month <= 12,
+
+1 <= day <= number of days in the given month and year,
+
+0 <= hour < 24,
+
+0 <= minute < 60,
+
+0 <= second < 60,
+
+0 <= microsecond < 1000000,
+
+fold in [0, 1].
+
+ 3. time
+time类中包含了一整天的信息，语法结构如下:
+
+datetime.time(hour,moniute,second,microsecond,tzinfo=None)

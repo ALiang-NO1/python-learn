@@ -1,0 +1,22 @@
+close()	关闭数据库连接
+commit()	提交事务
+rollback()	回滚数据库事务
+cursor()	获得cursor游标对象
+
+游标属性有：
+Description:数据库类型和值的相关信息。
+Rowcount:返回结果的行数统计信息。
+方法有：
+execute(sql[, parameters])	            执行一条SQL语句
+executemany(sql, seq_of_parameters)	    用于批量执行SQL语句
+fetchone()	        捕获查询结果集的下一行，返回单个序列，在没有更多数据可用时不返回
+fetchall()	    捕获查询结果的所有（剩余）行，返回列表。光标的数组大小属性可能会影响此操作的性能。如果没有行，则返回空列表。
+close()	        关闭当前游标
+connection.rollback()	            回滚从上一次调用 commit() 之后对数据库所做的所有变动
+cursor.executescript(sql_script)	接收到脚本会执行多个 SQL 语句，它首先执行 COMMIT 语句，然后执行作为参数传入的 SQL 脚本
+fetchmany(size=cursor.arraysize)	    搜索查询结果的下一组行，返回列表。当不可用行时，将返回一个空列表。
+connection.total_changes()	        返回自数据库连接打开以来被修改、插入或删除的数据库总行数
+Callproc(procname,[,parameters])    执行存储过程，procname为存储过程名，parameters为存储过程提供的参数
+cursor.executescript(sql_script)	接收到脚本会执行多个 SQL 语句，它首先执行 COMMIT 语句，然后执行作为参数传入的 SQL 脚本
+connection.executescript(sql_script)	这是一个非标准的快捷方式，通过调用游标（）方法创建游标对象，
+使用给定的sql_script调用游标的executescript（）方法，并返回游标。

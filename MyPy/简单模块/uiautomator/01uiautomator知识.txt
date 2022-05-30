@@ -1,0 +1,282 @@
+如果ANDROID_SERIAL是在环境中定义的，或者仅连接了一个设备：
+from uiautomator import device as d
+
+如果电脑连接多台Android机器，需要指定Serial Number(550b1ae3)，可以用下面的代码:
+d = Device('014E05DE0F02000E')
+
+专门在其他计算机上运行的adb服务器主机和端口
+d = Device('014E05DE0F02000E', adb_server_host='192.168.1.68', adb_server_port=5037)
+
+IMEI码的15位数字的含义分别为：
+1、"型号核准号码"：前6位数(TAC)，一般代表机型
+
+2、"最后装配号"：接着的2位数(FAC)，一般代表产地。
+
+3、"串号"：之后的6位数(SNR)，一般代表生产顺序号。
+
+4、检验码：最后1位数(SP)通常是"0"，当前暂备用。
+
+————检索设备信息: d.info
+{'currentPackageName': 'com.oppo.launcher',
+'displayHeight': 2264,
+'displayRotation': 0,
+'displaySizeDpX': 360,
+'displaySizeDpY': 780,
+'displayWidth': 1080,
+'productName': 'RMX1971',
+'screenOn': True, 'sdkInt': 29,
+'naturalOrientation': True}
+
+-----------设备的关键事件操作-----------
+————打开/关闭屏幕
+d.screen.on()   # 打开屏幕
+d.screen.off()  # 关闭屏幕
+——替代方法是：
+d.wakeup()  # 唤醒屏幕
+d.sleep()   # 息屏
+
+————检查屏幕是打开还是关闭
+if d.screen == "on":  # of d.screen != "off"
+    pass    # do something in case of screen on
+if d.screen == "off":  # of d.screen != "on"
+    pass    # do something in case of screen off
+
+————按硬/软键
+d.press.home()  # press home key
+d.press.back()  # press back key
+d.press("back") # the normal way to press back key
+d.press(0x07, 0x02) # press keycode 0x07('0') with META ALT(0x02) on
+支持的键：
+home    back    left    right
+up  down    center
+menu    search  enter   delete（或del）
+volume_up   volume_down volume_mute
+recent（最近的应用）   camera  power
+
+-----------设备的手势交互-----------
+点击画面
+d.click(x, y)   # click (x, y) on screen
+
+长按屏幕
+d.long_click(x, y)  # long click (x, y) on screen
+
+滑动
+d.swipe(sx, sy, ex, ey)     # swipe from (sx, sy) to (ex, ey)
+d.swipe(sx, sy, ex, ey, steps=10)   # swipe from (sx, sy) to (ex, ey) with 10 steps
+
+拖
+d.drag(sx, sy, ex, ey)  # drag from (sx, sy) to (ex, ey)
+d.drag(sx, sy, ex, ey, steps=10)    # drag from (sx, sy) to (ex, ey) with 10 steps
+
+
+-----------设备的屏幕操作-----------
+
+检索/设置方向————可能的方向是：
+natural 或者 n
+left 或者 l
+right 或者 r
+upsidedown 或 u（无法设置）
+orientation = d.orientation     # retrieve orientation, it may be "natural" or "left" or "right" or "upsidedown"
+
+# 设置或冻结旋转("upsidedown" 到Android 4.3.才有此功能)
+d.orientation = "l" # or "left"
+d.orientation = "r" # or "right"
+d.orientation = "n" # or "natural"
+
+————冻结/解冻旋转
+d.freeze_rotation()     # freeze rotation
+d.freeze_rotation(False)    # un-freeze rotation
+
+————截屏
+# 截屏并保存到"home.png", 到Android 4.2才有此功能.
+d.screenshot("home.png")
+
+————转储窗口层次结构
+d.dump("hierarchy.xml")     # dump the widown hierarchy and save to local file "hierarchy.xml"
+xml = d.dump()  # or get the dumped content(unicode) from return.
+
+————打开通知或快速设置
+d.open.notification()   # open notification, can not work until Android 4.3.
+d.open.quick_settings()     # open quick settings, can not work until Android 4.3.
+
+————等待空闲或窗口更新
+d.wait.idle()   # wait for current window to idle
+d.wait.update()     # wait until window update event occurs
+
+-----------守望者-----------
+
+当选择无法找到匹配，uiautomator将运行所有注册的观察者。
+条件匹配时点击目标
+d.watcher("AUTO_FC_WHEN_ANR").when(text="ANR").when(text="Wait").click(text="Force Close")
+# d.watcher(name) # creates a new named watcher.
+#  .when(condition)  # the UiSelector condition of the watcher.
+#  .click(target)  # perform click action on the target UiSelector.
+条件匹配时按键
+d.watcher("AUTO_FC_WHEN_ANR").when(text="ANR").when(text="Wait").press.back.home()
+# Alternative way to define it as below
+d.watcher("AUTO_FC_WHEN_ANR").when(text="ANR").when(text="Wait").press("back", "home")
+# d.watcher(name) ## creates a new named watcher.
+#  .when(condition)  ## the UiSelector condition of the watcher.
+#  .press.<keyname>.....<keyname>.()  ## press keys one by one in sequence.
+#  Alternavie way defining key sequence is press(<keybname>, ..., <keyname>)
+
+检查指定的观察者是否触发
+触发了监视程序，这意味着监视程序已运行且其所有条件都匹配。
+d.watcher("watcher_name").triggered     # true in case of the specified watcher triggered, else false
+
+删除命名的观察者
+d.watcher("watcher_name").remove()  # remove the watcher
+
+列出所有观察者
+d.watchers  # a list of all registered wachers' names
+
+检查是否触发了任何观察者
+d.watchers.triggered    #  true in case of any watcher triggered
+
+重置所有触发的观察者
+d.watchers.reset()  # reset all triggered watchers, after that, d.watchers.triggered will be false.
+
+守望者
+d.watchers.remove()     # remove all registered watchers
+d.watchers.remove("watcher_name")   # remove the named watcher, same as d.watcher("watcher_name").remove()
+
+强制运行所有观察者
+d.watchers.run()    # force to run all registered watchers
+
+-----------处理程序-----------
+处理程序的功能与Watcher相同，但它是在Android uiautomator内部实现的。处理程序和监视程序之间最不同的用法是，处理程序可以使用自定义的回调函数。
+
+def fc_close(device):
+  if device(text='Force Close').exists:
+    device(text='Force Close').click()
+  return True  # return True means to break the loop of handler callback functions.
+
+d.handlers.on(fc_close)     # turn on the handler callback function
+d.handlers.off(fc_close)    # turn off the handler callback function
+
+-----------选择器-----------
+ResourceId定位: d(resourceId="com.miui.home:id/icon_title").click()
+Text定位 d(text=u"音乐").click()
+Description定位 d(description="…").click()
+ClassName定位 d(className="android.widget.TextView").click()
+
+选择器用于识别当前窗口中的特定ui对象。
+# To seleted the object ,text is 'Clock' and its className is 'android.widget.TextView'
+d(text='Clock', className='android.widget.TextView')
+
+选择器支持以下参数。有关详细信息，请参考UiSelector Java文档。
+text, textContains, textMatches, textStartsWith
+className, classNameMatches
+description, descriptionContains, descriptionMatches, descriptionStartsWith
+checkable, checked, clickable, longClickable
+scrollable, enabled,focusable, focused, selected
+packageName, packageNameMatches
+resourceId, resourceIdMatches
+index, instance
+
+-----------子级和同级UI对象-----------
+孩子
+d(className="android.widget.ListView").child(text="Bluetooth")  # get the child or grandchild
+
+兄弟
+d(text="Google").sibling(className="android.widget.ImageView")  # get sibling or child of sibling
+
+child_by_description是要查找哪个子孙或哪个孙子包含指定的描述，其他子孙与相同child_by_text。
+child_by_instance是要找到在其子层次结构中位于指定实例的任何位置都具有子UI元素的子项。它在可见的视图上执行而无需滚动。
+相对位置：
+d(A).left(B)，表示选择A左侧的B。
+d(A).right(B)，表示选择A右侧的B。
+d(A).up(B)，表示选择A上方的B。
+d(A).down(B)，表示在A下选择B。
+d(text="Wi‑Fi").right(className="android.widget.Switch").click()    # select "switch" on the right side of "Wi‑Fi"
+d(text="Add new", instance=0)  # which means the first instance with text "Add new"
+
+-----------获取选定的ui对象状态及其信息-----------
+检查特定的ui对象是否存在
+d(text="Settings").exists # True if exists, else False
+d.exists(text="Settings") # alias of above property.
+
+检索特定ui对象的信息：d(text="Settings").info
+
+设置/清除可编辑字段的文本
+d(text="Settings").clear_text()  # clear the text
+d(text="Settings").set_text("My text...")  # set the text
+
+-----------对已选择的ui对象执行click操作-----------
+单击特定的ui对象
+d(text="Settings").click()  # click on the center of the specific ui object
+
+d(text="Settings").click.bottomright()  # click on the bottomright corner of the specific ui object
+
+d(text="Settings").click.topleft()  # click on the topleft corner of the specific ui object
+
+d(text="Settings").click.wait() # click and wait until the new window update
+
+长按特定的ui对象
+d(text="Settings").long_click() # long click on the center of the specific ui object
+
+d(text="Settings").long_click.bottomright() # long click on the bottomright corner of the specific ui object
+
+d(text="Settings").long_click.topleft() # long click on the topleft corner of the specific ui object
+
+-----------定ui对象的手势动作-----------
+将ui对象拖到另一个点或ui对象
+# drag the ui object to point (x, y) （can not be set until Android 4.3.）
+d(text="Settings").drag.to(x, y, steps=100)
+# drag the ui object to another ui object(center)
+d(text="Settings").drag.to(text="Clock", steps=50)
+
+从ui对象的中心向边缘滑动，滑动支持4个方向：
+d(text="Settings").swipe.right()
+d(text="Settings").swipe.left(steps=10)
+d(text="Settings").swipe.up(steps=10)
+d(text="Settings").swipe.down()
+
+从一个点到另一个的两点手势
+d(text="Settings").gesture((sx1, sy1), (sx2, sy2)).to((ex1, ey1), (ex2, ey2))
+
+特定ui对象上的两点手势，支持两种手势：
+
+In，从边缘到中心
+Out，从中心到边缘
+# from edge to center. here is "In" not "in"（pinch can not be set until Android 4.3.）
+d(text="Settings").pinch.In(percent=100, steps=10)
+d(text="Settings").pinch.Out()  # from center to edge
+
+3点手势
+d().gestureM((sx1, sy1), (sx2, sy2),(sx3, sy3)).to((ex1, ey1), (ex2, ey2),(ex3,ey3))
+d().gestureM((100,200),(300,200),(600,200),(100,600),(300,600),(600,900))
+
+等待直到特定的ui对象出现或消失
+d(text="Settings").wait.exists(timeout=3000)    # wait until the ui object appears
+d(text="Settings").wait.gone(timeout=1000)  # wait until the ui object gone
+
+对特定的ui对象执行滚动（可滚动），可能的属性：
+horiz 或者 vert
+forward或backward或toBeginning或toEnd
+# fling forward(default) vertically(default)
+d(scrollable=True).fling()
+# fling forward horizentally
+d(scrollable=True).fling.horiz.forward()
+# fling backward vertically
+d(scrollable=True).fling.vert.backward()
+# fling to beginning horizentally
+d(scrollable=True).fling.horiz.toBeginning(max_swipes=1000)
+# fling to end vertically
+d(scrollable=True).fling.toEnd()
+
+在特定的ui对象上执行滚动（可滚动），可能的属性：
+horiz 或者 vert
+forward或backward或toBeginning或toEnd或to
+# scroll forward(default) vertically(default)
+d(scrollable=True).scroll(steps=10)
+# scroll forward horizentally
+d(scrollable=True).scroll.horiz.forward(steps=100)
+# scroll backward vertically
+d(scrollable=True).scroll.vert.backward()
+# scroll to beginning horizentally
+d(scrollable=True).scroll.horiz.toBeginning(steps=100, max_swipes=1000)
+# scroll to end vertically
+d(scrollable=True).scroll.toEnd()
+# scroll forward vertically until specific ui object appears
+d(scrollable=True).scroll.to(text="Security")

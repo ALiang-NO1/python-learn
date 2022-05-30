@@ -1,0 +1,47 @@
+{
+  "GENERAL_SETTINGS": {
+    "TITLE": "Ρυθμίσεις",
+    "SUBMIT": "Ενημέρωση Ρυθμίσεων",
+    "BACK": "Πίσω",
+    "UPDATE": {
+      "ERROR": "Δεν μπορεί να ενημερωθεί η ρύθμιση προσπαθήστε ξανά!",
+      "SUCCESS": "Επιτυχής Ενημέρωση Ρυθμίσεων"
+    },
+    "FORM": {
+      "ERROR": "Παρακαλώ διορθώστε τα λάθη της Φόρμας",
+      "GENERAL_SECTION": {
+        "TITLE": "Γενικές Ρυθμίσεις",
+        "NOTE": ""
+      },
+      "NAME": {
+        "LABEL": "Ονομασία Λογαριασμού",
+        "PLACEHOLDER": "Η ονομασία του Λογαριασμού σας",
+        "ERROR": "Παρακαλώ συμπληρώστε ένα έγκυρο όνομα λογαριασμού"
+      },
+      "LANGUAGE": {
+        "LABEL": "Γλώσσα Ιστοσελίδας (Beta)",
+        "PLACEHOLDER": "Το όνομα του Λογαριασμού",
+        "ERROR": ""
+      },
+      "DOMAIN": {
+        "LABEL": "Τομέας (domain) του εισερχόμενου email",
+        "PLACEHOLDER": "Ο τομέας στον οποίο θα λαμβάνετε τα emails",
+        "ERROR": ""
+      },
+      "SUPPORT_EMAIL": {
+        "LABEL": "Email Υποστήριξης",
+        "PLACEHOLDER": "To email υποστήριξης της εταιρίας σας",
+        "ERROR": ""
+      },
+      "AUTO_RESOLVE_DURATION": {
+        "LABEL": "Number of days after a ticket should auto resolve if there is no activity",
+        "PLACEHOLDER": "30",
+        "ERROR": "Please enter a valid auto resolve duration (minimum 1 day)"
+      },
+      "FEATURES": {
+        "INBOUND_EMAIL_ENABLED": "Η συνέχεια της συνομιλίας με emails έχει ενεργοποιηθεί για τον λογαριασμό.",
+        "CUSTOM_EMAIL_DOMAIN_ENABLED": "Τώρα μπορείτε να λαμβάνετε emails στον τομέα (domain) σας."
+      }
+    }
+  }
+}

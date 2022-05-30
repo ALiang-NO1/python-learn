@@ -1,0 +1,34 @@
+功能体现：
+request去重、爬虫持久化、实现分布式爬虫、断点续爬（带爬取的request存在redis中）、增量式爬虫（爬取过的生成指纹）
+
+安装：pip install scrapy-redis
+源码包：git clone git://github.com/rolando/scrapy-redis
+源码：https://github.com/rmax/scrapy-redis
+官方文档：https://scrapy-redis.readthedocs.io/en/stable/index.html#running-the-example-project
+
+dmoz:items ：存放获取到的item信息，在pipeline中开启RedisPipeline才会存入
+
+dmoz:dupefilter ：指纹集合，存放的是已经进入 scheduler 队列的 request 对象的指纹，指纹默认由请求方法，url和请求体组成
+
+dmoz:requests ：Scheduler队列，存放着待请求的 request 对象，获取的过程是pop操作，即获取一个会去除一个
+
+- 使用sha1加密request得到指纹
+- 把指纹存在redis的集合中
+- 下一次新来一个request，同样的方式生成指纹，判断指纹是否存在reids的集合中
+request_seen:判断requests对象是否已经存在,如果没有就添加到“dmoz:dupefilter”
+request_fingerprint:调用函数request_fingerprint
+request_fingerprint：主要是对请求进行加密生成指纹
+
+# 去重
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# 调度器
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# 调度器持久化
+SCHEDULER_PERSIST = True
+
+# 指定redis地址
+REDIS_URL = "redis://192.168.226.150:6379"
+ITEM_PIPELINES = {
+    'example.pipelines.ExamplePipeline': 300,
+    'scrapy_redis.pipelines.RedisPipeline': 400, # 保存数据到redis
+}

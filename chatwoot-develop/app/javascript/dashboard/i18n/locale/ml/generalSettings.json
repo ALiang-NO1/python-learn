@@ -1,0 +1,47 @@
+{
+  "GENERAL_SETTINGS": {
+    "TITLE": "അക്കൗണ്ട് ക്രമീകരണങ്ങൾ",
+    "SUBMIT": "ക്രമീകരണങ്ങൾ അപ്‌ഡേറ്റു ചെയ്യുക",
+    "BACK": "മടങ്ങിപ്പോവുക",
+    "UPDATE": {
+      "ERROR": "ക്രമീകരണങ്ങൾ അപ്‌ഡേറ്റു ചെയ്യാനായില്ല, വീണ്ടും ശ്രമിക്കുക!",
+      "SUCCESS": "അക്കൗണ്ട് ക്രമീകരണങ്ങൾ വിജയകരമായി അപ്‌ഡേറ്റു ചെയ്‌തു"
+    },
+    "FORM": {
+      "ERROR": "ദയവായി ഫോമിലെ പിശകുകൾ പരിഹരിക്കുക",
+      "GENERAL_SECTION": {
+        "TITLE": "പൊതുവായ ക്രമീകരണങ്ങൾ",
+        "NOTE": ""
+      },
+      "NAME": {
+        "LABEL": "അക്കൗണ്ടിന്റെ പേര്",
+        "PLACEHOLDER": "നിങ്ങളുടെ അക്കൗണ്ടിന്റെ പേര്",
+        "ERROR": "ദയവായി സാധുവായ ഒരു അക്കൗണ്ട് പേര് നൽകുക"
+      },
+      "LANGUAGE": {
+        "LABEL": "സൈറ്റ് ഭാഷ (ബീറ്റ)",
+        "PLACEHOLDER": "നിങ്ങളുടെ അക്കൗണ്ടിന്റെ പേര്",
+        "ERROR": ""
+      },
+      "DOMAIN": {
+        "LABEL": "ഇൻകമിംഗ് ഇമെയിൽ ഡൊമെയ്ൻ",
+        "PLACEHOLDER": "നിങ്ങൾക്ക് ഇമെയിലുകൾ ലഭിക്കുന്ന ഡൊമെയ്ൻ",
+        "ERROR": ""
+      },
+      "SUPPORT_EMAIL": {
+        "LABEL": "ഇമെയിൽ",
+        "PLACEHOLDER": "നിങ്ങളുടെ കമ്പനിയുടെ പിന്തുണാ ഇമെയിൽ",
+        "ERROR": ""
+      },
+      "AUTO_RESOLVE_DURATION": {
+        "LABEL": "Number of days after a ticket should auto resolve if there is no activity",
+        "PLACEHOLDER": "30",
+        "ERROR": "Please enter a valid auto resolve duration (minimum 1 day)"
+      },
+      "FEATURES": {
+        "INBOUND_EMAIL_ENABLED": "നിങ്ങളുടെ അക്കൗണ്ടിനായി ഇമെയിലുകളുമായുള്ള സംഭാഷണ തുടർച്ച പ്രവർത്തനക്ഷമമാക്കി.",
+        "CUSTOM_EMAIL_DOMAIN_ENABLED": "നിങ്ങളുടെ ഇഷ്‌ടാനുസൃത ഡൊമെയ്‌നിൽ നിങ്ങൾക്ക് ഇപ്പോൾ ഇമെയിലുകൾ സ്വീകരിക്കാൻ കഴിയും."
+      }
+    }
+  }
+}

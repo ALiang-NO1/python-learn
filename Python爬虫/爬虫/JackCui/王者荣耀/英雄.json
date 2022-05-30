@@ -1,0 +1,895 @@
+{
+    "error_code": 0,
+    "list": [
+        {
+            "hero_id": "141",
+            "name": "西施",
+            "cover": "http://pic.wankacn.com/2019-10-16_5da699228718a.png",
+            "type": [
+                "2"
+            ],
+            "tags": 2
+        },
+        {
+            "hero_id": "21",
+            "name": "甄姬",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c234940e6f.png",
+            "type": [
+                "2"
+            ],
+            "tags": 3
+        },
+        {
+            "hero_id": "37",
+            "name": "姜子牙",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2339f01bf.png",
+            "type": [
+                "2",
+                "6"
+            ],
+            "tags": 3
+        },
+        {
+            "hero_id": "60",
+            "name": "雅典娜",
+            "cover": "http://pictest.wankacn.com/2017-05-09_591178d50a17a.png",
+            "type": [
+                "1"
+            ],
+            "tags": 3
+        },
+        {
+            "hero_id": "95",
+            "name": "鬼谷子",
+            "cover": "http://pic.wankacn.com/2017-05-16_591a6c6251957.png",
+            "type": [
+                "6"
+            ],
+            "tags": 3
+        },
+        {
+            "hero_id": "8",
+            "name": "鲁班七号",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c235759c23.png",
+            "type": [
+                "5"
+            ],
+            "tags": 3
+        },
+        {
+            "hero_id": "105",
+            "name": "苏烈",
+            "cover": "http://pic.wankacn.com/2017-08-16_5993f16569431.png",
+            "type": [
+                "3"
+            ],
+            "tags": 3
+        },
+        {
+            "hero_id": "48",
+            "name": "亚瑟",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c233041cf3.png",
+            "type": [
+                "1",
+                "3"
+            ],
+            "tags": 3
+        },
+        {
+            "hero_id": "143",
+            "name": "镜",
+            "cover": "http://pic.wankacn.com/2020-07-07_5f04145bd4696.png",
+            "type": [
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "139",
+            "name": "曜",
+            "cover": "http://pic.wankacn.com/2019-06-25_5d11c6137c3fe.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "136",
+            "name": "云中君",
+            "cover": "http://pic.wankacn.com/2019-04-04_5ca5d7f80df61.png",
+            "type": [
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "135",
+            "name": "马超",
+            "cover": "http://pic.wankacn.com/2019-02-21_5c6e602c2aa21.png",
+            "type": [
+                "1",
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "134",
+            "name": "盘古",
+            "cover": "http://pic.wankacn.com/2019-02-19_5c6b805115752.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "133",
+            "name": "嫦娥",
+            "cover": "http://pic.wankacn.com/2018-12-26_5c22fa6f28bbe.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "132",
+            "name": "猪八戒",
+            "cover": "http://pic.wankacn.com/2019-01-18_5c41377a62b70.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "131",
+            "name": "瑶",
+            "cover": "http://pic.wankacn.com/2018-11-27_5bfd0aa89e0f9.png",
+            "type": [
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "129",
+            "name": "上官婉儿",
+            "cover": "http://pic.wankacn.com/2018-11-13_5bea360053aa8.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "127",
+            "name": "李信",
+            "cover": "http://pic.wankacn.com/2018-11-02_5bdbd4708fa91.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "126",
+            "name": "沈梦溪",
+            "cover": "http://pic.wankacn.com/2018-09-13_5b99e680bf803.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "125",
+            "name": "伽罗",
+            "cover": "http://pic.wankacn.com/2018-09-06_5b909433905d2.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "124",
+            "name": "盾山",
+            "cover": "http://pic.wankacn.com/2018-08-28_5b84b1a03fef4.png",
+            "type": [
+                "3",
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "122",
+            "name": "司马懿",
+            "cover": "http://pic.wankacn.com/2018-07-23_5b5548f8e79c9.png",
+            "type": [
+                "2",
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "121",
+            "name": "孙策",
+            "cover": "http://pic.wankacn.com/2018-06-26_5b320091a1915.png",
+            "type": [
+                "1",
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "120",
+            "name": "元歌",
+            "cover": "http://pic.wankacn.com/2018-06-26_5b32044409be0.png",
+            "type": [
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "118",
+            "name": "米莱狄",
+            "cover": "http://pic.wankacn.com/2018-04-10_5acc27bf2e79a.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "117",
+            "name": "狂铁",
+            "cover": "http://pic.wankacn.com/2018-03-20_5ab0dda97a4c4.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "116",
+            "name": "裴擒虎",
+            "cover": "http://pic.wankacn.com/2018-02-23_5a8fdf41e691e.png",
+            "type": [
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "115",
+            "name": "杨玉环",
+            "cover": "http://pic.wankacn.com/2018-02-07_5a7a6e89e83fc.png",
+            "type": [
+                "2",
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "113",
+            "name": "公孙离",
+            "cover": "http://pic.wankacn.com/2018-01-02_5a4b2d79d6ac1.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "112",
+            "name": "弈星",
+            "cover": "http://pic.wankacn.com/2017-12-06_5a27bc4e6b4fb.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "110",
+            "name": "明世隐",
+            "cover": "http://pic.wankacn.com/2017-11-17_5a0e8c4208c88.png",
+            "type": [
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "106",
+            "name": "梦奇",
+            "cover": "http://pic.wankacn.com/2017-09-29_59cdf29e3e62d.png",
+            "type": [
+                "3",
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "104",
+            "name": "百里玄策",
+            "cover": "http://pic.wankacn.com/2017-08-04_59844776a6adf.png",
+            "type": [
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "103",
+            "name": "女娲",
+            "cover": "http://pic.wankacn.com/2017-08-03_5982964831197.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "98",
+            "name": "铠",
+            "cover": "http://pic.wankacn.com/2017-08-16_5993f44de1fbb.png",
+            "type": [
+                "1",
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "96",
+            "name": "百里守约",
+            "cover": "http://pic.wankacn.com/2017-08-08_59891a63683d7.png",
+            "type": [
+                "5",
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "89",
+            "name": "干将莫邪",
+            "cover": "http://pictest.wankacn.com/2017-05-09_5911c349718e1.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "66",
+            "name": "黄忠",
+            "cover": "http://pictest.wankacn.com/2017-05-09_59115f1b38692.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "65",
+            "name": "大乔",
+            "cover": "http://pictest.wankacn.com/2017-05-09_59115df336154.png",
+            "type": [
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "64",
+            "name": "诸葛亮",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c234ec5ebe.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "63",
+            "name": "东皇太一",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c232fb55c8.png",
+            "type": [
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "62",
+            "name": "太乙真人",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2338d81f3.png",
+            "type": [
+                "6",
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "61",
+            "name": "蔡文姬",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c234d2d398.png",
+            "type": [
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "59",
+            "name": "哪吒",
+            "cover": "http://pictest.wankacn.com/2017-05-09_591146fed1a87.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "58",
+            "name": "杨戬",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2344ceb61.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "57",
+            "name": "成吉思汗",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c234211822.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "56",
+            "name": "钟馗",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c23519c199.png",
+            "type": [
+                "2",
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "55",
+            "name": "虞姬",
+            "cover": "http://pictest.wankacn.com/2017-05-09_5911777c98798.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "54",
+            "name": "李元芳",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2343b8795.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "53",
+            "name": "张飞",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c234170ffa.png",
+            "type": [
+                "3",
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "52",
+            "name": "刘备",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c23326ca1d.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "51",
+            "name": "后羿",
+            "cover": "http://pic.wankacn.com/2017-12-13_5a3099f47e373.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "50",
+            "name": "牛魔",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c23478167f.png",
+            "type": [
+                "3",
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "49",
+            "name": "孙悟空",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c233c2bbc6.png",
+            "type": [
+                "1",
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "47",
+            "name": "橘右京",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c23464b02a.png",
+            "type": [
+                "4",
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "46",
+            "name": "娜可露露",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c233a826f8.png",
+            "type": [
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "45",
+            "name": "不知火舞",
+            "cover": "http://pic.wankacn.com/2018-05-30_5b0e49feb9808.png",
+            "type": [
+                "2",
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "44",
+            "name": "张良",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2340df43f.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "43",
+            "name": "艾琳",
+            "cover": "http://pictest.wankacn.com/2017-05-09_59114302686d2.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "42",
+            "name": "花木兰",
+            "cover": "http://pictest.wankacn.com/2017-05-09_5911728740cc8.png",
+            "type": [
+                "1",
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "41",
+            "name": "兰陵王",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2330c26af.png",
+            "type": [
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "40",
+            "name": "王昭君",
+            "cover": "http://pic.wankacn.com/2017-08-28_59a37b47af65d.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "39",
+            "name": "韩信",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c23545ba7b.png",
+            "type": [
+                "4",
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "38",
+            "name": "刘邦",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c233395c91.png",
+            "type": [
+                "3",
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "36",
+            "name": "露娜",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2353a041c.png",
+            "type": [
+                "1",
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "35",
+            "name": "程咬金",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c234a58630.png",
+            "type": [
+                "3",
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "34",
+            "name": "安琪拉",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c233d7b31d.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "33",
+            "name": "貂蝉",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c234f59445.png",
+            "type": [
+                "2",
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "32",
+            "name": "关羽",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c23316325e.png",
+            "type": [
+                "1",
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "31",
+            "name": "老夫子",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c234a93870.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "30",
+            "name": "武则天",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2346e0409.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "29",
+            "name": "项羽",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2355a8a48.png",
+            "type": [
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "28",
+            "name": "达摩",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c23506f249.png",
+            "type": [
+                "1",
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "27",
+            "name": "狄仁杰",
+            "cover": "http://pic.wankacn.com/2018-05-17_5afd602a06167.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "26",
+            "name": "马可波罗",
+            "cover": "http://pic.wankacn.com/2018-05-15_5afa452e33eb3.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "25",
+            "name": "李白",
+            "cover": "http://pic.wankacn.com/2018-05-17_5afd4f63a5f15.png",
+            "type": [
+                "4",
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "24",
+            "name": "宫本武藏",
+            "cover": "http://pictest.wankacn.com/2017-05-09_59116ec1b90cd.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "23",
+            "name": "典韦",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2331e56cb.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "22",
+            "name": "曹操",
+            "cover": "http://pictest.wankacn.com/2017-05-09_59116e190ef9f.png",
+            "type": [
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "20",
+            "name": "夏侯惇",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2337b0007.png",
+            "type": [
+                "3",
+                "1"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "19",
+            "name": "周瑜",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2335375ca.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "18",
+            "name": "吕布",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2334b5741.png",
+            "type": [
+                "1",
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "17",
+            "name": "芈月",
+            "cover": "http://pic.wankacn.com/2017-06-20_5948d1ec9a667.png",
+            "type": [
+                "2",
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "16",
+            "name": "白起",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2349c67a0.png",
+            "type": [
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "15",
+            "name": "扁鹊",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c23429ce10.png",
+            "type": [
+                "2",
+                "6"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "14",
+            "name": "孙膑",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c233cb89d3.png",
+            "type": [
+                "6",
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "13",
+            "name": "钟无艳",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2351100f8.png",
+            "type": [
+                "1",
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "12",
+            "name": "阿轲",
+            "cover": "http://pictest.wankacn.com/2017-05-09_59116c08f0dd0.png",
+            "type": [
+                "4"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "11",
+            "name": "高渐离",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c2356bc303.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "10",
+            "name": "刘禅",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c243539fa5.png",
+            "type": [
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "9",
+            "name": "庄周",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c233fd8988.png",
+            "type": [
+                "6",
+                "3"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "7",
+            "name": "孙尚香",
+            "cover": "http://pictest.wankacn.com/2017-05-09_5911605741286.png",
+            "type": [
+                "5"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "6",
+            "name": "嬴政",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c233b1827c.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "5",
+            "name": "妲己",
+            "cover": "http://pictest.wankacn.com/2017-05-05_590c233963aa3.png",
+            "type": [
+                "2"
+            ],
+            "tags": 0
+        },
+        {
+            "hero_id": "4",
+            "name": "墨子",
+            "cover": "http://pic.wankacn.com/2017-06-06_5936284094ea7.png",
+            "type": [
+                "3",
+                "2"
+            ],
+            "tags": 0
+        }
+    ],
+    "request_id": 3016401348
+}

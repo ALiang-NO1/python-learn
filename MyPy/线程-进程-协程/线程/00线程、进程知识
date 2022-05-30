@@ -1,0 +1,204 @@
+--------------线程----------------
+1）threading.Thread 实例的方法、属性:
+>>> threading.Thread(group=None, target=None, name=None, args=(), kwargs={}, *, daemon=None)
+方法：
+daemon:守护线程（也称后台线程）是在后台运行的，它的任务是为其他线程提供服务，如 Python 解释器的垃圾回收线程就是守护线程。
+如果所有的前台线程都死亡了，守护线程也会自动死亡。
+start()	启动线程活动，它在一个线程里最多只能被调用一次。
+run()	表示线程活动的方法。
+join(timeout=None)	等待至线程中止。
+getName()	返回线程名。
+setName()	设置线程名。
+ThreadName.exit()   退出
+is_alive()	返回线程是否是活动的。
+daemon	是否为守护线程的标志。
+ident	线程标识符，线程尚未开始返回 None，已启动返回非零整数。
+threading.current_thread()：返回当前的Thread对象。
+
+2）threading 直接调用的方法，threading 模块提供了 Timer 类实现定时器功能：
+# 单次执行
+from threading import Timer
+def work():
+    print("Hello Python")
+# 5 秒后执行 work 方法
+t = Timer(5, work)
+t.start()
+
+1.方法
+active_count()	返回当前存活的线程类 Thread 对象，返回个数等于 enumerate() 返回的列表长度。
+
+get_ident()	返回当前线程的线程标识符，它是一个非零的整数。
+
+enumerate()	以列表形式返回当前所有存活的 Thread 对象。
+
+main_thread()	返回主 Thread 对象。
+
+settrace(func)	为所有 threading 模块开始的线程设置追踪函数。
+
+setprofile(func)	为所有 threading 模块开始的线程设置性能测试函数。
+
+stack_size([size])	返回创建线程时用的堆栈大小。
+
+
+1. 等待线程结束
+所谓等待线程结束，就是保证主线程在子线程结束之后结束，使用的依然是join()方法，我们需要在join中设置超时时间，即join(timeout = None)。
+
+2. 临界资源问题
+多道程序系统中存在许多进程，它们共享各种资源，然而有很多资源一次只能供一个进程使用。一次仅允许一个进程使用的资源称为临界资源。
+许多物理设备都属于临界资源，如输入机、打印机、磁带机等。
+
+3.线程锁问题
+threading提供了一个Lock类：可以在某个线程访问某个变量的时候加锁，其他线程此时就不能进来，直到当前线程处理完后，把锁释放了，其他线程才能进来处理
+生产者和消费者模式是多线程开发中经常见到的一种模式。生产者的线程专门用来生产一些数据，然后存放到一个中间的变量中。
+消费者再从这个中间的变量中取出数据进行消费。但是因为要使用中间变量，中间变量经常是一些全局变量，因此需要使用锁来保证数据完整性
+
+Condition版的生产者与消费者模式：
+Lock版本的生产者与消费者模式可以正常的运行。但是存在一个不足，在消费者中，总是通过while True死循环并且上锁的方式去判断钱够不够。
+上锁是一个很耗费CPU资源的行为。因此这种方式不是最好的。还有一种更好的方式便是使用threading.Condition来实现。
+threading.Condition可以在没有数据的时候处于阻塞等待状态。一旦有合适的数据了，还可以使用notify相关的函数来通知其他处于等待状态的线程。
+这样就可以不用做一些无用的上锁和解锁的操作。可以提高程序的性能。首先对threading.Condition相关的函数做个介绍，
+threading.Condition类似threading.Lock，可以在修改全局数据的时候进行上锁，也可以在修改完毕后进行解锁。
+以下将一些常用的函数做个简单的介绍：
+>>> acquire：上锁。
+>>> release：解锁。
+>>> wait：将当前线程处于等待状态，并且会释放锁。可以被其他线程使用notify和notify_all函数唤醒。被唤醒后会继续等待上锁，上锁后继续执行下面的代码。
+>>> notify：通知某个正在等待的线程，默认是第1个等待的线程。
+>>> notify_all：通知所有正在等待的线程。notify和notify_all不会释放锁。并且需要在release之前调用。
+
+queue队列
+1.queue.Queue(maxsize=0)
+    先进先出(First In First Out: FIFO)队列，最早进入队列的数据拥有出队列的优先权，就像看电影入场时排队一样，排在队伍前头的优先进入电影院。
+2.queue.LifoQueue(maxsize=0)
+    后进先出(Last In First Out: LIFO)队列，最后进入队列的数据拥有出队列的优先权，就像栈一样。
+3.PriorityQueue(maxsize=0)
+    优先级队列，比较队列中每个数据的大小，值最小的数据拥有出队列的优先权。数据一般以元组的形式插入，典型形式为(priority_number, data)。
+    如果队列中的数据没有可比性，那么数据将被包装在一个类中，忽略数据值，仅仅比较优先级数字。
+4.queue.SimpleQueue
+    先进先出类型的简单队列，没有大小限制。由于它是简单队列，相比于 Queue 队列会缺少一些高级功能
+5.queue.Empty 异常
+    当队列中没有数据元素时，取出队列中的数据会引发 queue.Empty 异常，主要是不正当使用 get() 和 get_nowait() 引起的。
+6 queue.Full 异常
+    当队列数据元素容量达到上限时，继续往队列中放入数据会引发 queue.Empty 异常，主要是不正当使用 put() 和 put_nowait() 引起的。
+----------queue方法----------
+Queue.qsize() 返回队列的大小
+Queue.empty() 如果队列为空，返回True,反之False
+Queue.full() 如果队列满了，返回True,反之False
+Queue.full 与 maxsize 大小对应
+
+1.Queue.put_nowait(item)
+    相当于 Queue.put(item, block=False)，当队列中元素个数达到上限继续往里放数据时直接引发 queue.Full 异常。
+
+2.Queue.get(block=True, timeout=None)   从队列中取出数据并返回该数据内容。
+    block，当队列中没有数据元素继续取数据时：如果 block=False，直接引发 queue.Empty 异常；如果 block=True，且 timeout=None，则一直等待直到有
+    数据入队列后可以取出数据；如果 block=True，且 timeout=N，N 为某一正整数时，则等待 N 秒，如果队列中还没有数据放入的话就引发 queue.Empty 异常。
+    timeout，设置超时时间。
+
+3. Queue.get_nowait()
+    相当于 Queue.get(block=False)，当队列中没有数据元素继续取数据时直接引发 queue.Empty 异常
+
+4.Queue、LifoQueue 和 PriorityQueue 对象的高级使用方法
+--SimpleQueue 是 Python 3.7 版本中新加入的特性，与 Queue、LifoQueue 和 PriorityQueue 三种队列相比缺少了 task_done 和 join 的高级使用
+    方法，所以才会取名叫 Simple 了，下面介绍一下 task_done 和 join 的使用方法。
+--task_done，表示队列内的数据元素已经被取出，即每个 get 用于获取一个数据元素， 后续调用 task_done 告诉队列，该数据的处理已经完成。如果被调用的
+    次数多于放入队列中的元素个数，将引发 ValueError 异常。
+--join，一直阻塞直到队列中的所有数据元素都被取出和执行，只要有元素添加到 queue 中就会增加。当未完成任务的计数等于0，join 就不会阻塞。
+
+5.Queue.put(item) 写入队列，timeout等待时间
+
+6.Queue.task_done() 在完成一项工作之后，Queue.task_done()函数向任务已经完成的队列发送一个信号
+
+
+--------------进程----------------
+在Windows上要想使用进程模块，就必须把有关进程的代码写if __name__ == ‘__main__’ :语句的下面才能正常使用Windows下的进程模块。
+Unix/Linux下则不需要。
+
+1. multiprocessing模块
+Multiprocessing模块主要复制线程模块的API，为我们提供一个Process类来创建进程对象，它的语法格式为：
+Process(group=None,target=None,name=None,args=(),kwargs={},daemon=None)
+
+创建进程的方式和创建线程的方式大体一致，创建完成后都是通过start()函数来使用，除了start()，还有一些方法供我们使用：
+1) run()
+表示进程活动的方法，我们在前面提到线程中也使用了这种方法。
+
+2) join([timeout])
+如果可选参数timeout为None（默认值），则方法将阻塞，直到调用其join（）方法的进程终止。如果timeout是正数，则它最多阻塞超时秒数。请注意，
+如果方法的进程终止或方法超时，则该方法将返回None。检查进程的退出代码以确定它是否终止。
+
+3) is_alive()  返回进程是否活动。
+
+4) terminate()
+终止进程，在Unix上，这是使用SIGTERM信号完成的；在Windows上，使用TerminateProcess（），退出处理程序和最后子句等将不会被执行。
+
+5) Close()
+关闭流程对象，释放与之关联的所有资源。如果基础进程仍在运行，则引发ValueError。一旦close（）成功返回，
+Process对象的大多数其他方法和属性都将引发ValueError。
+
+6) kill()       和terminate() 类似，但在Unix上使用SIGKILL信号。
+
+7) Pid      返回进程ID。
+
+8) name      返回进程name
+
+9) is_alive      返回进程是否在运行
+
+通信
+即使他们共用的是一个资源number，但是都没有影响number的最终数值，也就是第一个使用过的资源并没有被用在第二个进程当中，资源没有共享，
+如果要实现进程间通信，Python在multiprocessing模块中提供了Queue、pipes等多种方法来进行数据的交换
+
+1. 队列
+学过数据结构的同学一定对这个词不陌生，队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，
+进行插入操作的端称为队尾，进行删除操作的端称为队头。
+我们也可以通过生活中的排队机制来理解一下队列，当一座桥只能允许一辆车通过的时候，那么新到来的车只能排在队伍的末尾来通过这座桥，而队列中间的车是无法直接
+离开桥的，只有等排在队头的车通过了之后才能过桥。
+2. 多进程队列
+在Python中，multiprocessing模块中存在Queue类帮我们实现多进程之间的数据交互，初始化一个Queue对象的方式为：
+my_queue = Queue(count)，还有一些常用的方法：
+
+Queue.qsize():返回队列中的信息数量。
+
+Queue.empty():如果队列为空，则返回True，否则为false。由于多线程/多处理语义，这是不可靠的。
+
+Queue.full():如果队列已满，则返回true，否则返回false。
+
+Queue.put(obj[, block[, timeout]]):将obj放入队列中，如果可选参数块为True（默认值），超时为None（默认值），则必要时阻塞，
+直到空闲插槽可用为止。如果超时为正数，则为b 锁定最多超时秒并提高队列。
+
+Queue.get([block[, timeout]]) :从队列中移除并返回一个项。如果可选args块为True （默认值），超时为None（默认值）。
+
+Pool类
+Pool类可以提供指定数量的进程供用户调用，当有新的请求提交到Pool中时，如果池还没有满，就会创建一个新的进程来执行请求。
+如果池满，请求就会告知先等待，直到池中有进程结束才会创建新的进程来执行这些请求。
+
+下面介绍一下multiprocessing 模块下的Pool类下的几个方法：
+1、apply()
+函数原型：apply(func[, args=()[, kwds={}]])
+该函数用于传递不定参数，同python中的apply函数一致，主进程会被阻塞直到函数执行结束（不建议使用，并且3.x以后不在出现）。
+
+2、apply_async
+函数原型：apply_async(func[, args=()[, kwds={}[, callback=None]]])
+与apply用法一致，但它是非阻塞的且支持结果返回后进行回调。
+
+3、map()
+函数原型：map(func, iterable[, chunksize=None])
+Pool类中的map方法，与内置的map函数用法行为基本一致，它会使进程阻塞直到结果返回。
+注意：虽然第二个参数是一个迭代器，但在实际使用中，必须在整个队列都就绪后，程序才会运行子进程。
+
+4、map_async()
+函数原型：map_async(func, iterable[, chunksize[, callback]])
+与map用法一致，但是它是非阻塞的。其有关事项见apply_async。
+
+5、close()
+关闭进程池（pool），使其不在接受新的任务。
+
+6、terminal()
+结束工作进程，不在处理未处理的任务。
+
+7、join()
+主进程阻塞等待子进程的退出， join方法要在close或terminate之后使用。
+
+
+-------------多核问题------------
+因为 Python 的线程虽然是真正的线程，但解释器执行代码时，有一个 GIL 锁：Global Interpreter Lock。
+任何 Python 线程执行前，必须先获得GIL 锁，然后，每执行 100 条字节码，解释器就自动释放 GIL 锁，让别的线程有机会执行。
+这个 GIL 全局锁实际上把所有线程的执行代码都给上了锁，所以，多线程在 Python 中只能交替执行，即使 100 个线程跑在 100 核 CPU 上，也只能用到 1 个核
+Python 虽然不能利用多线程实现多核任务，但可以通过多进程实现多核任务。多个 Python 进程有各自独立的 GIL 锁，互不影响。

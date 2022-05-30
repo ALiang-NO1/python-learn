@@ -1,0 +1,171 @@
+①	pdfkit.from_string()  # 将字符串转成pdf文件，如果字符串是html代码，pdf也是识别的
+②	pdfkit.from_file()  # 将文件转成pdf文件
+③	pdfkit.from_url()  # 将网址的整个内容转成pdf文件
+
+result = pdfkit.from_file(info, output_path=e_file_path, configuration=config)
+# info 代表文件路径
+# e_file_path 代表生成的pdf具体路径，该方法不识别中文，否则抛出字符编码报错，无法生成pdf文件
+# 如果output_path=False 代表返回一个字符串
+
+————添加配置：
+path_wk = "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+config = pdfkit.configuration(wkhtmltopdf=path_wk)
+
+指定目录及深度：目录是根据HTML的标题标签生成的<h1> <h2> <h3>.....，默认的深度是<h4>
+      --outline 生成的标签默认深度是 4  ，通过--outline-depth 6 可以设置目录深度为6
+指定页眉：
+     --header-spacing 5 页眉距离
+
+     --header-line 页眉线
+
+     --header-left 指定页眉左侧内容
+
+    --header-right  指定页眉右内容
+指定页脚：
+   --footer-center [page]/[topage] 页脚中显示，显示内容是 【当前页/总页数】
+
+   --footer-line 指定页脚线
+options = {
+        'encoding': "utf-8",
+        'page-size': 'A4',
+        'margin-top': '0mm',
+        'margin-right': '0mm',
+        'margin-bottom': '0mm',
+        'margin-left': '0mm'
+    }
+pdfkit.from_string(info, e_file_path, options=options, configuration=config)
+
+————不设置字符编码，可能导致pdf内容乱码
+# 设置方式
+options = {
+        'encoding': "utf-8"
+    }
+# 也可以设置生成pdf的大小等
+
+————在生成pdf的过程中，引用了css文件样式，是不能引用相对路径的，相对路径的css文件是不识别的
+————生成pdf时，是不识别图标css文件的
+————如果生成的pdf文件已经存在，在相同目录下生成重复的pdf文件是不会覆盖的，会直接报错
+————如果成功生成pdf，返回的结果就是True，如果生成pdf失败，返回的并不是False。
+————wkhtmltopdf可以同时转换多个HTML生成以个pdf，但是如果HTML文件太多，可能导致参数太长转换失败
+（避免此问题的方法有两种，一是把所有的 HTML 文件写到一个文件中，二是利用 wkhtmltopdf 源码）
+
+————其他注意事项
+》》提取正文主体后，可以直接将  <div xxxx </div> 保存html，不需要补全 <html>
+》》图片链接相对路径需要转换为绝对路径，才会自动加载图片
+<img alt="Inspecting elements with Firebug" src="../_images/firebug1.png" style="width: 913px; height: 600px;">
+》》pdfkit.from_file 第一个参数 input 为 html文件路径列表，文件名不能是中文。。。
+pdfkit.from_file(self.htmls_saved, self.netloc+'.pdf', options=options)
+》》pdf会根据<h1> <h2>等标题 tag 自动生成目录
+
+-------------PdfFileWriter--------------
+此类支持将PDF文件写出，给定由另一类产生的页面
+1.addAttachment（fname，fdata ）¶
+将文件嵌入PDF。（要显示的文件名，文件中的数据）
+2.addBlankPage（width = None，height = None ）¶
+将空白页附加到此PDF文件并返回。如果未指定页面大小，请使用最后一页的大小
+3.addBookmark（title，pagenum，parent = None，color = None，bold = False，斜体= False，fit ='/ Fit'，* args ）¶将书签添加到此PDF文件。
+--title（str）–用于此书签的标题。
+--pagenum（int）–此书签将指向的页码。
+--parent –对创建嵌套书签的父书签的引用。
+--color（tuple）–书签的颜色，从0.0到1.0为红色，绿色，蓝色的元组
+--粗体（bool）–书签为粗体
+--斜体（布尔）–书签为斜体
+--fit（str）–目标页面的适合度。
+4.addLink（pagenum，pagedest，rect，border = None，fit ='/ Fit'，* args ）¶添加从矩形区域到指定页面的内部链接。
+--pagenum（int）–放置链接的页面的索引。
+--pagedest（int）–链接应转到的页面的索引。
+--rect –RectangleObject或四个整数数组，指定可单击的矩形区域 ，或形式为字符串。[xLL, yLL, xUR, yUR]"[ xLL yLL xUR yUR ]"
+--border –如果提供，则为描述边框绘制属性的数组。有关详细信息，请参见PDF规范。如果省略此参数，则不会绘制边框。
+--fit（str）–页面适合或“缩放”选项（见下文）。可能需要提供其他参数。通过None将被读取为该坐标的空值。
+有效的缩放参数（有关详细信息，请参见PDF 1.7参考的表8.2）：
+/Fit	没有其他参数
+/XYZ	[左] [上] [zoomFactor]
+/FitH	[最佳]
+/FitV	[剩下]
+/FitR	[左] [底] [右] [顶]
+/FitB	没有其他参数
+/FitBH	[最佳]
+/FitBV	[剩下]
+5.write（流）¶ 将添加到该对象的页面集合写为PDF文件。
+参数：	流–写入文件的对象。该对象必须支持write方法和tell方法，类似于文件对象。
+6.pageLayout¶ 读取和写入访问getPageLayout() 和setPageLayout()方法的属性。
+pageMode¶ 读取和写入访问getPageMode() 和setPageMode()方法的属性。
+
+7.removeImages（ignoreByteStringObject = False ）¶ 从此输出中删除图像。
+参数：	ignoreByteStringObject（bool）–忽略ByteString对象的可选参数。
+
+8.removeLinks（）¶ 从此输出中删除链接和注释。
+
+9.removeText（ignoreByteStringObject = False ）¶从此输出中删除图像。
+参数：	ignoreByteStringObject（bool）–忽略ByteString对象的可选参数。
+--------------PdfFileReader------------
+PdfFileReader（stream，strict = True，warndest = None，overwriteWarnings = True ）¶
+初始化一个PdfFileReader对象。由于将PDF流的交叉引用表读入内存，因此此操作可能需要一些时间。
+参数：
+--流（strict） - 一个File对象或一个支持类似于File对象的标准读取和查找方法的对象。也可以是代表PDF文件路径的字符串。
+--严格（bool）–确定是否应警告用户所有问题，并导致一些可纠正的问题致命。默认为True。
+--warndest –记录警告的目的地（默认为 sys.stderr）。
+--overwriteWarnings（bool）–确定是否warnings.py使用自定义实现覆盖Python的 模块（默认为 True）。
+
+---------PdfFileMerger（strict = True ）¶--------------
+初始化一个PdfFileMerger对象。PdfFileMerger将多个PDF合并为一个PDF。它可以串联，切片，插入或上述任意组合。
+参数：	严格（bool）–确定是否应警告用户所有问题，并导致一些可纠正的问题致命。默认为True。
+
+2.addBookmark（title，pagenum，parent = None ）¶
+将书签添加到此PDF文件。
+参数：
+title（str）–用于此书签的标题。
+pagenum（int）–此书签将指向的页码。
+parent –对创建嵌套书签的父书签的引用。
+
+3.addMetadata（信息）¶ 将自定义元数据添加到输出中。
+参数：	infos（dict）– Python词典，其中每个键是一个字段，每个值是您的新元数据。例：{u'/Title': u'My title'}
+
+4.addNamedDestination（title，pagenum ）¶将目标添加到输出。
+参数：
+title（str）–使用的标题
+pagenum（int）–此目标指向的页码。
+
+5.append（fileobj，书签= None，pages = None，import_bookmarks = True ）¶ 与该merge()方法相同，但是假定您要将所有页面连接到文件末尾，而不是指定位置。
+参数：
+fileobj –文件对象或支持类似于文件对象的标准读取和查找方法的对象。也可以是代表PDF文件路径的字符串。
+书签（str）–（可选）您可以通过提供书签文本来指定要在包含文件的开头应用的书签。
+pages –可以是“页面范围”或元组，以仅将指定范围的页面从源文档合并到输出文档。(start, stop[, step])
+import_bookmarks（bool）–通过将其指定为，可以防止源文档书签被导入False。
+
+6.close（）¶ 关闭所有文件描述符（输入和输出）并清除所有内存使用情况。
+
+7.merge（position，fileobj，bookmark = None，pages = None，import_bookmarks = True ）¶ 以指定的页码将页面从给定文件合并到输出文件中。
+参数：
+--position（int）–插入此文件的页码。文件将在给定编号之后插入。
+--fileobj –文件对象或支持类似于文件对象的标准读取和查找方法的对象。也可以是代表PDF文件路径的字符串。
+--bookmark（str）–（可选）您可以通过提供书签文本来指定要在包含文件的开头应用的书签。
+--pages –可以是“页面范围”或元组，以仅将指定范围的页面从源文档合并到输出文档。(start, stop[, step])
+--import_bookmarks（bool）–通过将其指定为，可以防止源文档书签被导入False。
+
+8.setPageLayout（布局）¶ 设置页面布局
+参数：	layout（str）–要使用的页面布局
+有效的布局是：
+/NoLayout	未明确指定布局
+/SinglePage	一次显示一页
+/OneColumn	一次显示一列
+/TwoColumnLeft	在两列中显示页面，左侧显示奇数页
+/TwoColumnRight
+在两列中显示页面，右侧显示奇数页
+/TwoPageLeft	一次显示两页，左侧显示奇数页
+/TwoPageRight	一次显示两页，右侧显示奇数页
+
+9.setPageMode(mode)¶ Set the page mode.
+Parameters:	mode (str) – The page mode to use.
+Valid modes are:
+/UseNone	Do not show outlines or thumbnails panels
+/UseOutlines	Show outlines (aka bookmarks) panel
+/UseThumbs	Show page thumbnails panel
+/FullScreen	Fullscreen view
+/UseOC	Show Optional Content Group (OCG) panel
+/UseAttachments
+Show attachments panel
+
+10.write(fileobj)¶
+Writes all data that has been merged to the given output file.
+Parameters:	fileobj – Output file. Can be a filename or any kind of file-like object.
